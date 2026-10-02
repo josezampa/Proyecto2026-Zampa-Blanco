@@ -36,9 +36,9 @@ A continuación se detallan las herramientas y lenguajes empleados para el desar
 
 | Tecnología | Categoría | Uso que le dimos |
 | :--- | :--- | :--- |
-| **HTML5** | Estructura Web | Maquetado semántico de la página y formularios de registro. |
-| **CSS3** | Estilos y Diseño | Diseño responsivo, paleta de colores y estilos con Flexbox/Grid. |
-| **JavaScript** | Lógica | Manipulación del DOM, filtros interactivos y almacenamiento local. |
+| **HTML** | Estructura Web | Maquetado semántico de la página y formularios de registro. |
+| **CSS** | Estilos | Diseño responsivo, paleta de colores y estilos con Flexbox/Grid. |
+| **JavaScript** | Lógica | Interacción, dinamismo, formularios. |
 | **GitHub** | Hosting | Despliegue del sitio web dinámico/estático en línea. |
 | **Canva** | Diseño | Hacer el wireframe |
 
@@ -57,5 +57,5 @@ El proyecto se encuentra desplegado y se puede navegar en línea a través del s
 ## 👥 Autoras
 
 Proyecto realizado por las alumnas:
-* **Julieta Blanco** - 2522810 - *Desarrolladora* - (https://github.com/Julieta-B)
-* **María Josefina Zampa** - 2521085 - *Desarrolladora* - (https://github.com/josezampa)
+* **Julieta Blanco** - 2522810 - (https://github.com/Julieta-B)
+* **María Josefina Zampa** - 2521085 - (https://github.com/josezampa)
