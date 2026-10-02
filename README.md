@@ -50,7 +50,7 @@ A continuación se detallan las herramientas y lenguajes empleados para el desar
 ## 🚀 Demostración y Despliegue
 
 El proyecto se encuentra desplegado y se puede navegar en línea a través del siguiente enlace:
-👉 **[Ver Aplicación Web en GitHub Pages] /completar_esto/**
+👉 **[https://josezampa.github.io/Proyecto2026-Zampa-Blanco/](https://josezampa.github.io/Proyecto2026-Zampa-Blanco/)**
 
 ---
 
