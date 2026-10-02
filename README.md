@@ -1,5 +1,5 @@
 # 🎬 CINETECA
-> Un registro personal de películas y series para organizar, puntuar y guardar tus vistas.
+> Un registro personal de películas para organizar, puntuar, y guardar las pelis que mas te gusten :)
 
 ## 📌 Índice
 1. [Descripción del Proyecto](#-descripción-del-proyecto)
@@ -54,12 +54,12 @@ A continuación se detallan las herramientas y lenguajes empleados para el desar
 
 El proyecto se encuentra desplegado y se puede navegar en línea a través del siguiente enlace:
 
-👉 **[Ver Aplicación Web en GitHub Pages] /completar_esto_:D/**
+👉 **[Ver Aplicación Web en GitHub Pages] /completar_esto/**
 
 ---
 
 ## 👥 Autoras
 
 Proyecto realizado para la materia **Taller de Desarrollo Web** por:
-* **Julieta Blanco** - *Desarrolladora* - (https://github.com/julieta_b) /corregir esto/
+* **Julieta Blanco** - *Desarrolladora* - (https://github.com/Julieta-B)
 * **María Josefina Zampa** - *Desarrolladora* - (https://github.com/josezampa)
