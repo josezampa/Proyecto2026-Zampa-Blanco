@@ -24,7 +24,6 @@ Proporcionar una interfaz limpia, accesible e intuitiva que le permita a cada us
 La plataforma incluye las siguientes **secciones y funcionalidades principales**:
 
 * **Catálogo Principal:** Listado de películas con buscador por título y filtro por género.
-* **Ficha Detallada:** Vista con sinopsis, año de estreno, director y reparto de cada título.
 * **Registro y Valoración:** Formulario para agregar una película a la lista de vistas y otorgarle **puntuación (1 a 5 estrellas)** junto a una reseña personal.
 * **Lista de Pendientes (Watchlist):** Sección dedicada a guardar películas que el usuario desea ver a futuro.
 * **Estadísticas Personales:** Resumen con el total de películas vistas y promedio general de calificaciones.
@@ -35,31 +34,28 @@ La plataforma incluye las siguientes **secciones y funcionalidades principales**
 
 A continuación se detallan las herramientas y lenguajes empleados para el desarrollo de la aplicación web:
 
-| Tecnología | Categoría | Descripción / Uso en el Proyecto |
+| Tecnología | Categoría | Uso que le dimos |
 | :--- | :--- | :--- |
 | **HTML5** | Estructura Web | Maquetado semántico de la página y formularios de registro. |
 | **CSS3** | Estilos y Diseño | Diseño responsivo, paleta de colores y estilos con Flexbox/Grid. |
 | **JavaScript** | Lógica | Manipulación del DOM, filtros interactivos y almacenamiento local. |
 | **GitHub** | Hosting | Despliegue del sitio web dinámico/estático en línea. |
-| **Canva** | Diseño | Sketchear las ideas generales y cómo se va a ver nuestra página. |
-| **Google GEMINI** | Asistencia | Organizar ideas, consultas de sintaxis, correcciones. |
+| **Canva** | Diseño | Hacer el wireframe |
 
 ### 🔧 Recursos Adicionales
-* **Google Fonts:** Tipografías para la jerarquía de textos.
-* **Font Awesome:** Íconos de navegación y estrellas de calificación.
+* **Google GEMINI:** Organizar ideas, consultas de sintaxis, correcciones.
 
 ---
 
 ## 🚀 Demostración y Despliegue
 
 El proyecto se encuentra desplegado y se puede navegar en línea a través del siguiente enlace:
-
 👉 **[Ver Aplicación Web en GitHub Pages] /completar_esto/**
 
 ---
 
 ## 👥 Autoras
 
-Proyecto realizado para la materia **Taller de Desarrollo Web** por:
-* **Julieta Blanco** - *Desarrolladora* - (https://github.com/Julieta-B)
-* **María Josefina Zampa** - *Desarrolladora* - (https://github.com/josezampa)
+Proyecto realizado por las alumnas:
+* **Julieta Blanco** - 2522810 - *Desarrolladora* - (https://github.com/Julieta-B)
+* **María Josefina Zampa** - 2521085 - *Desarrolladora* - (https://github.com/josezampa)
