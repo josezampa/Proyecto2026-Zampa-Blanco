@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Equipo de Desarrollo Cineteca">
+    <meta name="description" content="Perfil de usuario y estadísticas de visualización de películas en Cineteca.">
+    <meta name="keywords" content="perfil, cinefilo, estadisticas, peliculas vistas, cineteca">
+    <title>Cineteca - Perfil de Usuario</title>
+    <link rel="icon" href="imagenes/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+    <header id="encabezado-principal">
+        <div class="cinta-filmica"></div>
+        <div class="contenedor-cabecera">
+            <img src="imagenes/logo_cineteca.png" alt="Logotipo oficial de Cineteca" id="logo-header">
+            <h1>CINETECA</h1>
+        </div>
+        <nav id="navegacion-principal">
+            <a href="index.html" class="enlace-nav">Inicio</a>
+            <a href="registrar.html" class="enlace-nav">Agregar Película</a>
+            <a href="perfil.html" class="enlace-nav activo">Perfil</a>
+        </nav>
+    </header>
+
+    <main id="contenido-perfil">
+        <section class="seccion-usuario">
+            <img src="imagenes/perfil_usuario.jpg" alt="Fotografía de perfil del usuario" id="foto-perfil">
+            <div class="datos-usuario">
+                <h2>Cinéfilo Apasionado</h2>
+                <p>Amante del cine clásico, la ciencia ficción y el cine independiente.</p>
+            </div>
+        </section>
+
+        <section class="seccion-calculadora">
+            <h2>Calculadora de Tiempo y Estadísticas de Visualización</h2>
+            <form id="form-estadisticas">
+                <div class="campo-formulario">
+                    <label for="input-vistas">Películas Vistas:</label>
+                    <input type="text" id="input-vistas" placeholder="Ej: 15" size="10" maxlength="4" onblur="validarNumero('input-vistas')">
+                </div>
+
+                <div class="campo-formulario">
+                    <label for="input-pendientes">Películas Pendientes:</label>
+                    <input type="text" id="input-pendientes" placeholder="Ej: 5" size="10" maxlength="4" onblur="validarNumero('input-pendientes')">
+                </div>
+
+                <div class="campo-formulario">
+                    <label for="input-duracion-promedio">Duración Promedio (minutos):</label>
+                    <input type="text" id="input-duracion-promedio" placeholder="Ej: 120" size="10" maxlength="3" onblur="validarNumero('input-duracion-promedio')">
+                </div>
+
+                <button type="button" id="btn-calcular-stats" class="boton-accion" onclick="calcularEstadisticasCine()">Calcular Estadísticas</button>
+            </form>
+
+            <div id="contenedor-resultado" class="resultado-box">
+                <p id="texto-resultado">Ingrese sus datos para obtener las estadísticas acumuladas.</p>
+            </div>
+        </section>
+
+        <section class="seccion-tabla-stats">
+            <table>
+                <caption>Historial Resumido de Visualización</caption>
+                <thead>
+                    <tr>
+                        <th>Categoría</th>
+                        <th>Cantidad</th>
+                        <th>Porcentaje</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Vistas</td>
+                        <td id="td-cant-vistas">15</td>
+                        <td id="td-porc-vistas">75%</td>
+                    </tr>
+                    <tr>
+                        <td>Pendientes</td>
+                        <td id="td-cant-pendientes">5</td>
+                        <td id="td-porc-pendientes">25%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer id="pie-pagina">
+        <p>Cineteca &copy; 2026 - Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="js/funciones.js"></script>
+</body>
+</html>
