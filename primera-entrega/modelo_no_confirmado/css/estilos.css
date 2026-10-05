@@ -105,6 +105,12 @@ input[type="text"]:focus, select:focus {
     outline: none;
 }
 
+.grupo-botones {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
 .boton-accion, .boton-guardar {
     background-color: #ffd700;
     color: #000000;
@@ -158,6 +164,12 @@ input[type="text"]:focus, select:focus {
     padding: 12px;
 }
 
+.mensaje-vacio {
+    color: #aaaaaa;
+    font-style: italic;
+    grid-column: 1 / -1;
+}
+
 .seccion-usuario {
     display: flex;
     align-items: center;
@@ -176,38 +188,78 @@ input[type="text"]:focus, select:focus {
     object-fit: cover;
 }
 
-.seccion-calculadora, .formulario-contenedor {
-    background-color: #1e1e1e;
-    padding: 25px;
-    border-radius: 8px;
-    margin-bottom: 25px;
+.contenedor-perfil-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
 }
 
-.resultado-box {
-    margin-top: 15px;
-    padding: 15px;
+.seccion-favoritas, .seccion-pendientes, .seccion-stats, .formulario-contenedor {
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.indicador-limite {
+    color: #ffd700;
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.lista-favoritas {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.item-favorita {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     background-color: #2b2b2b;
-    border-left: 4px solid #ffd700;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.subtitulo-seccion {
+    color: #aaaaaa;
+    font-size: 0.9rem;
+}
+
+.lista-pendientes {
+    list-style-type: none;
+    padding: 0;
+    margin: 15px 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.tarjeta-pendiente {
+    background-color: #3b1111;
+    border-left: 4px solid #cc2222;
+    padding: 12px;
     border-radius: 4px;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
-    background-color: #1e1e1e;
+    margin-top: 15px;
+    background-color: #2b2b2b;
 }
 
 caption {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     color: #ffd700;
 }
 
 th, td {
-    border: 1px solid #333333;
-    padding: 12px;
+    border: 1px solid #444444;
+    padding: 10px;
     text-align: left;
 }
 
@@ -222,4 +274,5 @@ th {
     background-color: #000000;
     border-top: 1px solid #333333;
     color: #888888;
+    margin-top: 40px;
 }

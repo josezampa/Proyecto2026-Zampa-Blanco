@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/estilos.css">
 </head>
-<body>
+<body onload="cargarPeliculas()">
     <header id="encabezado-principal">
         <div class="cinta-filmica"></div>
         <div class="contenedor-cabecera">
@@ -50,15 +50,7 @@
         <section class="seccion-catalogo">
             <h2>Películas Agregadas</h2>
             <div id="grid-peliculas" class="grid-cartelera">
-                <article class="tarjeta-pelicula" data-genero="Drama">
-                    <img src="imagenes/portada_el_padrino.jpg" alt="Portada de la película El Padrino" class="imagen-portada">
-                    <div class="info-pelicula">
-                        <h3>El Padrino</h3>
-                        <p><strong>Director:</strong> Francis Ford Coppola</p>
-                        <p><strong>Género:</strong> Drama</p>
-                        <p class="estado-vista">Estado: Vista</p>
-                    </div>
-                </article>
+                <!-- Se dibuja dinámicamente desde JavaScript usando la URL de portada ingresada -->
             </div>
         </section>
     </main>

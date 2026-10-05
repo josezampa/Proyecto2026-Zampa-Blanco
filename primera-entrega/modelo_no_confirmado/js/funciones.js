@@ -1,94 +1,237 @@
 /**
- * Comprueba que el valor ingresado en un campo numérico sea válido. Si es inválido, muestra una alerta y blanquea el campo.
- * @method validarNumero
- * @param {string} idInput - Identificador del elemento HTML input a validar
- * @return {boolean} Retorna verdadero si el valor es numérico y válido, falso en caso contrario
- */
-const validarNumero = (idInput) => {
-    const campo = document.getElementById(idInput);
-    const valor = campo.value.trim();
-
-    if (valor !== "" && (isNaN(valor) || Number(valor) < 0)) {
-        alert("Error: Por favor, ingrese un número entero mayor o igual a cero.");
-        campo.value = "";
-        return false;
-    }
-    return true;
-};
-
-/**
- * Comprueba que la calificación ingresada esté en el rango de 1 a 10. Si es inválida, alerta y blanquea el campo.
- * @method validarCalificacion
- * @param {string} idInput - Identificador del campo de calificación
- * @return {boolean} Retorna verdadero si está en el rango correcto, falso si fue rechazado
- */
-const validarCalificacion = (idInput) => {
-    const campo = document.getElementById(idInput);
-    const valor = Number(campo.value.trim());
-
-    if (campo.value.trim() !== "" && (isNaN(valor) || valor < 1 || valor > 10)) {
-        alert("Error: La calificación debe ser un número entero entre 1 y 10.");
-        campo.value = "";
-        return false;
-    }
-    return true;
-};
-
-/**
- * Valida que un campo de texto obligatorio no quede vacío al perder el foco. Si está vacío, blanquea y advierte al usuario.
- * @method validarTextoNoVacio
- * @param {string} idInput - Identificador del campo de texto a verificar
- * @return {boolean} Retorna verdadero si contiene texto, falso si está vacío
- */
-const validarTextoNoVacio = (idInput) => {
-    const campo = document.getElementById(idInput);
-    if (campo.value.trim() === "") {
-        alert("Atención: Este campo es obligatorio.");
-        campo.value = "";
-        return false;
-    }
-    return true;
-};
-
-/**
- * Calcula las estadísticas de horas vistas, totales de películas y porcentajes en base a las entradas del usuario.
- * @method calcularEstadisticasCine
+ * Obtiene el arreglo de películas guardadas en localStorage. Si no existe nada registrado, retorna un arreglo vacío.
+ * @method obtenerPeliculasGuardadas
  * @param Ninguno
- * @return {void} No retorna ningún valor, actualiza el DOM directamente
+ * @return {Array} Arreglo con los objetos de las películas registradas
  */
-const calcularEstadisticasCine = () => {
-    const vistasInput = document.getElementById("input-vistas");
-    const pendientesInput = document.getElementById("input-pendientes");
-    const duracionInput = document.getElementById("input-duracion-promedio");
+const obtenerPeliculasGuardadas = () => {
+    const peliculas = localStorage.getItem("peliculasCineteca");
+    return peliculas ? JSON.parse(peliculas) : [];
+};
 
-    const vistas = Number(vistasInput.value.trim());
-    const pendientes = Number(pendientesInput.value.trim());
-    const duracion = Number(duracionInput.value.trim());
+/**
+ * Guarda el arreglo actualizado de películas en localStorage.
+ * @method guardarPeliculasEnStorage
+ * @param {Array} peliculas - Arreglo de objetos de películas a guardar
+ * @return {void} No retorna ningún valor
+ */
+const guardarPeliculasEnStorage = (peliculas) => {
+    localStorage.setItem("peliculasCineteca", JSON.stringify(peliculas));
+};
 
-    if (vistasInput.value.trim() === "" || pendientesInput.value.trim() === "" || duracionInput.value.trim() === "") {
-        alert("Por favor complete todos los campos de la calculadora.");
+/**
+ * Captura los datos del formulario de registro, utiliza la URL de portada ingresada y guarda la nueva película.
+ * @method guardarPelicula
+ * @param Ninguno
+ * @return {void} Notifica al usuario y limpia el formulario
+ */
+const guardarPelicula = () => {
+    const nombre = document.getElementById("input-nombre-pelicula").value.trim();
+    let urlPortada = document.getElementById("input-url-portada").value.trim();
+    const director = document.getElementById("input-director").value.trim();
+    const genero = document.getElementById("select-genero").value;
+    const calificacion = document.getElementById("input-calificacion").value.trim();
+    const estado = document.getElementById("select-estado").value;
+
+    if (nombre === "" || director === "" || calificacion === "") {
+        alert("Por favor, complete todos los campos obligatorios antes de guardar.");
         return;
     }
 
-    const totalPeliculas = vistas + pendientes;
-    const porcentajeVistas = totalPeliculas > 0 ? Math.round((vistas / totalPeliculas) * 100) : 0;
-    const porcentajePendientes = totalPeliculas > 0 ? (100 - porcentajeVistas) : 0;
-    const horasTotales = Math.round((vistas * duracion) / 60);
+    if (urlPortada === "") {
+        urlPortada = "imagenes/portada_el_padrino.jpg";
+    }
 
-    const elementoTexto = document.getElementById("texto-resultado");
-    elementoTexto.innerHTML = `Has visto un total de <strong>${horasTotales} horas</strong> de cine (${vistas} películas). Progreso: <strong>${porcentajeVistas}% completado</strong>.`;
+    const nuevaPelicula = {
+        id: Date.now(),
+        nombre: nombre,
+        urlPortada: urlPortada,
+        director: director,
+        genero: genero,
+        calificacion: calificacion,
+        estado: estado,
+        esFavorita: false
+    };
 
-    document.getElementById("td-cant-vistas").textContent = vistas;
-    document.getElementById("td-porc-vistas").textContent = `${porcentajeVistas}%`;
-    document.getElementById("td-cant-pendientes").textContent = pendientes;
-    document.getElementById("td-porc-pendientes").textContent = `${porcentajePendientes}%`;
+    const peliculas = obtenerPeliculasGuardadas();
+    peliculas.push(nuevaPelicula);
+    guardarPeliculasEnStorage(peliculas);
+
+    alert(`¡La película "${nombre}" ha sido registrada con éxito!`);
+    limpiarFormularioRegistro();
 };
 
 /**
- * Filtra las películas mostradas en la pantalla principal según el título ingresado en el buscador.
+ * Lee las películas de localStorage y renderiza sus portadas e información en la cartelera principal (index.html).
+ * @method cargarPeliculas
+ * @param Ninguno
+ * @return {void} Renderiza las tarjetas dentro del grid
+ */
+const cargarPeliculas = () => {
+    const contenedor = document.getElementById("grid-peliculas");
+    if (!contenedor) return;
+
+    const peliculas = obtenerPeliculasGuardadas();
+    contenedor.innerHTML = "";
+
+    if (peliculas.length === 0) {
+        contenedor.innerHTML = "<p class='mensaje-vacio'>No hay películas registradas. Agrega una desde la sección 'Agregar Película'.</p>";
+        return;
+    }
+
+    peliculas.forEach((pelicula) => {
+        const tarjeta = document.createElement("article");
+        tarjeta.className = "tarjeta-pelicula";
+        tarjeta.setAttribute("data-genero", pelicula.genero);
+
+        tarjeta.innerHTML = `
+            <img src="${pelicula.urlPortada}" alt="Portada de la película ${pelicula.nombre}" class="imagen-portada">
+            <div class="info-pelicula">
+                <h3>${pelicula.nombre}</h3>
+                <p><strong>Director:</strong> ${pelicula.director}</p>
+                <p><strong>Género:</strong> ${pelicula.genero}</p>
+                <p><strong>Calificación:</strong> ${pelicula.calificacion}/10</p>
+                <p class="estado-vista"><strong>Estado:</strong> ${pelicula.estado}</p>
+            </div>
+        `;
+
+        contenedor.appendChild(tarjeta);
+    });
+};
+
+/**
+ * Genera la lista de películas para seleccionar favoritas, la lista de pendientes y calcula las estadísticas en el perfil.
+ * @method cargarPerfil
+ * @param Ninguno
+ * @return {void} Actualiza la vista de perfil.html con datos reales
+ */
+const cargarPerfil = () => {
+    const contenedorFavoritas = document.getElementById("contenedor-favoritas-lista");
+    const listaPendientes = document.querySelector(".lista-pendientes");
+
+    if (!contenedorFavoritas || !listaPendientes) return;
+
+    const peliculas = obtenerPeliculasGuardadas();
+
+    contenedorFavoritas.innerHTML = "";
+    listaPendientes.innerHTML = "";
+
+    if (peliculas.length === 0) {
+        contenedorFavoritas.innerHTML = "<p class='mensaje-vacio'>Registra películas para elegirlas como favoritas.</p>";
+        listaPendientes.innerHTML = "<li class='tarjeta-pendiente'>No hay películas pendientes registradas.</li>";
+        
+        document.getElementById("stat-vistas").textContent = "0";
+        document.getElementById("stat-pendientes").textContent = "0";
+        document.getElementById("stat-nota-media").textContent = "0 / 10";
+        document.getElementById("stat-genero-top").textContent = "N/A";
+        actualizarContadorFavoritos();
+        return;
+    }
+
+    const pendientes = peliculas.filter((p) => p.estado === "Pendiente");
+    const vistas = peliculas.filter((p) => p.estado === "Vista");
+
+    peliculas.forEach((pelicula) => {
+        const div = document.createElement("div");
+        div.className = "item-favorita";
+
+        const checkedAttr = pelicula.esFavorita ? "checked" : "";
+
+        div.innerHTML = `
+            <input type="checkbox" id="fav-pelicula-${pelicula.id}" class="check-favorito" ${checkedAttr} onchange="marcarFavorito('${pelicula.id}')">
+            <label for="fav-pelicula-${pelicula.id}">${pelicula.nombre} (${pelicula.genero}) - ${pelicula.estado}</label>
+        `;
+        contenedorFavoritas.appendChild(div);
+    });
+
+    if (pendientes.length === 0) {
+        listaPendientes.innerHTML = "<li class='tarjeta-pendiente'>No tienes películas pendientes.</li>";
+    } else {
+        pendientes.forEach((p) => {
+            const item = document.createElement("li");
+            item.className = "tarjeta-pendiente";
+            item.innerHTML = `<strong>${p.nombre}</strong> - ${p.genero} (Pendiente)`;
+            listaPendientes.appendChild(item);
+        });
+    }
+
+    let sumaNotas = 0;
+    const generosContador = {};
+
+    peliculas.forEach((p) => {
+        sumaNotas += Number(p.calificacion);
+        generosContador[p.genero] = (generosContador[p.genero] || 0) + 1;
+    });
+
+    const notaMedia = (sumaNotas / peliculas.length).toFixed(1);
+
+    let generoMasVisto = "N/A";
+    let maxConteo = 0;
+    for (const genero in generosContador) {
+        if (generosContador[genero] > maxConteo) {
+            maxConteo = generosContador[genero];
+            generoMasVisto = genero;
+        }
+    }
+
+    document.getElementById("stat-vistas").textContent = vistas.length;
+    document.getElementById("stat-pendientes").textContent = pendientes.length;
+    document.getElementById("stat-nota-media").textContent = `${notaMedia} / 10`;
+    document.getElementById("stat-genero-top").textContent = generoMasVisto;
+
+    actualizarContadorFavoritos();
+};
+
+/**
+ * Controla que el usuario no marque más de 3 películas como favoritas y persiste la elección.
+ * @method marcarFavorito
+ * @param {string} idPelicula - Identificador unívoco de la película
+ * @return {boolean} Retorna verdadero si se aceptó el cambio, falso si excedió el límite de 3
+ */
+const marcarFavorito = (idPelicula) => {
+    const peliculas = obtenerPeliculasGuardadas();
+    const favoritasActuales = peliculas.filter((p) => p.esFavorita);
+    const targetPelicula = peliculas.find((p) => p.id === Number(idPelicula));
+
+    if (!targetPelicula) return false;
+
+    const checkbox = document.getElementById(`fav-pelicula-${idPelicula}`);
+
+    if (checkbox.checked) {
+        if (favoritasActuales.length >= 3) {
+            alert("Error: Solo puedes seleccionar un máximo de 3 películas como favoritas.");
+            checkbox.checked = false;
+            return false;
+        }
+        targetPelicula.esFavorita = true;
+    } else {
+        targetPelicula.esFavorita = false;
+    }
+
+    guardarPeliculasEnStorage(peliculas);
+    actualizarContadorFavoritos();
+    return true;
+};
+
+/**
+ * Actualiza el indicador textual del límite de favoritas en la pantalla de perfil.
+ * @method actualizarContadorFavoritos
+ * @param Ninguno
+ * @return {void} No retorna valor
+ */
+const actualizarContadorFavoritos = () => {
+    const seleccionados = document.querySelectorAll('.check-favorito:checked');
+    const contadorElemento = document.getElementById("contador-favoritos");
+    if (contadorElemento) {
+        contadorElemento.textContent = `Favoritas seleccionadas: ${seleccionados.length} / 3`;
+    }
+};
+
+/**
+ * Filtra las películas del catálogo en index.html según el texto tipeado por el usuario.
  * @method filtrarPorTitulo
  * @param Ninguno
- * @return {void} Actualiza la visibilidad de los elementos en el catálogo
+ * @return {void} Muestra u oculta tarjetas del DOM
  */
 const filtrarPorTitulo = () => {
     const textoBuscado = document.getElementById("input-buscador").value.toLowerCase();
@@ -105,10 +248,10 @@ const filtrarPorTitulo = () => {
 };
 
 /**
- * Filtra la vista del catálogo según la opción de género seleccionada en el select.
+ * Filtra el catálogo de la página principal según el género elegido en el select.
  * @method filtrarPorGenero
  * @param Ninguno
- * @return {void} Modifica la propiedad display de las tarjetas de películas
+ * @return {void} Oculta o muestra elementos del DOM
  */
 const filtrarPorGenero = () => {
     const generoSeleccionado = document.getElementById("select-genero-filtro").value;
@@ -125,31 +268,48 @@ const filtrarPorGenero = () => {
 };
 
 /**
- * Procesa la carga de una nueva película ingresada mediante el formulario de registro.
- * @method guardarPelicula
- * @param Ninguno
- * @return {void} Muestra mensaje de éxito y blanquea el formulario
+ * Comprueba que la calificación ingresada sea un entero entre 1 y 10.
+ * @method validarCalificacion
+ * @param {string} idInput - Identificador del input de calificación
+ * @return {boolean} Retorna verdadero si es correcto, falso si fue rechazado
  */
-const guardarPelicula = () => {
-    const nombre = document.getElementById("input-nombre-pelicula").value.trim();
-    const director = document.getElementById("input-director").value.trim();
-    const calificacion = document.getElementById("input-calificacion").value.trim();
+const validarCalificacion = (idInput) => {
+    const campo = document.getElementById(idInput);
+    const valor = Number(campo.value.trim());
 
-    if (nombre === "" || director === "" || calificacion === "") {
-        alert("Por favor, complete los campos obligatorios antes de guardar.");
-        return;
+    if (campo.value.trim() !== "" && (isNaN(valor) || valor < 1 || valor > 10)) {
+        alert("Error: La calificación debe ser un número entero entre 1 y 10.");
+        campo.value = "";
+        return false;
     }
-
-    alert(`¡Película "${nombre}" registrada correctamente!`);
-    limpiarFormularioRegistro();
+    return true;
 };
 
 /**
- * Resetea y blanquea todos los datos ingresados en el formulario de registro de película.
+ * Valida que un campo de texto no se envíe ni pierda el foco estando vacío.
+ * @method validarTextoNoVacio
+ * @param {string} idInput - Identificador del input a validar
+ * @return {boolean} Retorna verdadero si tiene contenido, falso si está vacío
+ */
+const validarTextoNoVacio = (idInput) => {
+    const campo = document.getElementById(idInput);
+    if (campo.value.trim() === "") {
+        alert("Atención: Este campo es obligatorio.");
+        campo.value = "";
+        return false;
+    }
+    return true;
+};
+
+/**
+ * Vacía el formulario de alta de películas.
  * @method limpiarFormularioRegistro
  * @param Ninguno
- * @return {void} Limpia los valores del formulario
+ * @return {void} Reinicia los campos
  */
 const limpiarFormularioRegistro = () => {
-    document.getElementById("form-registro-pelicula").reset();
+    const formulario = document.getElementById("form-registro-pelicula");
+    if (formulario) {
+        formulario.reset();
+    }
 };
