@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Cineteca - Tu archivo personal de cine</title>
+</head>
+<body>
+
+    <!-- ENCABEZADO -->
+    <header class="encabezado">
+        <div class="cont-logo">
+            <img src="images/logo.png" alt="Logo de Cineteca, rollo de película" class="logo">
+            <div>
+                <h1>Cineteca</h1>
+                <p>Tu archivo personal de cine</p>
+            </div>
+        </div>
+        <nav class="menu-superior">
+            <button class="btn-nav activa">Catálogo</button>
+            <a href="perfil.html" class="enlace-nav activo">Perfil</a>
+            <button class="btn-principal">+ Agregar</button>
+        </nav>
+    </header>
+
+    <!-- CONTENEDOR PRINCIPAL -->
+    <div class="cont-principal">
+
+        <!-- MENÚ LATERAL -->
+        <aside class="menu-lateral">
+            <section class="cat-menu">
+                <h2>ESTADO</h2>
+                <ul>
+                    <li><button class="activa">Todas</button></li>
+                    <li><button>Vistas</button></li>
+                    <li><button>Pendientes</button></li>
+                </ul>
+            </section>
+
+            <section class="cat-menu">
+                <h2>GÉNERO</h2>
+                <ul>
+                    <li><button class="activa">Todos</button></li>
+                    <li><button>Drama</button></li>
+                    <li><button>Terror</button></li>
+                    <li><button>Comedia</button></li>
+                    <li><button>Acción</button></li>
+                    <li><button>Romance</button></li>
+                    <li><button>Ciencia ficción</button></li>
+                    <li><button>Thriller</button></li>
+                </ul>
+            </section>
+        </aside>
+
+        <!-- CATÁLOGO DE PELÍCULAS -->
+        <main>
+            
+            <!-- Barra de búsqueda -->
+        <div class="busqueda">
+            <label for="buscar-peli" class="label-busqueda">Buscar película:</label>
+            <input type="search" id="buscar-peli" placeholder="Título o director...">
+            <button class="btn-filtro">Año</button>  <!-- agregar flecha-->
+        </div>
+
+            <!-- Grilla de películas -->
+            <div class="grilla-pelis">
+                
+                <article class="tarjeta-peli"> <!-- De prueba para ver como se verían las tarjetas -->
+                    <a href="#" class="detalle-peli">
+                        
+                        <div class="cont-portada">
+                            <span class="puntuacion">9/10</span>
+                            <img src="https://gbaike-image.cdn.bcebos.com/574e9258d109b3de9c823de76de37b81800a18d8e6b5/574e9258d109b3de9c823de76de37b81800a18d8e6b5_3_4?x-bce-process=image/format,f_auto" alt="Portada" class="portada-peli">
+                            
+                            <button class="btn-hover-vista">+ Marcar</button>
+                        </div>
+                        
+                        <div class="info-tarjeta">
+                            <p class="gen-year">Género - 2026</p>
+                            <h3>Nombre peli</h3>
+                            <p class="director">Director</p>
+                        </div>
+                        
+                    </a>
+                </article>
+
+                
+            </div>
+        </main>
+
+    </div>
+
+    <!--Agregar ventana emergente de la peli -->
+
+</body>
+</html>
