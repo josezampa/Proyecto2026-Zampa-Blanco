@@ -23,10 +23,9 @@ Proporcionar una interfaz limpia, accesible e intuitiva que le permita a cada us
 
 La plataforma incluye las siguientes **secciones y funcionalidades principales**:
 
-* **Catálogo Principal:** Listado de películas con buscador por título y filtro por género.
-* **Registro y Valoración:** Formulario para agregar una película a la lista de vistas y otorgarle **puntuación (1 a 5 estrellas)** junto a una reseña personal.
-* **Lista de Pendientes (Watchlist):** Sección dedicada a guardar películas que el usuario desea ver a futuro.
-* **Estadísticas Personales:** Resumen con el total de películas vistas y promedio general de calificaciones.
+* **Catálogo Principal:** Listado de películas con buscador por título y filtro por género. Acá aparecen todas las películas registradas por el usuario.
+* **Registro y Valoración:** Formulario para agregar una película al catálogo, ingresando información principal de la peli y una valoración personal en el caso que se haya visto.
+* **Perfil:** Sección dedicada a guardar la info más importante del usuario: películas pendientes, pelis favoritas, y estadísticas personales.
 
 ---
 
