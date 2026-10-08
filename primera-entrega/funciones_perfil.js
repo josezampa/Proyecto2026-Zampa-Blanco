@@ -66,12 +66,13 @@ const cargarPerfil = () => {
 
     let generoMasVisto = "N/A";
     let maxConteo = 0;
-    for (const genero in generosContador) {
-        if (generosContador[genero] > maxConteo) {
-            maxConteo = generosContador[genero];
+
+    Object.entries(generosContador).forEach(([genero, conteo]) => {
+        if (conteo > maxConteo) {
+            maxConteo = conteo;
             generoMasVisto = genero;
         }
-    }
+    });
 
     document.getElementById("stat-vistas").textContent = vistas.length;
     document.getElementById("stat-pendientes").textContent = pendientes.length;
@@ -79,38 +80,6 @@ const cargarPerfil = () => {
     document.getElementById("stat-genero-top").textContent = generoMasVisto;
 
     actualizarContadorFavoritos();
-};
-
-
-/**
- * Controla que el usuario no marque más de 3 películas como favoritas y persiste la elección.
- * @method marcarFavorito
- * @param {string} idPelicula - Identificador unívoco de la película
- * @return {boolean} Retorna verdadero si se aceptó el cambio, falso si excedió el límite de 3
- */
-const marcarFavorito = (idPelicula) => {
-    const peliculas = obtenerPeliculasGuardadas();
-    const favoritasActuales = peliculas.filter((p) => p.esFavorita);
-    const targetPelicula = peliculas.find((p) => p.id === Number(idPelicula));
-
-    if (!targetPelicula) return false;
-
-    const checkbox = document.getElementById(`fav-pelicula-${idPelicula}`);
-
-    if (checkbox.checked) {
-        if (favoritasActuales.length >= 3) {
-            alert("Error: Solo puedes seleccionar un máximo de 3 películas como favoritas.");
-            checkbox.checked = false;
-            return false;
-        }
-        targetPelicula.esFavorita = true;
-    } else {
-        targetPelicula.esFavorita = false;
-    }
-
-    guardarPeliculasEnStorage(peliculas);
-    actualizarContadorFavoritos();
-    return true;
 };
 
 /**
