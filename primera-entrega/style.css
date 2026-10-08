@@ -39,6 +39,13 @@ body {
     display: flex;
     align-items: center;
     gap: 15px;
+    
+    & img {
+        width: 130px;
+        height: auto;
+        object-fit: contain; 
+    }
+
     & h1 {
         margin: 0;
         font-size: 24px;
@@ -335,7 +342,7 @@ body {
 }
 
 #logo-header {
-    height: 40px;
+    height: 130px;
     width: auto;
     object-fit: contain;
 }
