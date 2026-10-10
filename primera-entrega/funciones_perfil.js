@@ -4,8 +4,8 @@ const MAX_FAVORITAS = 3;
 
 /**
  * Lee las películas que guardó el catálogo (index.html) en localStorage.
- * @method obtenerPeliculasGuardadas
- * @return {Array} Arreglo de películas (vacío si no hay nada guardado)
+ * @function obtenerPeliculasGuardadas
+ * @returns {Array} Arreglo de películas (vacío si no hay nada guardado)
  */
 const obtenerPeliculasGuardadas = () => {
     try {
@@ -18,9 +18,9 @@ const obtenerPeliculasGuardadas = () => {
 
 /**
  * Guarda el arreglo de películas en localStorage.
- * @method guardarPeliculasEnStorage
+ * @function guardarPeliculasEnStorage
  * @param {Array} peliculas - Arreglo completo de películas
- * @return {void}
+ * @returns {void}
  */
 const guardarPeliculasEnStorage = (peliculas) => {
     localStorage.setItem(CLAVE_STORAGE, JSON.stringify(peliculas));
@@ -28,8 +28,8 @@ const guardarPeliculasEnStorage = (peliculas) => {
 
 /**
  * Genera la lista de películas para elegir favoritas, la lista de pendientes y calcula las estadísticas.
- * @method cargarPerfil
- * @return {void} Actualiza la vista de perfil.html con datos reales
+ * @function cargarPerfil
+ * @returns {void} Actualiza la vista de perfil.html con datos reales
  */
 const cargarPerfil = () => {
     const contenedorFavoritas = document.getElementById("contenedor-favoritas-lista");
@@ -57,8 +57,6 @@ const cargarPerfil = () => {
     const pendientes = peliculas.filter((p) => p.estado === "Pendiente");
     const vistas = peliculas.filter((p) => p.estado === "Vista");
 
-    // Favoritas: solo se pueden elegir las películas vistas.
-    // El identificador es la posición en el arreglo (igual que en el catálogo)
     if (vistas.length === 0) {
         contenedorFavoritas.innerHTML = "<p class='mensaje-vacio'>Marca películas como vistas para poder elegirlas como favoritas.</p>";
     } else {
@@ -84,7 +82,6 @@ const cargarPerfil = () => {
         });
     }
 
-    // Pendientes
     if (pendientes.length === 0) {
         listaPendientes.innerHTML = "<li class='tarjeta-pendiente'>No tienes películas pendientes.</li>";
     } else {
@@ -103,13 +100,10 @@ const cargarPerfil = () => {
         });
     }
 
-    // Estadísticas
-    // La nota media solo cuenta las películas que tienen puntuación (puede venir vacía "")
     const puntuadas = peliculas.filter((p) => Number(p.puntuacion) > 0);
     const sumaNotas = puntuadas.reduce((suma, p) => suma + Number(p.puntuacion), 0);
     const notaMedia = puntuadas.length > 0 ? (sumaNotas / puntuadas.length).toFixed(1) : "-";
 
-    // Género más visto: se cuenta solo entre las películas vistas
     const generosContador = {};
     vistas.forEach((p) => {
         generosContador[p.genero] = (generosContador[p.genero] || 0) + 1;
@@ -134,9 +128,9 @@ const cargarPerfil = () => {
 
 /**
  * Controla que solo se marquen como favoritas películas vistas (máximo 3) y persiste la elección.
- * @method marcarFavorito
+ * @function marcarFavorito
  * @param {number} indice - Posición de la película en el arreglo guardado
- * @return {boolean} true si se aceptó el cambio, false si excedió el límite de 3
+ * @returns {boolean} true si se aceptó el cambio, false si excedió el límite de 3
  */
 const marcarFavorito = (indice) => {
     const peliculas = obtenerPeliculasGuardadas();
@@ -145,14 +139,12 @@ const marcarFavorito = (indice) => {
 
     if (!pelicula || !checkbox) return false;
 
-    // Seguridad extra: solo las películas vistas pueden ser favoritas
     if (pelicula.estado !== "Vista") {
         checkbox.checked = false;
         return false;
     }
 
     if (checkbox.checked) {
-        // Solo cuentan las favoritas que están vistas (son las que se muestran en la lista)
         const cantidadFavoritas = peliculas.filter((p) => p.favorita && p.estado === "Vista").length;
         if (cantidadFavoritas >= MAX_FAVORITAS) {
             alert(`Error: Solo puedes seleccionar un máximo de ${MAX_FAVORITAS} películas como favoritas.`);
@@ -171,8 +163,8 @@ const marcarFavorito = (indice) => {
 
 /**
  * Actualiza el indicador textual del límite de favoritas.
- * @method actualizarContadorFavoritos
- * @return {void}
+ * @function actualizarContadorFavoritos
+ * @returns {void}
  */
 const actualizarContadorFavoritos = () => {
     const seleccionados = document.querySelectorAll(".check-favorito:checked");
