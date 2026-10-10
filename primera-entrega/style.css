@@ -347,13 +347,15 @@ input:focus {
 
 
 
-/* Oculto el vista, se muestra solo al pasar el mouse */
-.tarjeta-peli .btn-hover-vista{
+/* Oculto el vista y favorito, se muestra solo al pasar el mouse */
+.tarjeta-peli .btn-hover-vista,
+.tarjeta-peli .icono-favorito{
     opacity: 0;
     transition: opacity 0.3s ease;
 }
 
-.tarjeta-peli:hover .btn-hover-vista{
+.tarjeta-peli:hover .btn-hover-vista,
+.tarjeta-peli:hover .icono-favorito{
     opacity: 1;
 }
 
@@ -527,4 +529,47 @@ input:focus {
     flex: none !important;
     width: auto !important;
     margin: 0 !important;
+}
+
+/*Estilos js*/
+.icono-vista {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: var(--color-accent);
+    color: #000;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.icono-favorito {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    color: var(--color-accent);
+    font-size: 20px;
+    cursor: pointer; 
+    transition: transform 0.2s ease;
+}
+
+.icono-favorito:hover {
+    transform: scale(1.2);
+}
+
+.rating-peli {
+    color: var(--color-accent);
+    cursor: pointer;
+    font-size: 18px;
+    transition: transform 0.1s ease;
+    display: inline-block;
+}
+
+.rating-peli:hover {
+    transform: scale(1.2);
 }
