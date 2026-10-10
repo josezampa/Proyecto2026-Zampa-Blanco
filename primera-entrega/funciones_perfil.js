@@ -57,25 +57,32 @@ const cargarPerfil = () => {
     const pendientes = peliculas.filter((p) => p.estado === "Pendiente");
     const vistas = peliculas.filter((p) => p.estado === "Vista");
 
-    // Favoritas: el identificador es la posición en el arreglo (igual que en el catálogo)
-    peliculas.forEach((pelicula, indice) => {
-        const div = document.createElement("div");
-        div.className = "item-favorita";
+    // Favoritas: solo se pueden elegir las películas vistas.
+    // El identificador es la posición en el arreglo (igual que en el catálogo)
+    if (vistas.length === 0) {
+        contenedorFavoritas.innerHTML = "<p class='mensaje-vacio'>Marca películas como vistas para poder elegirlas como favoritas.</p>";
+    } else {
+        peliculas.forEach((pelicula, indice) => {
+            if (pelicula.estado !== "Vista") return;
 
-        const checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
-        checkbox.id = `fav-pelicula-${indice}`;
-        checkbox.className = "check-favorito";
-        checkbox.checked = pelicula.favorita === true;
-        checkbox.addEventListener("change", () => marcarFavorito(indice));
+            const div = document.createElement("div");
+            div.className = "item-favorita";
 
-        const etiqueta = document.createElement("label");
-        etiqueta.htmlFor = checkbox.id;
-        etiqueta.textContent = `${pelicula.titulo} (${pelicula.genero}) - ${pelicula.estado}`;
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.id = `fav-pelicula-${indice}`;
+            checkbox.className = "check-favorito";
+            checkbox.checked = pelicula.favorita === true;
+            checkbox.addEventListener("change", () => marcarFavorito(indice));
 
-        div.append(checkbox, etiqueta);
-        contenedorFavoritas.appendChild(div);
-    });
+            const etiqueta = document.createElement("label");
+            etiqueta.htmlFor = checkbox.id;
+            etiqueta.textContent = `${pelicula.titulo} (${pelicula.genero})`;
+
+            div.append(checkbox, etiqueta);
+            contenedorFavoritas.appendChild(div);
+        });
+    }
 
     // Pendientes
     if (pendientes.length === 0) {
@@ -126,7 +133,7 @@ const cargarPerfil = () => {
 };
 
 /**
- * Controla que no se marquen más de 3 películas como favoritas y persiste la elección.
+ * Controla que solo se marquen como favoritas películas vistas (máximo 3) y persiste la elección.
  * @method marcarFavorito
  * @param {number} indice - Posición de la película en el arreglo guardado
  * @return {boolean} true si se aceptó el cambio, false si excedió el límite de 3
@@ -138,8 +145,15 @@ const marcarFavorito = (indice) => {
 
     if (!pelicula || !checkbox) return false;
 
+    // Seguridad extra: solo las películas vistas pueden ser favoritas
+    if (pelicula.estado !== "Vista") {
+        checkbox.checked = false;
+        return false;
+    }
+
     if (checkbox.checked) {
-        const cantidadFavoritas = peliculas.filter((p) => p.favorita).length;
+        // Solo cuentan las favoritas que están vistas (son las que se muestran en la lista)
+        const cantidadFavoritas = peliculas.filter((p) => p.favorita && p.estado === "Vista").length;
         if (cantidadFavoritas >= MAX_FAVORITAS) {
             alert(`Error: Solo puedes seleccionar un máximo de ${MAX_FAVORITAS} películas como favoritas.`);
             checkbox.checked = false;
