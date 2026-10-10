@@ -3,22 +3,25 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="Perfil de usuario en Cineteca con seleccion de películas favoritas, pendientes y estadísticas de visualización.">
-    <title>Cineteca - Perfil de Usuario</title>>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Perfil de usuario en Cineteca con selección de películas favoritas, pendientes y estadísticas de visualización.">
     <link rel="stylesheet" href="style.css">
+    <title>Cineteca - Perfil de Usuario</title>
 </head>
 
-<body onload="cargarPerfil()">
-    <header id="encabezado-principal">
-        <div class="cinta-filmica"></div>
-        <div class="contenedor-cabecera">
-            <img src="imagenes/logo_cineteca.png" alt="Logotipo oficial de Cineteca" id="logo-header">
-            <h1>CINETECA</h1>
+<body>
+    <!-- ENCABEZADO (igual al del catálogo) -->
+    <header class="encabezado">
+        <div class="cont-logo">
+            <img src="imagenes/logo_cineteca.png" alt="Logo de Cineteca, rollo de película" class="logo">
+            <div>
+                <h1>Cineteca</h1>
+                <p>Tu archivo personal de cine</p>
+            </div>
         </div>
-        <nav id="navegacion-principal">
-            <a href="index.html" class="enlace-nav">Inicio</a>
-            <a href="registrar.html" class="enlace-nav">Agregar Película</a>
-            <a href="perfil.html" class="enlace-nav activo">Perfil</a>
+        <nav class="menu-superior">
+            <a href="index.html" class="btn-nav">Catálogo</a>
+            <a href="perfil.html" class="btn-nav activa">Perfil</a>
         </nav>
     </header>
 
@@ -32,7 +35,7 @@
         </section>
 
         <div class="contenedor-perfil-grid">
-            <!-- Películas Favoritas (Dinámicas desde JS) -->
+            <!-- Películas Favoritas (dinámicas desde JS) -->
             <section class="seccion-favoritas">
                 <h2>Películas Favoritas</h2>
                 <p id="contador-favoritos" class="indicador-limite">Favoritas seleccionadas: 0 / 3</p>
@@ -41,7 +44,7 @@
                 </div>
             </section>
 
-            <!-- Películas Pendientes (Dinámicas desde JS) -->
+            <!-- Películas Pendientes (dinámicas desde JS) -->
             <section class="seccion-pendientes">
                 <h2>Pendientes</h2>
                 <p class="subtitulo-seccion">Las películas cargadas que aún no has marcado como vistas:</p>
@@ -50,7 +53,7 @@
                 </ul>
             </section>
 
-            <!-- Stats (Calculadas en tiempo real desde JS) -->
+            <!-- Stats (calculadas en tiempo real desde JS) -->
             <section class="seccion-stats">
                 <h2>Stats</h2>
                 <table>
