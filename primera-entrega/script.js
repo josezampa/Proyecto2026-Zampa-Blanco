@@ -116,5 +116,44 @@ btnOrdenarAnio.onclick = () => {
     aplicarFiltros();
 };
 
+const btnAgregar = document.getElementById('btn-agregar');
+const modalAgregar = document.getElementById('modal-agregar');
+const formPelicula = document.getElementById('form-pelicula');
+const btnCerrarModal = document.getElementById('btn-cerrar-modal');
+
+// Modal agregar peli
+btnAgregar.onclick = () => modalAgregar.showModal(); 
+btnCerrarModal.onclick = () => modalAgregar.close(); 
+
+formPelicula.onsubmit = (evento) => {
+    evento.preventDefault(); 
+    
+    //input de la portada
+    const portadaIngresada = document.getElementById('input-portada').value;
+    const portadaGenerica = "https://via.placeholder.com/300x450/141417/888888?text=Sin+Portada";
+
+    const nuevaPeli = {
+        titulo: document.getElementById('input-titulo').value,
+        director: document.getElementById('input-director').value || "Director desconocido",
+        anio: document.getElementById('input-anio').value,
+        genero: document.getElementById('input-genero').value || "Otro",
+        estado: document.getElementById('input-estado').value || "Pendiente",
+        portada: portadaIngresada ? portadaIngresada : portadaGenerica,
+        puntuacion: document.getElementById('input-puntuacion').value,
+        sinopsis: document.getElementById('input-sinopsis').value,
+        compania: document.getElementById('input-compania').value,
+        enCine: document.getElementById('input-cine').checked,
+        resena: "",
+        favorita: false
+    };
+
+    peliculas.push(nuevaPeli);
+    localStorage.setItem('cineteca_pelis', JSON.stringify(peliculas));
+    formPelicula.reset();
+    modalAgregar.close(); 
+    aplicarFiltros(); 
+};
+
+
 // Ejecución inicial 
 renderizarPeliculas(peliculas);
