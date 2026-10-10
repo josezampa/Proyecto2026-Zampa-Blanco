@@ -1,4 +1,3 @@
-// Misma clave de localStorage que usa script.js en el catálogo
 const CLAVE_STORAGE = "cineteca_pelis";
 const MAX_FAVORITAS = 3;
 
