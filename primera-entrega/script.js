@@ -154,6 +154,34 @@ formPelicula.onsubmit = (evento) => {
     aplicarFiltros(); 
 };
 
+/**
+ * @method alternarEstado
+ * @param {number} index - Índice de la película en el arreglo principal
+ * @return {void}
+ */
+const alternarEstado = (index) => {
+    peliculas[index].estado = peliculas[index].estado === 'Vista' ? 'Pendiente' : 'Vista';
+    localStorage.setItem('cineteca_pelis', JSON.stringify(peliculas));
+    aplicarFiltros(); 
+};
+
+/**
+ * @method alternarFavorito
+ * @param {number} index - Índice de la película en el arreglo principal
+ * @return {void}
+ */
+const alternarFavorito = (index) => {
+    peliculas[index].favorita = !peliculas[index].favorita;
+    localStorage.setItem('cineteca_pelis', JSON.stringify(peliculas));
+    aplicarFiltros();
+};
+
+
+
+
+
+
+
 
 // Ejecución inicial 
 renderizarPeliculas(peliculas);
