@@ -90,7 +90,7 @@
 
 #### Sobre la funcionalidad JavaScript
 Se debe agregar funcionalidad Js a la página HTML+CSS desarrollada
-- [ ] Una función que compruebe si los valores ingresados son correctos, y si no lo son, que le indique al usuario por un alert o dialog, y que blanquee el contenido del campo.
+- [x] Una función que compruebe si los valores ingresados son correctos, y si no lo son, que le indique al usuario por un alert o dialog, y que blanquee el contenido del campo.
 - [ ] Una función que calcule/muestre algo en base a los valores ingresados por el usuario en los inputs.
 - [ ] El código Js debe estar en un archivo externo
 - [ ] Se debe emplear var, let o const según corresponda para mayor eficiencia

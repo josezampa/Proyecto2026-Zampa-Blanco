@@ -99,7 +99,7 @@ const cargarPerfil = () => {
         });
     }
 
-    const puntuadas = peliculas.filter((p) => Number(p.puntuacion) > 0);
+    const puntuadas = vistas.filter((p) => Number(p.puntuacion) > 0);
     const sumaNotas = puntuadas.reduce((suma, p) => suma + Number(p.puntuacion), 0);
     const notaMedia = puntuadas.length > 0 ? (sumaNotas / puntuadas.length).toFixed(1) : "-";
 
