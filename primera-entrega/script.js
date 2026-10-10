@@ -177,9 +177,100 @@ const alternarFavorito = (index) => {
 };
 
 
+// MODAL DE DETALLE 
+const modalDetalle = document.getElementById('modal-detalle');
+const btnCerrarDetalle = document.getElementById('btn-cerrar-detalle');
+let indicePeliActual = null;
 
+/**
+ * @method marcarPuntos
+ * @param {string|number} puntaje - El puntaje actual de la película
+ * @return {void}
+ */
+const marcarPuntos = (puntaje) => {
+    const contPuntos = document.getElementById('cont-puntos');
+    let htmlPuntos = '';
+    const limite = puntaje ? parseInt(puntaje) : 0;
 
+    for (let i = 1; i <= 10; i++) {
+        const simbolo = i <= limite ? '■' : '□';
+        htmlPuntos += `<span class="rating-peli" onclick="actualizarPuntuacion(${i}, ${limite})">${simbolo}</span>`;
+    }
+    
+    contPuntos.innerHTML = htmlPuntos;
+    document.getElementById('detalle-puntuacion-num').innerText = limite > 0 ? limite + '/10' : '-/10';
+};
 
+/**
+ * @method actualizarPuntuacion
+ * @param {number} valorTocado - El número del cuadrado en el que se hizo click
+ * @param {number} limiteActual - El puntaje que la película tenía antes del click
+ * @return {void}
+ */
+const actualizarPuntuacion = (valorTocado, limiteActual) => {
+    const nuevoPuntaje = (valorTocado === limiteActual) ? valorTocado - 1 : valorTocado;
+    peliculas[indicePeliActual].puntuacion = nuevoPuntaje > 0 ? nuevoPuntaje.toString() : "";
+    localStorage.setItem('cineteca_pelis', JSON.stringify(peliculas));
+    
+    marcarPuntos(nuevoPuntaje);
+    aplicarFiltros(); 
+};
+
+/**
+ * @method abrirDetalle
+ * @param {number} index - Índice de la película para mostrar en el modal
+ * @return {void}
+ */
+const abrirDetalle = (index) => {
+    indicePeliActual = index;
+    const peli = peliculas[index];
+
+    document.getElementById('detalle-portada').src = peli.portada;
+    document.getElementById('detalle-genero').innerText = peli.genero;
+    document.getElementById('detalle-anio').innerText = peli.anio;
+    document.getElementById('detalle-titulo').innerText = peli.titulo;
+    document.getElementById('detalle-director').innerText = peli.director;
+    document.getElementById('detalle-sinopsis').innerText = peli.sinopsis || "No hay sinopsis disponible.";
+    document.getElementById('detalle-resena').value = peli.resena || "";
+
+    document.getElementById('detalle-compania').innerText = peli.compania ? peli.compania : ' ';
+    document.getElementById('detalle-cine').innerText = peli.enCine ? '  - En el cine' : '';
+
+    document.getElementById('btn-detalle-vista').innerText = peli.estado === 'Vista' ? '✓ Vista' : 'Marcar como Vista';
+    document.getElementById('btn-detalle-favorita').innerText = peli.favorita ? '♥ Favorita' : '♡ Marcar Favorita';
+
+    marcarPuntos(peli.puntuacion);
+    modalDetalle.showModal();
+};
+
+btnCerrarDetalle.onclick = () => modalDetalle.close();
+
+document.getElementById('btn-guardar-resena').onclick = () => {
+    const textoResena = document.getElementById('detalle-resena').value;
+    peliculas[indicePeliActual].resena = textoResena;
+    localStorage.setItem('cineteca_pelis', JSON.stringify(peliculas));
+    alert("Reseña guardada exitosamente");
+};
+
+document.getElementById('btn-detalle-vista').onclick = () => {
+    alternarEstado(indicePeliActual);
+    abrirDetalle(indicePeliActual); 
+};
+
+document.getElementById('btn-detalle-favorita').onclick = () => {
+    alternarFavorito(indicePeliActual);
+    abrirDetalle(indicePeliActual); 
+};
+
+document.getElementById('btn-detalle-eliminar').onclick = () => {
+    const confirmacion = confirm("¿Estás segura de que querés eliminar esta película?");
+    if(confirmacion) {
+        peliculas.splice(indicePeliActual, 1); 
+        localStorage.setItem('cineteca_pelis', JSON.stringify(peliculas));
+        modalDetalle.close();
+        aplicarFiltros();
+    }
+};
 
 
 
