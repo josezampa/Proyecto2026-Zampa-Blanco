@@ -821,7 +821,6 @@ body {
     margin: 0 !important;
 }
 
-/*Estilos js*/
 .icono-vista {
     position: absolute;
     top: 10px;
@@ -864,12 +863,10 @@ body {
     transform: scale(1.2);
 }
 
-/* Enlaces del menú con el mismo aspecto que los botones .btn-nav */
 a.btn-nav {
     text-decoration: none;
 }
 
-/* Perfil: lista de favoritas */
 .lista-favoritas {
     grid-template-columns: 1fr;
     gap: 10px;
