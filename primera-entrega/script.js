@@ -273,6 +273,5 @@ document.getElementById('btn-detalle-eliminar').onclick = () => {
 };
 
 
-
 // Ejecución inicial 
 renderizarPeliculas(peliculas);

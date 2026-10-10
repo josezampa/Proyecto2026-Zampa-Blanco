@@ -569,6 +569,8 @@ body {
     .contenedor-perfil-grid {
         grid-template-columns: 1fr;
     }
+}
+
 /*Ventana emergente*/
 .modal {
     border: none;
@@ -860,4 +862,46 @@ body {
 
 .rating-peli:hover {
     transform: scale(1.2);
-}}
+}
+
+/* Enlaces del menú con el mismo aspecto que los botones .btn-nav */
+a.btn-nav {
+    text-decoration: none;
+}
+
+/* Perfil: lista de favoritas */
+.lista-favoritas {
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+
+.item-favorita {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    background: var(--bg-main);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+.item-favorita .check-favorito {
+    flex: none;
+    width: 18px;
+    height: 18px;
+    padding: 0;
+    margin: 0;
+    accent-color: var(--color-accent);
+    cursor: pointer;
+}
+
+.item-favorita label {
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.mensaje-vacio {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin: 0;
+}
