@@ -49,5 +49,72 @@ const renderizarPeliculas = (listaPeliculas) => {
     contenedorPelis.innerHTML = contenidoHTML; 
 };
 
+const inputBusqueda = document.getElementById('buscar-peli');
+const btnOrdenarAnio = document.getElementById('btn-ordenar-anio');
+let ordenAnioDescendente = true;
+
+const botonesEstado = document.querySelectorAll('.cat-menu:nth-child(1) button');
+const botonesGenero = document.querySelectorAll('.cat-menu:nth-child(2) button');
+
+let filtroEstadoActual = 'Todas';
+let filtroGeneroActual = 'Todos';
+
+/**
+ * @method aplicarFiltros
+ * @return {void}
+ */
+const aplicarFiltros = () => {
+    const textoBusqueda = inputBusqueda.value.toLowerCase();
+
+    const pelisFiltradas = peliculas.filter((peli) => {
+        let coincideEstado = false;
+        if (filtroEstadoActual === 'Todas') coincideEstado = true;
+        else if (filtroEstadoActual === 'Vistas' && peli.estado === 'Vista') coincideEstado = true;
+        else if (filtroEstadoActual === 'Pendientes' && peli.estado === 'Pendiente') coincideEstado = true;
+        else if (filtroEstadoActual === 'Favoritas' && peli.favorita === true) coincideEstado = true;
+
+        const coincideGenero = filtroGeneroActual === 'Todos' || peli.genero === filtroGeneroActual;
+        const coincideBusqueda = peli.titulo.toLowerCase().includes(textoBusqueda) || 
+                                 peli.director.toLowerCase().includes(textoBusqueda);
+
+        return coincideEstado && coincideGenero && coincideBusqueda;
+    });
+
+    // Ordenar las películas filtradas según la variable de estado
+    pelisFiltradas.sort((a, b) => {
+        return ordenAnioDescendente ? b.anio - a.anio : a.anio - b.anio;
+    });
+
+    renderizarPeliculas(pelisFiltradas);
+};
+
+// Eventos Laterales y Buscador
+botonesEstado.forEach((boton) => {
+    boton.onclick = () => {
+        botonesEstado.forEach(b => b.classList.remove('activa'));
+        boton.classList.add('activa');
+        filtroEstadoActual = boton.innerText; 
+        aplicarFiltros();
+    };
+});
+
+botonesGenero.forEach((boton) => {
+    boton.onclick = () => {
+        botonesGenero.forEach(b => b.classList.remove('activa'));
+        boton.classList.add('activa');
+        filtroGeneroActual = boton.innerText; 
+        aplicarFiltros();
+    };
+});
+
+inputBusqueda.oninput = () => aplicarFiltros();
+
+// Evento para el boton de ordenar por año
+btnOrdenarAnio.onclick = () => {
+    ordenAnioDescendente = !ordenAnioDescendente; 
+    btnOrdenarAnio.innerText = ordenAnioDescendente ? 'Año ▼' : 'Año ▲';
+    aplicarFiltros();
+};
+
 // Ejecución inicial 
 renderizarPeliculas(peliculas);
