@@ -19,8 +19,8 @@
         </div>
         <nav class="menu-superior">
             <button class="btn-nav activa">Catálogo</button>
-            <a href="perfil.html" class="enlace-nav activo">Perfil</a>
-            <button class="btn-principal">+ Agregar</button>
+            <a href="perfil.html" class="btn-nav">Perfil</a>
+            <button id="btn-agregar" class="btn-principal">+ Agregar</button>
         </nav>
     </header>
 
@@ -35,6 +35,7 @@
                     <li><button class="activa">Todas</button></li>
                     <li><button>Vistas</button></li>
                     <li><button>Pendientes</button></li>
+                    <li><button>Favoritas</button></li>
                 </ul>
             </section>
 
@@ -49,6 +50,7 @@
                     <li><button>Romance</button></li>
                     <li><button>Ciencia ficción</button></li>
                     <li><button>Thriller</button></li>
+                    <li><button>Otro</button></li>
                 </ul>
             </section>
         </aside>
@@ -60,7 +62,7 @@
         <div class="busqueda">
             <label for="buscar-peli" class="label-busqueda">Buscar película:</label>
             <input type="search" id="buscar-peli" placeholder="Título o director...">
-            <button class="btn-filtro">Año</button>  <!-- agregar flecha-->
+            <button id="btn-ordenar-anio" class="btn-filtro">Año ▼</button>
         </div>
 
             <!-- Grilla de películas -->
@@ -91,7 +93,149 @@
 
     </div>
 
-    <!--Agregar ventana emergente de la peli -->
+
+    <!-- Ventana emergente de Detalle peli -->
+    <dialog id="modal-detalle" class="modal modal-grande">
+        <div class="modal-contenido-detalle">
+            <button type="button" id="btn-cerrar-detalle" class="btn-cerrar-x">✕</button>
+            
+            <div class="detalle-izq">
+                <img src="" id="detalle-portada" alt="Portada de la película">
+            </div>
+            
+            <div class="detalle-der">
+                <p class="detalle-gen-year"><span id="detalle-genero"></span> · <span id="detalle-anio"></span></p>
+                <h2 id="detalle-titulo"></h2>
+                <p class="detalle-director" id="detalle-director"></p>
+
+                <p class="detalle-contexto">
+                    <span id="detalle-compania"></span> <span id="detalle-cine"></span>
+                </p>
+
+                <div class="detalle-puntuacion">
+                    <span id="cont-puntos"></span> 
+                    <span id="detalle-puntuacion-num"></span>
+                </div>
+
+                <p class="detalle-sinopsis" id="detalle-sinopsis"></p>
+
+                <div class="seccion-resena">
+                    <label>RESEÑA</label>
+                    <textarea id="detalle-resena" placeholder="Escribe tu reseña personal..."></textarea>
+                    <div class="acciones-resena">
+                        <button id="btn-guardar-resena" class="btn-principal">Guardar</button>
+                    </div>
+                </div>
+
+                <div class="acciones-detalle">
+                    <button id="btn-detalle-vista" class="btn-filtro">✓ Vista</button>
+                    <button id="btn-detalle-favorita" class="btn-filtro">♥ Favorita</button>
+                    <button id="btn-detalle-eliminar" class="btn-eliminar">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </dialog>
+
+
+
+        <!-- Ventana emergente para agregar película -->
+    <dialog id="modal-agregar" class="modal">
+        <div class="modal-contenido">
+            <h2>Agregar Nueva Película</h2>
+            
+            <form id="form-pelicula">
+                <!-- Título ocupa todo el ancho -->
+                <div class="campo-form campo-largo">
+                    <label for="input-titulo">Título:</label>
+                    <input type="text" id="input-titulo" placeholder="Ej: Taken" required oninvalid="this.setCustomValidity('Por favor, ingresá el título de la película')" oninput="this.setCustomValidity('')">
+                </div>
+                
+                <!-- El resto en dos columnas -->
+                <div class="campo-form">
+                    <label for="input-director">Director:</label>
+                    <input type="text" id="input-director" placeholder="Nombre del director">
+                </div>
+                
+                <div class="campo-form">
+                    <label for="input-anio">Año:</label>
+                    <select id="input-anio" required oninvalid="this.setCustomValidity('Por favor, seleccioná un año')" oninput="this.setCustomValidity('')">
+                        <option value="" disabled selected>Seleccioná el año</option>
+                    </select>
+                </div>
+                
+                <div class="campo-form">
+                    <label for="input-genero">Género:</label>
+                    <select id="input-genero">
+                        <option value="" disabled selected>Seleccioná un género</option>
+                        <option value="Drama">Drama</option>
+                        <option value="Terror">Terror</option>
+                        <option value="Comedia">Comedia</option>
+                        <option value="Acción">Acción</option>
+                        <option value="Romance">Romance</option>
+                        <option value="Ciencia ficción">Ciencia ficción</option>
+                        <option value="Thriller">Thriller</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                </div>
+                
+                <div class="campo-form">
+                    <label for="input-estado">Estado:</label>
+                    <select id="input-estado">
+                        <option value="" disabled selected>Seleccioná un estado</option>
+                        <option value="Vista">Vista</option>
+                        <option value="Pendiente">Pendiente</option>
+                    </select>
+                </div>
+                
+                <div class="campo-form">
+                    <label for="input-puntuacion">Puntuación:</label>
+                    <input type="number" id="input-puntuacion" min="1" max="10" placeholder="Del 1 al 10">
+                </div>
+
+                <div class="campo-form">
+                    <label for="input-compania">¿Con quién la viste?</label>
+                    <select id="input-compania">
+                        <option value="">No especificar</option>
+                        <option value="Solo/a">Solo/a</option>
+                        <option value="Con amigos">Con amigos</option>
+                        <option value="Con familia">Con familia</option>
+                        <option value="En pareja">En pareja</option>
+                    </select>
+                </div>
+                
+                <div class="campo-form">
+                    <label for="input-portada">URL de portada:</label>
+                    <input type="url" id="input-portada" placeholder="Enlace a la imagen (opcional)">
+                </div>
+
+                <!-- Checkbox como un ítem más de la grilla -->
+                <div class="campo-form campo-checkbox">
+                    <input type="checkbox" id="input-cine">
+                    <label for="input-cine">Vista en el cine</label>
+                </div>
+
+                <!-- Sinopsis y Reseña ahora comparten fila (una columna cada uno) -->
+                <div class="campo-form">
+                    <label for="input-sinopsis">Sinopsis:</label>
+                    <textarea id="input-sinopsis" placeholder="Breve descripción de la película" rows="4"></textarea>
+                </div>
+
+                <div class="campo-form">
+                    <label for="input-resena">Reseña personal:</label>
+                    <textarea id="input-resena" placeholder="Escribe tu opinión de la película..." rows="4"></textarea>
+                </div>
+                
+                <!-- Botones al final ocupando todo el ancho -->
+                <div class="acciones-modal campo-largo">
+                    <button type="submit" class="btn-principal">Guardar</button>
+                    <button type="button" id="btn-cerrar-modal" class="btn-filtro">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
+
+
+<script src="script.js"></script>
 
 </body>
 </html>
