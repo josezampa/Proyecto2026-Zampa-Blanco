@@ -745,3 +745,90 @@ input:focus {
         grid-template-columns: 1fr;
     }
 }
+
+/* ========== Mobile (extra) ========== */
+
+/* En pantallas táctiles, mostrar siempre los botones de la tarjeta */
+@media (hover: none) {
+    .tarjeta-peli .btn-hover-vista,
+    .tarjeta-peli .icono-favorito {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    main {
+        padding: 20px 15px;
+    }
+
+    .encabezado {
+        padding: 15px 20px;
+    }
+
+    /* Buscador en dos líneas */
+    .busqueda {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .busqueda input {
+        min-width: 0;
+        flex: 1 1 100%;
+    }
+
+    /* Menú lateral: botones en fila con salto de línea */
+    .cat-menu {
+        margin-bottom: 20px;
+    }
+    .cat-menu ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    .cat-menu button {
+        width: auto;
+        padding: 8px 14px;
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+    }
+    .cat-menu button.activa {
+        border-left: 1px solid var(--a-color);
+        border-color: var(--a-color);
+    }
+
+    /* Modal de agregar: una sola columna */
+    .modal-contenido {
+        padding: 25px 20px;
+    }
+    #form-pelicula {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    /* Modal de detalle: imagen arriba, texto abajo */
+    .modal-grande .modal-contenido-detalle {
+        flex-direction: column;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    .detalle-izq,
+    .detalle-der {
+        width: 100%;
+    }
+    .detalle-izq img {
+        height: 220px;
+    }
+    .detalle-der {
+        padding: 25px 20px;
+    }
+    .detalle-der h2 {
+        font-size: 24px;
+    }
+    .acciones-detalle {
+        flex-wrap: wrap;
+    }
+}
+
+/* Perfil: evita desborde en pantallas muy chicas */
+.contenedor-perfil-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+}
