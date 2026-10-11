@@ -120,6 +120,7 @@ const btnAgregar = document.getElementById('btn-agregar');
 const modalAgregar = document.getElementById('modal-agregar');
 const formPelicula = document.getElementById('form-pelicula');
 const btnCerrarModal = document.getElementById('btn-cerrar-modal');
+const MAX_FAVORITAS = 3;
 
 // Modal agregar peli
 btnAgregar.onclick = () => modalAgregar.showModal(); 
@@ -171,7 +172,18 @@ const alternarEstado = (index) => {
  * @return {void}
  */
 const alternarFavorito = (index) => {
-    peliculas[index].favorita = !peliculas[index].favorita;
+    const peli = peliculas[index];
+
+    // Si se quiere marcar como favorita, verificar el límite
+    if (!peli.favorita) {
+        const cantidadFavoritas = peliculas.filter((p) => p.favorita).length;
+        if (cantidadFavoritas >= MAX_FAVORITAS) {
+            alert(`Error: Solo puedes seleccionar un máximo de ${MAX_FAVORITAS} películas como favoritas.`);
+            return;
+        }
+    }
+
+    peli.favorita = !peli.favorita;
     localStorage.setItem('cineteca_pelis', JSON.stringify(peliculas));
     aplicarFiltros();
 };
