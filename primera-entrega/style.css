@@ -9,13 +9,20 @@
     --text-terciario: #e0e0e0;
 }
 
-/* General*/
+/* Reset y base */
+* {
+    box-sizing: border-box;
+}
+
 body {
     background: var(--bg-principal);
     color: var(--text-terciario);
     margin: 0;
     padding: 0;
     font-family: sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .label-busqueda {
@@ -23,7 +30,6 @@ body {
     font-weight: bold;
     align-self: center; 
 }
-
 
 /* Encabezado */
 .encabezado {
@@ -52,7 +58,6 @@ body {
     }
 }
 
-
 .menu-superior {
     display: flex;
     gap: 20px;
@@ -67,6 +72,7 @@ body {
     font-size: 16px;
     transition: color 0.3s ease;
 }
+
 .btn-nav.activa {
     font-weight: bold;
     color: var(--a-color);
@@ -82,15 +88,16 @@ body {
     cursor: pointer;
     transition: transform 0.2s ease;
 }
+
 .btn-principal:hover {
     transform: scale(1.05);
 }
-
 
 /* Contenedor Principal */
 .cont-principal {
     display: flex;
     min-height: 100vh;
+    flex: 1;
 }
 
 .menu-lateral {
@@ -105,10 +112,10 @@ main {
     padding: 40px;
 }
 
-
 .cat-menu {
     margin-bottom: 40px;
 }
+
 .cat-menu h2 {
     font-size: 12px;
     color: var(--text-secundario);
@@ -119,7 +126,6 @@ ul {
     margin: 0;
     padding: 0;
 }
-
 
 .cat-menu button {
     display: block;
@@ -142,7 +148,6 @@ ul {
     }
 }
 
-
 /* Buscador */
 .busqueda {
     display: flex;
@@ -159,6 +164,7 @@ input {
     color: var(--text-terciario);
     transition: border-color 0.3s ease;
 }
+
 input:focus {
     border-color: var(--a-color);
     outline: none;
@@ -173,10 +179,10 @@ input:focus {
     cursor: pointer;
     transition: background 0.3s ease;
 }
+
 .btn-filtro:hover {
     background: #1e1e22;
 }
-
 
 /* Grilla de pelis*/
 .grilla-pelis {
@@ -192,6 +198,7 @@ input:focus {
     border: 1px solid var(--border-color);
     transition: transform 0.3s ease;
 }
+
 .tarjeta-peli:hover {
     transform: translateY(-5px);
 }
@@ -241,84 +248,49 @@ input:focus {
 .info-tarjeta {
     padding: 15px;
 }
+
 .gen-year {
     color: var(--text-secundario);
     font-size: 12px;
     margin: 0 0 5px 0;
 }
+
 .info-tarjeta h3 {
     margin: 0 0 5px 0;
     font-size: 16px;
     color: var(--text-primario);
 }
+
 .director {
     color: var(--text-secundario);
     font-size: 14px;
     margin: 0;
 }
 
-
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .cont-principal {
-        flex-direction: column;
-    }
-    
-    .menu-lateral {
-        width: 100%;
-        border-right: none;
-        border-bottom: 1px solid var(--border-color);
-        padding: 20px;
-        box-sizing: border-box;
-    }
-    
-    .encabezado {
-        flex-direction: column;
-        gap: 20px;
-    }
-    
+/* Oculto el vista y favorito, se muestra solo al pasar el mouse */
+.tarjeta-peli .btn-hover-vista,
+.tarjeta-peli .icono-favorito{
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
-
-
-/* Variables globales (Mantenidas del index) */
-:root {
-    --bg-main: #0f0f11;
-    --bg-secondary: #141417;
-    --color-accent: #f5c518;
-    --border-color: #2a2a2a;
-    --text-primary: #ffffff;
-    --text-secondary: #888888;
-    --text-muted: #e0e0e0;
+.tarjeta-peli:hover .btn-hover-vista,
+.tarjeta-peli:hover .icono-favorito{
+    opacity: 1;
 }
 
-/* Reset y base */
-* {
-    box-sizing: border-box;
-}
-
-body {
-    background: var(--bg-main);
-    color: var(--text-muted);
-    margin: 0;
-    padding: 0;
-    font-family: sans-serif;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
+/* ESTILOS DE LA PÁGINA PERFIL */
 
 /* Cinta fílmica decorativa superior */
 .cinta-filmica {
     height: 4px;
-    background: var(--color-accent);
+    background: var(--a-color);
     width: 100%;
 }
 
-/* Encabezado Principal */
+/* Encabezado Principal del Perfil */
 #encabezado-principal {
-    background: var(--bg-secondary);
+    background: var(--bg-secundario);
     border-bottom: 1px solid var(--border-color);
     padding: 15px 40px;
     display: flex;
@@ -343,7 +315,7 @@ body {
 .contenedor-cabecera h1 {
     margin: 0;
     font-size: 24px;
-    color: var(--text-primary);
+    color: var(--text-primario);
     letter-spacing: 1px;
 }
 
@@ -355,20 +327,20 @@ body {
 }
 
 .enlace-nav {
-    color: var(--text-muted);
+    color: var(--text-terciario);
     text-decoration: none;
     font-size: 16px;
     transition: color 0.3s ease;
 }
 
 .enlace-nav:hover {
-    color: var(--text-primary);
+    color: var(--text-primario);
 }
 
 .enlace-nav.activo {
     font-weight: bold;
-    color: var(--color-accent);
-    border-bottom: 2px solid var(--color-accent);
+    color: var(--a-color);
+    border-bottom: 2px solid var(--a-color);
     padding-bottom: 2px;
 }
 
@@ -383,7 +355,7 @@ body {
 
 /* Sección de Usuario (Cabecera del Perfil) */
 .seccion-usuario {
-    background: var(--bg-secondary);
+    background: var(--bg-secundario);
     border: 1px solid var(--border-color);
     border-radius: 8px;
     padding: 25px 30px;
@@ -398,18 +370,18 @@ body {
     height: 90px;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid var(--color-accent);
+    border: 2px solid var(--a-color);
 }
 
 .datos-usuario h2 {
     margin: 0 0 8px 0;
-    color: var(--text-primary);
+    color: var(--text-primario);
     font-size: 22px;
 }
 
 .datos-usuario p {
     margin: 0;
-    color: var(--text-secondary);
+    color: var(--text-secundario);
     font-size: 14px;
 }
 
@@ -424,7 +396,7 @@ body {
 .seccion-favoritas,
 .seccion-pendientes,
 .seccion-stats {
-    background: var(--bg-secondary);
+    background: var(--bg-secundario);
     border: 1px solid var(--border-color);
     border-radius: 8px;
     padding: 25px;
@@ -435,14 +407,14 @@ body {
 .seccion-stats h2 {
     margin: 0 0 15px 0;
     font-size: 18px;
-    color: var(--text-primary);
+    color: var(--text-primario);
     border-bottom: 1px solid var(--border-color);
     padding-bottom: 10px;
 }
 
 /* Sección Favoritas */
 .indicador-limite {
-    color: var(--color-accent);
+    color: var(--a-color);
     font-size: 13px;
     font-weight: bold;
     margin-top: 0;
@@ -458,7 +430,7 @@ body {
 
 /* Sección Pendientes */
 .subtitulo-seccion {
-    color: var(--text-secondary);
+    color: var(--text-secundario);
     font-size: 13px;
     margin-top: 0;
     margin-bottom: 15px;
@@ -472,11 +444,11 @@ body {
 
 .lista-pendientes li {
     padding: 12px 15px;
-    background: var(--bg-main);
+    background: var(--bg-principal);
     border: 1px solid var(--border-color);
     border-radius: 4px;
     margin-bottom: 10px;
-    color: var(--text-muted);
+    color: var(--text-terciario);
     font-size: 14px;
     display: flex;
     justify-content: space-between;
@@ -485,7 +457,7 @@ body {
 }
 
 .lista-pendientes li:hover {
-    border-color: var(--color-accent);
+    border-color: var(--a-color);
 }
 
 /* Sección Estadísticas (Tabla) */
@@ -497,7 +469,7 @@ body {
 .seccion-stats caption {
     caption-side: top;
     text-align: left;
-    color: var(--text-secondary);
+    color: var(--text-secundario);
     font-size: 12px;
     margin-bottom: 12px;
 }
@@ -511,12 +483,12 @@ body {
 }
 
 .seccion-stats th {
-    color: var(--text-secondary);
+    color: var(--text-secundario);
     font-weight: normal;
 }
 
 .seccion-stats td {
-    color: var(--text-primary);
+    color: var(--text-primario);
     font-weight: bold;
     text-align: right;
 }
@@ -528,7 +500,7 @@ body {
 
 /* Pie de Página */
 #pie-pagina {
-    background: var(--bg-secondary);
+    background: var(--bg-secundario);
     border-top: 1px solid var(--border-color);
     padding: 20px 40px;
     text-align: center;
@@ -537,34 +509,11 @@ body {
 
 #pie-pagina p {
     margin: 0;
-    color: var(--text-secondary);
+    color: var(--text-secundario);
     font-size: 13px;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    #encabezado-principal {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 20px;
-    }
-
-    #navegacion-principal {
-        width: 100%;
-        justify-content: space-between;
-    }
-
-    .seccion-usuario {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .contenedor-perfil-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-/*Ventana emergente*/
+/*Ventana emergente (Modales)*/
 .modal {
     border: none;
     background: transparent;
@@ -626,20 +575,6 @@ body {
             margin-top: 15px;
         }
     }
-}
-
-
-
-/* Oculto el vista y favorito, se muestra solo al pasar el mouse */
-.tarjeta-peli .btn-hover-vista,
-.tarjeta-peli .icono-favorito{
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.tarjeta-peli:hover .btn-hover-vista,
-.tarjeta-peli:hover .icono-favorito{
-    opacity: 1;
 }
 
 /* --- Ventana de Detalle --- */
@@ -728,8 +663,6 @@ body {
     margin-left: auto; 
 }
 
-
-
 .modal .modal-contenido .campo-form.campo-checkbox {
     flex-direction: row;
     align-items: center;
@@ -737,7 +670,6 @@ body {
     gap: 10px;
     margin-top: 5px;
 }
-
 
 .modal .modal-contenido .campo-form.campo-checkbox input[type="checkbox"] {
     width: 18px !important; 
@@ -780,7 +712,6 @@ body {
     grid-column: 1 / -1; 
 }
 
-
 #input-sinopsis, 
 #input-resena {
     background-color: #000000;
@@ -789,7 +720,6 @@ body {
     padding: 12px;
     resize: vertical;
 }
-
 
 #form-pelicula .campo-checkbox {
     display: flex !important;
@@ -819,7 +749,7 @@ body {
     position: absolute;
     top: 10px;
     left: 10px;
-    background: var(--color-accent);
+    background: var(--a-color);
     color: #000;
     width: 24px;
     height: 24px;
@@ -835,7 +765,7 @@ body {
     position: absolute;
     bottom: 10px;
     left: 10px;
-    color: var(--color-accent);
+    color: var(--a-color);
     font-size: 20px;
     cursor: pointer; 
     transition: transform 0.2s ease;
@@ -846,7 +776,7 @@ body {
 }
 
 .rating-peli {
-    color: var(--color-accent);
+    color: var(--a-color);
     cursor: pointer;
     font-size: 18px;
     transition: transform 0.1s ease;
@@ -857,21 +787,20 @@ body {
     transform: scale(1.2);
 }
 
-
 /* --- ESTILOS DEL LOGIN --- */
 .body-login {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: var(--bg-principal, #0f0f11); 
+    background: var(--bg-principal); 
 }
 
 .contenedor-login {
-    background: var(--bg-secundario, #141417);
+    background: var(--bg-secundario);
     padding: 40px;
     border-radius: 8px;
-    border: 1px solid var(--border-color, #2a2a2a);
+    border: 1px solid var(--border-color);
     width: 100%;
     max-width: 400px;
     text-align: center;
@@ -884,17 +813,16 @@ body {
 }
 
 .contenedor-login h1 {
-    color: var(--text-primario, #ffffff);
+    color: var(--text-primario);
     font-size: 24px;
     margin: 0 0 10px 0;
 }
 
 .contenedor-login p {
-    color: var(--text-secundario, #888888);
+    color: var(--text-secundario);
     font-size: 14px;
     margin-bottom: 25px;
 }
-
 
 .contenedor-login .campo-form {
     display: flex;
@@ -937,4 +865,44 @@ body {
     font-size: 13px !important;
     margin-bottom: 15px !important;
     display: none; 
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .cont-principal {
+        flex-direction: column;
+    }
+    
+    .menu-lateral {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        padding: 20px;
+        box-sizing: border-box;
+    }
+    
+    .encabezado {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    #encabezado-principal {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+    }
+
+    #navegacion-principal {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .seccion-usuario {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .contenedor-perfil-grid {
+        grid-template-columns: 1fr;
+    }
 }

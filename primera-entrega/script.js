@@ -287,7 +287,7 @@ document.getElementById('btn-detalle-favorita').onclick = () => {
 };
 
 document.getElementById('btn-detalle-eliminar').onclick = () => {
-    const confirmacion = confirm("¿Estás segura de que querés eliminar esta película?");
+    const confirmacion = confirm("¿Estás seguro de que querés eliminar esta película?");
     if(confirmacion) {
         peliculas.splice(indicePeliActual, 1); 
         localStorage.setItem('cineteca_pelis', JSON.stringify(peliculas));
