@@ -161,9 +161,16 @@ formPelicula.onsubmit = (evento) => {
  * @return {void}
  */
 const alternarEstado = (index) => {
-    peliculas[index].estado = peliculas[index].estado === 'Vista' ? 'Pendiente' : 'Vista';
+    const peli = peliculas[index];
+    peli.estado = peli.estado === 'Vista' ? 'Pendiente' : 'Vista';
+
+    // Una película pendiente no puede ser favorita
+    if (peli.estado === 'Pendiente') {
+        peli.favorita = false;
+    }
+
     localStorage.setItem('cineteca_pelis', JSON.stringify(peliculas));
-    aplicarFiltros(); 
+    aplicarFiltros();
 };
 
 /**
@@ -174,9 +181,14 @@ const alternarEstado = (index) => {
 const alternarFavorito = (index) => {
     const peli = peliculas[index];
 
-    // Si se quiere marcar como favorita, verificar el límite
     if (!peli.favorita) {
-        const cantidadFavoritas = peliculas.filter((p) => p.favorita).length;
+        // Solo se pueden marcar como favoritas las películas vistas
+        if (peli.estado !== 'Vista') {
+            alert('Error: Solo puedes marcar como favoritas las películas que ya viste.');
+            return;
+        }
+
+        const cantidadFavoritas = peliculas.filter((p) => p.favorita && p.estado === 'Vista').length;
         if (cantidadFavoritas >= MAX_FAVORITAS) {
             alert(`Error: Solo puedes seleccionar un máximo de ${MAX_FAVORITAS} películas como favoritas.`);
             return;
