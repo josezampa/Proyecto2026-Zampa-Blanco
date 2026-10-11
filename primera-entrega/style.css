@@ -281,8 +281,7 @@ input:focus {
 }
 
 
-<<<<<<< HEAD
-/* ESTILOS DEL PERFIL :::: */
+
 /* Variables globales (Mantenidas del index) */
 :root {
     --bg-main: #0f0f11;
@@ -563,7 +562,8 @@ body {
     .contenedor-perfil-grid {
         grid-template-columns: 1fr;
     }
-=======
+}
+
 /*Ventana emergente*/
 .modal {
     border: none;
@@ -855,5 +855,86 @@ body {
 
 .rating-peli:hover {
     transform: scale(1.2);
->>>>>>> julieta_blanco
+}
+
+
+/* --- ESTILOS DEL LOGIN --- */
+.body-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: var(--bg-principal, #0f0f11); 
+}
+
+.contenedor-login {
+    background: var(--bg-secundario, #141417);
+    padding: 40px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color, #2a2a2a);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5); 
+}
+
+.logo-login {
+    width: 60px;
+    margin-bottom: 15px;
+}
+
+.contenedor-login h1 {
+    color: var(--text-primario, #ffffff);
+    font-size: 24px;
+    margin: 0 0 10px 0;
+}
+
+.contenedor-login p {
+    color: var(--text-secundario, #888888);
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+
+.contenedor-login .campo-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    margin-bottom: 20px;
+}
+
+.contenedor-login .campo-form label {
+    margin-bottom: 8px;
+    color: var(--text-primario);
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.contenedor-login .campo-form input {
+    width: 85%; 
+    padding: 12px;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-principal);
+    color: var(--text-terciario);
+    text-align: center; 
+}
+
+.contenedor-login .campo-form input:focus {
+    border-color: var(--a-color);
+    outline: none;
+}
+
+.btn-login {
+    width: 85%;
+    margin-top: 10px;
+    padding: 12px;
+    font-size: 16px;
+}
+
+.mensaje-error {
+    color: #ff4d4d !important;
+    font-size: 13px !important;
+    margin-bottom: 15px !important;
+    display: none; 
 }
