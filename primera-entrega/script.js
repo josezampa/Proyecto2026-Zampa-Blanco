@@ -1,3 +1,26 @@
+// INICIO DE SESIÓN
+const validar = () => {
+    // Tomamos los valores ingresados
+    const usuario = document.getElementById('usuario').value.trim().toLowerCase();
+    const clave = document.getElementById('clave').value.trim();
+    const mensajeError = document.getElementById('mensaje-error');
+
+    mensajeError.style.display = "none";
+
+    if (usuario === "" || clave === "") {
+        mensajeError.innerText = "Por favor, completá ambos campos.";
+        mensajeError.style.display = "block";
+        return;
+    }
+
+    if ((usuario === "juli" || usuario === "jose") && clave === "1234") {
+        window.location.href = "catalogo.html";
+    } else {
+        mensajeError.innerText = "Usuario o clave incorrectos. Volvé a intentar.";
+        mensajeError.style.display = "block";
+    }
+};
+
 // Declaración de variables y selección del DOM
 const contenedorPelis = document.querySelector('.grilla-pelis');
 const selectAnio = document.getElementById('input-anio');
