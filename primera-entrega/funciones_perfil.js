@@ -1,8 +1,34 @@
+const CLAVE_STORAGE = "cineteca_pelis";
+const MAX_FAVORITAS = 3;
+
 /**
- * Genera la lista de películas para seleccionar favoritas, la lista de pendientes y calcula las estadísticas en el perfil.
- * @method cargarPerfil
- * @param Ninguno
- * @return {void} Actualiza la vista de perfil.html con datos reales
+ * Lee las películas que guardó el catálogo (index.html) en localStorage.
+ * @function obtenerPeliculasGuardadas
+ * @returns {Array} Arreglo de películas (vacío si no hay nada guardado)
+ */
+const obtenerPeliculasGuardadas = () => {
+    try {
+        const guardadas = localStorage.getItem(CLAVE_STORAGE);
+        return guardadas ? JSON.parse(guardadas) : [];
+    } catch (error) {
+        return [];
+    }
+};
+
+/**
+ * Guarda el arreglo de películas en localStorage.
+ * @function guardarPeliculasEnStorage
+ * @param {Array} peliculas - Arreglo completo de películas
+ * @returns {void}
+ */
+const guardarPeliculasEnStorage = (peliculas) => {
+    localStorage.setItem(CLAVE_STORAGE, JSON.stringify(peliculas));
+};
+
+/**
+ * Genera la lista de películas para elegir favoritas, la lista de pendientes y calcula las estadísticas.
+ * @function cargarPerfil
+ * @returns {void} Actualiza la vista de perfil.html con datos reales
  */
 const cargarPerfil = () => {
     const contenedorFavoritas = document.getElementById("contenedor-favoritas-lista");
@@ -18,10 +44,10 @@ const cargarPerfil = () => {
     if (peliculas.length === 0) {
         contenedorFavoritas.innerHTML = "<p class='mensaje-vacio'>Registra películas para elegirlas como favoritas.</p>";
         listaPendientes.innerHTML = "<li class='tarjeta-pendiente'>No hay películas pendientes registradas.</li>";
-        
+
         document.getElementById("stat-vistas").textContent = "0";
         document.getElementById("stat-pendientes").textContent = "0";
-        document.getElementById("stat-nota-media").textContent = "0 / 10";
+        document.getElementById("stat-nota-media").textContent = "- / 10";
         document.getElementById("stat-genero-top").textContent = "N/A";
         actualizarContadorFavoritos();
         return;
@@ -30,18 +56,30 @@ const cargarPerfil = () => {
     const pendientes = peliculas.filter((p) => p.estado === "Pendiente");
     const vistas = peliculas.filter((p) => p.estado === "Vista");
 
-    peliculas.forEach((pelicula) => {
-        const div = document.createElement("div");
-        div.className = "item-favorita";
+    if (vistas.length === 0) {
+        contenedorFavoritas.innerHTML = "<p class='mensaje-vacio'>Marca películas como vistas para poder elegirlas como favoritas.</p>";
+    } else {
+        peliculas.forEach((pelicula, indice) => {
+            if (pelicula.estado !== "Vista") return;
 
-        const checkedAttr = pelicula.esFavorita ? "checked" : "";
+            const div = document.createElement("div");
+            div.className = "item-favorita";
 
-        div.innerHTML = `
-            <input type="checkbox" id="fav-pelicula-${pelicula.id}" class="check-favorito" ${checkedAttr} onchange="marcarFavorito('${pelicula.id}')">
-            <label for="fav-pelicula-${pelicula.id}">${pelicula.nombre} (${pelicula.genero}) - ${pelicula.estado}</label>
-        `;
-        contenedorFavoritas.appendChild(div);
-    });
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.id = `fav-pelicula-${indice}`;
+            checkbox.className = "check-favorito";
+            checkbox.checked = pelicula.favorita === true;
+            checkbox.addEventListener("change", () => marcarFavorito(indice));
+
+            const etiqueta = document.createElement("label");
+            etiqueta.htmlFor = checkbox.id;
+            etiqueta.textContent = `${pelicula.titulo} (${pelicula.genero})`;
+
+            div.append(checkbox, etiqueta);
+            contenedorFavoritas.appendChild(div);
+        });
+    }
 
     if (pendientes.length === 0) {
         listaPendientes.innerHTML = "<li class='tarjeta-pendiente'>No tienes películas pendientes.</li>";
@@ -49,24 +87,29 @@ const cargarPerfil = () => {
         pendientes.forEach((p) => {
             const item = document.createElement("li");
             item.className = "tarjeta-pendiente";
-            item.innerHTML = `<strong>${p.nombre}</strong> - ${p.genero} (Pendiente)`;
+
+            const titulo = document.createElement("strong");
+            titulo.textContent = p.titulo;
+
+            const detalle = document.createElement("span");
+            detalle.textContent = p.genero;
+
+            item.append(titulo, detalle);
             listaPendientes.appendChild(item);
         });
     }
 
-    let sumaNotas = 0;
-    const generosContador = {};
+    const puntuadas = vistas.filter((p) => Number(p.puntuacion) > 0);
+    const sumaNotas = puntuadas.reduce((suma, p) => suma + Number(p.puntuacion), 0);
+    const notaMedia = puntuadas.length > 0 ? (sumaNotas / puntuadas.length).toFixed(1) : "-";
 
-    peliculas.forEach((p) => {
-        sumaNotas += Number(p.calificacion);
+    const generosContador = {};
+    vistas.forEach((p) => {
         generosContador[p.genero] = (generosContador[p.genero] || 0) + 1;
     });
 
-    const notaMedia = (sumaNotas / peliculas.length).toFixed(1);
-
     let generoMasVisto = "N/A";
     let maxConteo = 0;
-
     Object.entries(generosContador).forEach(([genero, conteo]) => {
         if (conteo > maxConteo) {
             maxConteo = conteo;
@@ -83,29 +126,33 @@ const cargarPerfil = () => {
 };
 
 /**
- * Controla que el usuario no marque más de 3 películas como favoritas y persiste la elección.
- * @method marcarFavorito
- * @param {string} idPelicula - Identificador unívoco de la película
- * @return {boolean} Retorna verdadero si se aceptó el cambio, falso si excedió el límite de 3
+ * Controla que solo se marquen como favoritas películas vistas (máximo 3) y persiste la elección.
+ * @function marcarFavorito
+ * @param {number} indice - Posición de la película en el arreglo guardado
+ * @returns {boolean} true si se aceptó el cambio, false si excedió el límite de 3
  */
-const marcarFavorito = (idPelicula) => {
+const marcarFavorito = (indice) => {
     const peliculas = obtenerPeliculasGuardadas();
-    const favoritasActuales = peliculas.filter((p) => p.esFavorita);
-    const targetPelicula = peliculas.find((p) => p.id === Number(idPelicula));
+    const pelicula = peliculas[indice];
+    const checkbox = document.getElementById(`fav-pelicula-${indice}`);
 
-    if (!targetPelicula) return false;
+    if (!pelicula || !checkbox) return false;
 
-    const checkbox = document.getElementById(`fav-pelicula-${idPelicula}`);
+    if (pelicula.estado !== "Vista") {
+        checkbox.checked = false;
+        return false;
+    }
 
     if (checkbox.checked) {
-        if (favoritasActuales.length >= 3) {
-            alert("Error: Solo puedes seleccionar un máximo de 3 películas como favoritas.");
+        const cantidadFavoritas = peliculas.filter((p) => p.favorita && p.estado === "Vista").length;
+        if (cantidadFavoritas >= MAX_FAVORITAS) {
+            alert(`Error: Solo puedes seleccionar un máximo de ${MAX_FAVORITAS} películas como favoritas.`);
             checkbox.checked = false;
             return false;
         }
-        targetPelicula.esFavorita = true;
+        pelicula.favorita = true;
     } else {
-        targetPelicula.esFavorita = false;
+        pelicula.favorita = false;
     }
 
     guardarPeliculasEnStorage(peliculas);
@@ -114,15 +161,16 @@ const marcarFavorito = (idPelicula) => {
 };
 
 /**
- * Actualiza el indicador textual del límite de favoritas en la pantalla de perfil.
- * @method actualizarContadorFavoritos
- * @param Ninguno
- * @return {void} No retorna valor
+ * Actualiza el indicador textual del límite de favoritas.
+ * @function actualizarContadorFavoritos
+ * @returns {void}
  */
 const actualizarContadorFavoritos = () => {
-    const seleccionados = document.querySelectorAll('.check-favorito:checked');
+    const seleccionados = document.querySelectorAll(".check-favorito:checked");
     const contadorElemento = document.getElementById("contador-favoritos");
     if (contadorElemento) {
-        contadorElemento.textContent = `Favoritas seleccionadas: ${seleccionados.length} / 3`;
+        contadorElemento.textContent = `Favoritas seleccionadas: ${seleccionados.length} / ${MAX_FAVORITAS}`;
     }
 };
+
+document.addEventListener("DOMContentLoaded", cargarPerfil);

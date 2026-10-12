@@ -1,5 +1,4 @@
-
-
+// INICIO DE SESIÓN
 const validar = () => {
     // Tomamos los valores ingresados
     const usuario = document.getElementById('usuario').value.trim().toLowerCase();
@@ -11,7 +10,7 @@ const validar = () => {
     if (usuario === "" || clave === "") {
         mensajeError.innerText = "Por favor, completá ambos campos.";
         mensajeError.style.display = "block";
-        return; 
+        return;
     }
 
     if ((usuario === "juli" || usuario === "jose") && clave === "1234") {
@@ -144,6 +143,7 @@ const btnAgregar = document.getElementById('btn-agregar');
 const modalAgregar = document.getElementById('modal-agregar');
 const formPelicula = document.getElementById('form-pelicula');
 const btnCerrarModal = document.getElementById('btn-cerrar-modal');
+const MAX_FAVORITAS = 3;
 
 // Modal agregar peli
 btnAgregar.onclick = () => modalAgregar.showModal(); 
@@ -184,9 +184,16 @@ formPelicula.onsubmit = (evento) => {
  * @return {void}
  */
 const alternarEstado = (index) => {
-    peliculas[index].estado = peliculas[index].estado === 'Vista' ? 'Pendiente' : 'Vista';
+    const peli = peliculas[index];
+    peli.estado = peli.estado === 'Vista' ? 'Pendiente' : 'Vista';
+
+    // Una película pendiente no puede ser favorita
+    if (peli.estado === 'Pendiente') {
+        peli.favorita = false;
+    }
+
     localStorage.setItem('cineteca_pelis', JSON.stringify(peliculas));
-    aplicarFiltros(); 
+    aplicarFiltros();
 };
 
 /**
@@ -195,7 +202,23 @@ const alternarEstado = (index) => {
  * @return {void}
  */
 const alternarFavorito = (index) => {
-    peliculas[index].favorita = !peliculas[index].favorita;
+    const peli = peliculas[index];
+
+    if (!peli.favorita) {
+        // Solo se pueden marcar como favoritas las películas vistas
+        if (peli.estado !== 'Vista') {
+            alert('Error: Solo puedes marcar como favoritas las películas que ya viste.');
+            return;
+        }
+
+        const cantidadFavoritas = peliculas.filter((p) => p.favorita && p.estado === 'Vista').length;
+        if (cantidadFavoritas >= MAX_FAVORITAS) {
+            alert(`Error: Solo puedes seleccionar un máximo de ${MAX_FAVORITAS} películas como favoritas.`);
+            return;
+        }
+    }
+
+    peli.favorita = !peli.favorita;
     localStorage.setItem('cineteca_pelis', JSON.stringify(peliculas));
     aplicarFiltros();
 };
@@ -287,7 +310,7 @@ document.getElementById('btn-detalle-favorita').onclick = () => {
 };
 
 document.getElementById('btn-detalle-eliminar').onclick = () => {
-    const confirmacion = confirm("¿Estás seguro de que querés eliminar esta película?");
+    const confirmacion = confirm("¿Estás segura de que querés eliminar esta película?");
     if(confirmacion) {
         peliculas.splice(indicePeliActual, 1); 
         localStorage.setItem('cineteca_pelis', JSON.stringify(peliculas));
@@ -297,3 +320,5 @@ document.getElementById('btn-detalle-eliminar').onclick = () => {
 };
 
 
+// Ejecución inicial 
+renderizarPeliculas(peliculas);

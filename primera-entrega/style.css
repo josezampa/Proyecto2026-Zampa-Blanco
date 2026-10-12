@@ -1,15 +1,17 @@
-/* Variables globales */
+/* ========== Variables globales ========== */
 :root {
     --bg-principal: #0f0f11;
     --bg-secundario: #141417;
+    --bg-hover: #1e1e22;
     --a-color: #f5c518;
+    --color-peligro: #ff4d4d;
     --border-color: #2a2a2a;
     --text-primario: #ffffff;
     --text-secundario: #888888;
     --text-terciario: #e0e0e0;
 }
 
-/* Reset y base */
+/* ========== Base ========== */
 * {
     box-sizing: border-box;
 }
@@ -25,18 +27,70 @@ body {
     flex-direction: column;
 }
 
-.label-busqueda {
-    color: var(--text-terciario); 
-    font-weight: bold;
-    align-self: center; 
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
 }
 
-/* Encabezado */
+main {
+    flex: 1;
+    padding: 40px;
+}
+
+/* ========== Estilos reutilizados ========== */
+
+/* Tarjetas (películas y secciones del perfil) */
+.tarjeta-peli,
+.seccion-usuario,
+.seccion-favoritas,
+.seccion-pendientes,
+.seccion-stats {
+    background: var(--bg-secundario);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+}
+
+/* Botones amarillos */
+.btn-principal,
+.btn-hover-vista {
+    background: var(--a-color);
+    color: #000000;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Ítems de lista del perfil (favoritas y pendientes) */
+.item-favorita,
+.lista-pendientes li {
+    display: flex;
+    align-items: center;
+    background: var(--bg-principal);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    color: var(--text-terciario);
+    font-size: 14px;
+}
+
+/* Campos de texto largos de los modales */
+.modal textarea {
+    width: 100%;
+    background: var(--bg-principal);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    color: var(--text-terciario);
+    padding: 12px;
+    resize: vertical;
+}
+
+/* ========== Encabezado ========== */
 .encabezado {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: var(--bg-secundario); 
+    background: var(--bg-secundario);
     border-bottom: 1px solid var(--border-color);
     padding: 15px 40px;
 }
@@ -45,12 +99,19 @@ body {
     display: flex;
     align-items: center;
     gap: 15px;
+
+    & img {
+        width: 130px;
+        height: auto;
+        object-fit: contain;
+    }
+
     & h1 {
         margin: 0;
         font-size: 24px;
         color: var(--text-primario);
     }
-   
+
     & p {
         margin: 0;
         font-size: 14px;
@@ -70,34 +131,26 @@ body {
     color: var(--text-terciario);
     cursor: pointer;
     font-size: 16px;
+    text-decoration: none;
     transition: color 0.3s ease;
 }
-
 .btn-nav.activa {
     font-weight: bold;
     color: var(--a-color);
 }
 
 .btn-principal {
-    background: var(--a-color);
-    color: #000000;
-    border: none;
     padding: 10px 20px;
-    border-radius: 4px;
-    font-weight: bold;
-    cursor: pointer;
     transition: transform 0.2s ease;
 }
-
 .btn-principal:hover {
     transform: scale(1.05);
 }
 
-/* Contenedor Principal */
+/* ========== Catálogo: contenedor y menú lateral ========== */
 .cont-principal {
     display: flex;
     min-height: 100vh;
-    flex: 1;
 }
 
 .menu-lateral {
@@ -107,24 +160,12 @@ body {
     padding: 30px;
 }
 
-main {
-    flex: 1;
-    padding: 40px;
-}
-
 .cat-menu {
     margin-bottom: 40px;
 }
-
 .cat-menu h2 {
     font-size: 12px;
     color: var(--text-secundario);
-}
-
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
 }
 
 .cat-menu button {
@@ -144,15 +185,21 @@ ul {
     }
 
     &:hover:not(.activa) {
-        background: #1e1e22;
+        background: var(--bg-hover);
     }
 }
 
-/* Buscador */
+/* ========== Buscador ========== */
 .busqueda {
     display: flex;
     gap: 15px;
     margin-bottom: 30px;
+}
+
+.label-busqueda {
+    color: var(--text-terciario);
+    font-weight: bold;
+    align-self: center;
 }
 
 input {
@@ -164,7 +211,6 @@ input {
     color: var(--text-terciario);
     transition: border-color 0.3s ease;
 }
-
 input:focus {
     border-color: var(--a-color);
     outline: none;
@@ -179,12 +225,11 @@ input:focus {
     cursor: pointer;
     transition: background 0.3s ease;
 }
-
 .btn-filtro:hover {
-    background: #1e1e22;
+    background: var(--bg-hover);
 }
 
-/* Grilla de pelis*/
+/* ========== Grilla de películas ========== */
 .grilla-pelis {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -192,13 +237,10 @@ input:focus {
 }
 
 .tarjeta-peli {
-    background: var(--bg-secundario);
-    border-radius: 8px;
-    overflow: hidden; 
-    border: 1px solid var(--border-color);
+    overflow: hidden;
+    cursor: pointer;
     transition: transform 0.3s ease;
 }
-
 .tarjeta-peli:hover {
     transform: translateY(-5px);
 }
@@ -210,7 +252,7 @@ input:focus {
 }
 
 .cont-portada {
-    position: relative; 
+    position: relative;
 }
 
 .portada-peli {
@@ -221,7 +263,7 @@ input:focus {
 }
 
 .puntuacion {
-    position: absolute; 
+    position: absolute;
     top: 10px;
     right: 10px;
     background: rgba(0, 0, 0, 0.7);
@@ -236,115 +278,276 @@ input:focus {
     position: absolute;
     bottom: 10px;
     right: 10px;
+    padding: 8px 12px;
+}
+
+.icono-vista {
+    position: absolute;
+    top: 10px;
+    left: 10px;
     background: var(--a-color);
     color: #000000;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 4px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
     font-weight: bold;
+}
+
+.icono-favorito {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    color: var(--a-color);
+    font-size: 20px;
     cursor: pointer;
+    transition: transform 0.2s ease;
+}
+.icono-favorito:hover {
+    transform: scale(1.2);
+}
+
+/* Se muestran solo al pasar el mouse por la tarjeta */
+.tarjeta-peli .btn-hover-vista,
+.tarjeta-peli .icono-favorito {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.tarjeta-peli:hover .btn-hover-vista,
+.tarjeta-peli:hover .icono-favorito {
+    opacity: 1;
 }
 
 .info-tarjeta {
     padding: 15px;
 }
-
 .gen-year {
     color: var(--text-secundario);
     font-size: 12px;
     margin: 0 0 5px 0;
 }
-
 .info-tarjeta h3 {
     margin: 0 0 5px 0;
     font-size: 16px;
     color: var(--text-primario);
 }
-
 .director {
     color: var(--text-secundario);
     font-size: 14px;
     margin: 0;
 }
 
-/* Oculto el vista y favorito, se muestra solo al pasar el mouse */
-.tarjeta-peli .btn-hover-vista,
-.tarjeta-peli .icono-favorito{
-    opacity: 0;
-    transition: opacity 0.3s ease;
+/* ========== Ventana emergente: agregar película ========== */
+.modal {
+    border: none;
+    background: transparent;
+    padding: 0;
+
+    &::backdrop {
+        background: rgba(0, 0, 0, 0.8);
+    }
+
+    & .modal-contenido {
+        background: var(--bg-secundario);
+        border: 1px solid var(--border-color);
+        width: 90vw;
+        max-width: 750px;
+        padding: 40px;
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        color: var(--text-terciario);
+
+        & h2 {
+            color: var(--text-primario);
+            margin-top: 0;
+            margin-bottom: 5px;
+        }
+
+        & .campo-form {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+
+            & label {
+                font-size: 14px;
+                color: var(--text-secundario);
+            }
+
+            & input,
+            & select {
+                width: 100%;
+                padding: 10px;
+                background: var(--bg-principal);
+                border: 1px solid var(--border-color);
+                border-radius: 2px;
+                color: var(--text-terciario);
+
+                &:focus {
+                    border-color: var(--a-color);
+                    outline: none;
+                }
+            }
+        }
+
+        & .acciones-modal {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 15px;
+        }
+    }
 }
 
-.tarjeta-peli:hover .btn-hover-vista,
-.tarjeta-peli:hover .icono-favorito{
-    opacity: 1;
-}
-
-/* ESTILOS DE LA PÁGINA PERFIL */
-
-/* Cinta fílmica decorativa superior */
-.cinta-filmica {
-    height: 4px;
-    background: var(--a-color);
-    width: 100%;
-}
-
-/* Encabezado Principal del Perfil */
-#encabezado-principal {
-    background: var(--bg-secundario);
-    border-bottom: 1px solid var(--border-color);
-    padding: 15px 40px;
-    display: flex;
-    justify-content: space-between;
+#form-pelicula {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px 40px;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 20px;
 }
 
-.contenedor-cabecera {
-    display: flex;
+.campo-largo {
+    grid-column: 1 / -1;
+}
+
+/* Checkbox "Vista en el cine": se apoya en la especificidad del ID */
+#form-pelicula .campo-checkbox {
+    flex-direction: row;
+    justify-content: flex-start;
     align-items: center;
-    gap: 15px;
+    gap: 10px;
+    height: 100%;
+    margin-top: 5px;
 }
 
-#logo-header {
-    height: 40px;
-    width: auto;
-    object-fit: contain;
-}
-
-.contenedor-cabecera h1 {
+#form-pelicula .campo-checkbox input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    flex: none;
     margin: 0;
-    font-size: 24px;
+    padding: 0;
+    cursor: pointer;
+}
+
+#form-pelicula .campo-checkbox label {
+    margin: 0;
+    cursor: pointer;
+}
+
+/* ========== Ventana emergente: detalle ========== */
+.modal-grande .modal-contenido-detalle {
+    background: var(--bg-secundario);
+    border: 1px solid var(--border-color);
+    width: 90vw;
+    max-width: 800px;
+    border-radius: 8px;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    padding: 0;
+}
+
+.btn-cerrar-x {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
     color: var(--text-primario);
+    font-size: 16px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.detalle-izq {
+    width: 40%;
+    background: var(--bg-principal);
+}
+
+.detalle-izq img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.detalle-der {
+    width: 60%;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    color: var(--text-terciario);
+}
+
+.detalle-gen-year { color: var(--text-secundario); font-size: 14px; margin: 0; }
+.detalle-der h2 { margin: 0; color: var(--text-primario); font-size: 32px; }
+.detalle-director { margin: 0; color: var(--text-secundario); }
+.detalle-puntuacion { margin: 10px 0; }
+.detalle-sinopsis { line-height: 1.5; font-size: 14px; }
+
+.detalle-contexto {
+    color: var(--text-secundario);
+    font-size: 14px;
+    margin: 25px 0 15px 0;
+    display: flex;
+    align-items: center;
+
+    &:before {
+        content: "●";
+        color: var(--a-color);
+        margin-right: 10px;
+        font-size: 12px;
+    }
+}
+
+.seccion-resena label {
+    font-size: 12px;
+    color: var(--text-secundario);
     letter-spacing: 1px;
 }
+.seccion-resena textarea {
+    height: 90px;
+    margin-top: 8px;
+    resize: none;
+}
 
-/* Navegación */
-#navegacion-principal {
+.acciones-detalle {
     display: flex;
-    gap: 20px;
-    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 20px;
 }
 
-.enlace-nav {
-    color: var(--text-terciario);
-    text-decoration: none;
-    font-size: 16px;
-    transition: color 0.3s ease;
+.btn-eliminar {
+    background: transparent;
+    border: 1px solid var(--color-peligro);
+    color: var(--color-peligro);
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: auto;
 }
 
-.enlace-nav:hover {
-    color: var(--text-primario);
-}
-
-.enlace-nav.activo {
-    font-weight: bold;
+.rating-peli {
     color: var(--a-color);
-    border-bottom: 2px solid var(--a-color);
-    padding-bottom: 2px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: transform 0.1s ease;
+    display: inline-block;
+}
+.rating-peli:hover {
+    transform: scale(1.2);
 }
 
-/* Contenido del Perfil */
+/* ========== Perfil ========== */
 #contenido-perfil {
     flex: 1;
     max-width: 1200px;
@@ -353,11 +556,7 @@ input:focus {
     padding: 40px 20px;
 }
 
-/* Sección de Usuario (Cabecera del Perfil) */
 .seccion-usuario {
-    background: var(--bg-secundario);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
     padding: 25px 30px;
     display: flex;
     align-items: center;
@@ -385,20 +584,15 @@ input:focus {
     font-size: 14px;
 }
 
-/* Grilla del Perfil (Secciones Secundarias) */
 .contenedor-perfil-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 25px;
 }
 
-/* Estilos comunes para cada tarjeta/sección */
 .seccion-favoritas,
 .seccion-pendientes,
 .seccion-stats {
-    background: var(--bg-secundario);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
     padding: 25px;
 }
 
@@ -412,7 +606,7 @@ input:focus {
     padding-bottom: 10px;
 }
 
-/* Sección Favoritas */
+/* Favoritas */
 .indicador-limite {
     color: var(--a-color);
     font-size: 13px;
@@ -423,12 +617,37 @@ input:focus {
 
 .lista-favoritas {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-    gap: 15px;
+    grid-template-columns: 1fr;
+    gap: 10px;
     min-height: 100px;
 }
 
-/* Sección Pendientes */
+.item-favorita {
+    gap: 10px;
+    padding: 10px 12px;
+}
+
+.item-favorita .check-favorito {
+    flex: none;
+    width: 18px;
+    height: 18px;
+    padding: 0;
+    margin: 0;
+    accent-color: var(--a-color);
+    cursor: pointer;
+}
+
+.item-favorita label {
+    cursor: pointer;
+}
+
+.mensaje-vacio {
+    color: var(--text-secundario);
+    font-size: 14px;
+    margin: 0;
+}
+
+/* Pendientes */
 .subtitulo-seccion {
     color: var(--text-secundario);
     font-size: 13px;
@@ -436,31 +655,17 @@ input:focus {
     margin-bottom: 15px;
 }
 
-.lista-pendientes {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
 .lista-pendientes li {
-    padding: 12px 15px;
-    background: var(--bg-principal);
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    margin-bottom: 10px;
-    color: var(--text-terciario);
-    font-size: 14px;
-    display: flex;
     justify-content: space-between;
-    align-items: center;
+    padding: 12px 15px;
+    margin-bottom: 10px;
     transition: border-color 0.3s ease;
 }
-
 .lista-pendientes li:hover {
     border-color: var(--a-color);
 }
 
-/* Sección Estadísticas (Tabla) */
+/* Stats */
 .seccion-stats table {
     width: 100%;
     border-collapse: collapse;
@@ -498,7 +703,7 @@ input:focus {
     border-bottom: none;
 }
 
-/* Pie de Página */
+/* Pie de página */
 #pie-pagina {
     background: var(--bg-secundario);
     border-top: 1px solid var(--border-color);
@@ -513,281 +718,9 @@ input:focus {
     font-size: 13px;
 }
 
-/*Ventana emergente (Modales)*/
-.modal {
-    border: none;
-    background: transparent;
-    padding: 0;
-    
-    &::backdrop {
-        background: rgba(0, 0, 0, 0.8);
-    }
 
-    & .modal-contenido {
-        background: var(--bg-secundario);
-        border: 1px solid var(--border-color);
-        width: 90vw; 
-        max-width: 750px;
-        padding: 40px;
-        border-radius: 8px;
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-        color: var(--text-terciario);
+/* ========== ESTILOS DEL LOGIN (index.html) ========== */
 
-        & h2 {
-            color: var(--text-primario);
-            margin-top: 0;
-            margin-bottom: 5px;
-        }
-
-        & .campo-form {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-            
-            & label {
-                font-size: 14px;
-                color: var(--text-secundario);
-            }
-
-            & input, 
-            & select {
-                width: 100%;
-                box-sizing: border-box;
-                padding: 10px;
-                background: var(--bg-principal);
-                border: 1px solid var(--border-color);
-                border-radius: 2px;
-                color: var(--text-terciario);
-                
-                &:focus {
-                    border-color: var(--a-color);
-                    outline: none;
-                }
-            }
-        }
-
-        & .acciones-modal {
-            display: flex;
-            gap: 10px;
-            justify-content: flex-end;
-            margin-top: 15px;
-        }
-    }
-}
-
-/* --- Ventana de Detalle --- */
-.modal-grande .modal-contenido-detalle {
-    background: var(--bg-secundario);
-    border: 1px solid var(--border-color);
-    width: 90vw;
-    max-width: 800px;
-    border-radius: 8px;
-    display: flex;
-    position: relative; 
-    overflow: hidden; 
-    padding: 0;
-}
-
-.btn-cerrar-x {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: rgba(0,0,0,0.5);
-    border: none;
-    color: white;
-    font-size: 16px;
-    padding: 8px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    z-index: 10;
-}
-
-.detalle-izq {
-    width: 40%;
-    background: var(--bg-principal); 
-}
-
-.detalle-izq img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; 
-    display: block;
-}
-
-.detalle-der {
-    width: 60%;
-    padding: 40px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    color: var(--text-terciario);
-}
-
-.detalle-gen-year { color: var(--text-secundario); font-size: 14px; margin: 0; }
-.detalle-der h2 { margin: 0; color: var(--text-primario); font-size: 32px; }
-.detalle-director { margin: 0; color: var(--text-secundario); }
-.detalle-puntuacion { margin: 10px 0; }
-.detalle-sinopsis { line-height: 1.5; font-size: 14px; }
-
-.seccion-resena label { font-size: 12px; color: var(--text-secundario); letter-spacing: 1px; }
-.seccion-resena textarea {
-    width: 100%;
-    height: 90px;
-    background: var(--bg-principal);
-    border: 1px solid var(--border-color);
-    color: var(--text-terciario);
-    padding: 10px;
-    border-radius: 4px;
-    resize: none;
-    margin-top: 8px;
-    box-sizing: border-box;
-}
-
-.acciones-detalle {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
-    border-top: 1px solid var(--border-color);
-    padding-top: 20px;
-}
-
-.btn-eliminar {
-    background: transparent;
-    border: 1px solid #ff4d4d;
-    color: #ff4d4d;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-left: auto; 
-}
-
-.modal .modal-contenido .campo-form.campo-checkbox {
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start; 
-    gap: 10px;
-    margin-top: 5px;
-}
-
-.modal .modal-contenido .campo-form.campo-checkbox input[type="checkbox"] {
-    width: 18px !important; 
-    height: 18px !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    cursor: pointer;
-}
-
-.modal .modal-contenido .campo-form.campo-checkbox label {
-    margin: 0;
-    cursor: pointer;
-    font-size: 14px;
-    color: var(--text-secundario);
-}
-
-.detalle-contexto {
-    color: var(--text-secundario);
-    font-size: 14px;
-    margin: 25px 0 15px 0; 
-    display: flex;
-    align-items: center;
-
-    &:before {
-        content: "●"; 
-        color: var(--a-color);
-        margin-right: 10px; 
-        font-size: 12px;
-    }   
-}
-
-#form-pelicula {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px 40px; 
-    align-items: center; 
-}
-
-.campo-largo {
-    grid-column: 1 / -1; 
-}
-
-#input-sinopsis, 
-#input-resena {
-    background-color: #000000;
-    color: var(--text-terciario);
-    border: 1px solid var(--border-color);
-    padding: 12px;
-    resize: vertical;
-}
-
-#form-pelicula .campo-checkbox {
-    display: flex !important;
-    flex-direction: row !important;
-    justify-content: flex-start !important;
-    align-items: center !important;
-    gap: 10px !important;
-    height: 100% !important; 
-}
-
-#form-pelicula .campo-checkbox input[type="checkbox"] {
-    width: 18px !important;
-    height: 18px !important;
-    flex: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
-#form-pelicula .campo-checkbox label {
-    flex: none !important;
-    width: auto !important;
-    margin: 0 !important;
-}
-
-/*Estilos js*/
-.icono-vista {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background: var(--a-color);
-    color: #000;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 14px;
-    font-weight: bold;
-}
-
-.icono-favorito {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    color: var(--a-color);
-    font-size: 20px;
-    cursor: pointer; 
-    transition: transform 0.2s ease;
-}
-
-.icono-favorito:hover {
-    transform: scale(1.2);
-}
-
-.rating-peli {
-    color: var(--a-color);
-    cursor: pointer;
-    font-size: 18px;
-    transition: transform 0.1s ease;
-    display: inline-block;
-}
-
-.rating-peli:hover {
-    transform: scale(1.2);
-}
-
-/* --- ESTILOS DEL LOGIN --- */
 .body-login {
     display: flex;
     justify-content: center;
@@ -867,34 +800,22 @@ input:focus {
     display: none; 
 }
 
-/* Responsive Design */
+/* ========== Responsive Design ========== */
 @media (max-width: 768px) {
     .cont-principal {
         flex-direction: column;
     }
-    
+
     .menu-lateral {
         width: 100%;
         border-right: none;
         border-bottom: 1px solid var(--border-color);
         padding: 20px;
-        box-sizing: border-box;
     }
-    
+
     .encabezado {
         flex-direction: column;
         gap: 20px;
-    }
-
-    #encabezado-principal {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 20px;
-    }
-
-    #navegacion-principal {
-        width: 100%;
-        justify-content: space-between;
     }
 
     .seccion-usuario {
@@ -905,4 +826,91 @@ input:focus {
     .contenedor-perfil-grid {
         grid-template-columns: 1fr;
     }
+}
+
+/* ========== Mobile (extra) ========== */
+
+/* En pantallas táctiles, mostrar siempre los botones de la tarjeta */
+@media (hover: none) {
+    .tarjeta-peli .btn-hover-vista,
+    .tarjeta-peli .icono-favorito {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    main {
+        padding: 20px 15px;
+    }
+
+    .encabezado {
+        padding: 15px 20px;
+    }
+
+    /* Buscador en dos líneas */
+    .busqueda {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .busqueda input {
+        min-width: 0;
+        flex: 1 1 100%;
+    }
+
+    /* Menú lateral: botones en fila con salto de línea */
+    .cat-menu {
+        margin-bottom: 20px;
+    }
+    .cat-menu ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    .cat-menu button {
+        width: auto;
+        padding: 8px 14px;
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+    }
+    .cat-menu button.activa {
+        border-left: 1px solid var(--a-color);
+        border-color: var(--a-color);
+    }
+
+    /* Modal de agregar: una sola columna */
+    .modal-contenido {
+        padding: 25px 20px;
+    }
+    #form-pelicula {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    /* Modal de detalle: imagen arriba, texto abajo */
+    .modal-grande .modal-contenido-detalle {
+        flex-direction: column;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    .detalle-izq,
+    .detalle-der {
+        width: 100%;
+    }
+    .detalle-izq img {
+        height: 220px;
+    }
+    .detalle-der {
+        padding: 25px 20px;
+    }
+    .detalle-der h2 {
+        font-size: 24px;
+    }
+    .acciones-detalle {
+        flex-wrap: wrap;
+    }
+}
+
+/* Perfil: evita desborde en pantallas muy chicas */
+.contenedor-perfil-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
 }
