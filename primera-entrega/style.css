@@ -726,11 +726,16 @@ input:focus {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: var(--bg-principal); 
+    background-image: url('imagenes/fondo_login.jpg'); 
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-attachment: fixed;
 }
 
 .contenedor-login {
-    background: var(--bg-secundario);
+    background: rgba(20, 20, 23, 0.85); 
+    backdrop-filter: blur(5px);
     padding: 40px;
     border-radius: 8px;
     border: 1px solid var(--border-color);
@@ -741,8 +746,8 @@ input:focus {
 }
 
 .logo-login {
-    width: 60px;
-    margin-bottom: 15px;
+    width: 160px;
+    margin-bottom: 10px;
 }
 
 .contenedor-login h1 {
@@ -800,7 +805,6 @@ input:focus {
     display: none; 
 }
 
-/* ========== Responsive Design ========== */
 @media (max-width: 768px) {
     .cont-principal {
         flex-direction: column;
