@@ -25,10 +25,8 @@
         </nav>
     </header>
 
-    <!-- CONTENEDOR PRINCIPAL -->
-    <div class="cont-principal">
 
-        <!-- MENÚ LATERAL -->
+    <div class="cont-principal">
         <aside class="menu-lateral">
             <section class="cat-menu">
                 <h2>ESTADO</h2>
@@ -56,20 +54,17 @@
             </section>
         </aside>
 
-        <!-- CATÁLOGO DE PELÍCULAS -->
         <main>
             
-            <!-- Barra de búsqueda -->
         <div class="busqueda">
             <label for="buscar-peli" class="label-busqueda">Buscar película:</label>
             <input type="search" id="buscar-peli" placeholder="Título o director...">
             <button id="btn-ordenar-anio" class="btn-filtro">Año ▼</button>
         </div>
 
-            <!-- Grilla de películas -->
             <div class="grilla-pelis">
                 
-                <article class="tarjeta-peli"> <!-- De prueba para ver como se verían las tarjetas -->
+                <article class="tarjeta-peli"> 
                     <a href="#" class="detalle-peli">
                         
                         <div class="cont-portada">
@@ -95,7 +90,6 @@
     </div>
 
 
-    <!-- Ventana emergente de Detalle peli -->
     <dialog id="modal-detalle" class="modal modal-grande">
         <div class="modal-contenido-detalle">
             <button type="button" id="btn-cerrar-detalle" class="btn-cerrar-x">✕</button>
@@ -138,20 +132,16 @@
     </dialog>
 
 
-
-        <!-- Ventana emergente para agregar película -->
     <dialog id="modal-agregar" class="modal">
         <div class="modal-contenido">
             <h2>Agregar Nueva Película</h2>
             
             <form id="form-pelicula">
-                <!-- Título ocupa todo el ancho -->
                 <div class="campo-form campo-largo">
                     <label for="input-titulo">Título:</label>
                     <input type="text" id="input-titulo" placeholder="Ej: Taken" required oninvalid="this.setCustomValidity('Por favor, ingresá el título de la película')" oninput="this.setCustomValidity('')">
                 </div>
                 
-                <!-- El resto en dos columnas -->
                 <div class="campo-form">
                     <label for="input-director">Director:</label>
                     <input type="text" id="input-director" placeholder="Nombre del director">
@@ -209,13 +199,11 @@
                     <input type="url" id="input-portada" placeholder="Enlace a la imagen (opcional)">
                 </div>
 
-                <!-- Checkbox como un ítem más de la grilla -->
                 <div class="campo-form campo-checkbox">
                     <input type="checkbox" id="input-cine">
                     <label for="input-cine">Vista en el cine</label>
                 </div>
 
-                <!-- Sinopsis y Reseña ahora comparten fila (una columna cada uno) -->
                 <div class="campo-form">
                     <label for="input-sinopsis">Sinopsis:</label>
                     <textarea id="input-sinopsis" placeholder="Breve descripción de la película" rows="4"></textarea>
@@ -226,7 +214,6 @@
                     <textarea id="input-resena" placeholder="Escribe tu opinión de la película..." rows="4"></textarea>
                 </div>
                 
-                <!-- Botones al final ocupando todo el ancho -->
                 <div class="acciones-modal campo-largo">
                     <button type="submit" class="btn-principal">Guardar</button>
                     <button type="button" id="btn-cerrar-modal" class="btn-filtro">Cancelar</button>

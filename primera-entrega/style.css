@@ -1,4 +1,4 @@
-/* ========== Variables globales ========== */
+
 :root {
     --bg-principal: #0f0f11;
     --bg-secundario: #141417;
@@ -11,7 +11,7 @@
     --text-terciario: #e0e0e0;
 }
 
-/* ========== Base ========== */
+
 * {
     box-sizing: border-box;
 }
@@ -38,9 +38,9 @@ main {
     padding: 40px;
 }
 
-/* ========== Estilos reutilizados ========== */
 
-/* Tarjetas (películas y secciones del perfil) */
+
+
 .tarjeta-peli,
 .seccion-usuario,
 .seccion-favoritas,
@@ -51,7 +51,7 @@ main {
     border-radius: 8px;
 }
 
-/* Botones amarillos */
+
 .btn-principal,
 .btn-hover-vista {
     background: var(--a-color);
@@ -62,7 +62,7 @@ main {
     cursor: pointer;
 }
 
-/* Ítems de lista del perfil (favoritas y pendientes) */
+
 .item-favorita,
 .lista-pendientes li {
     display: flex;
@@ -74,7 +74,7 @@ main {
     font-size: 14px;
 }
 
-/* Campos de texto largos de los modales */
+
 .modal textarea {
     width: 100%;
     background: var(--bg-principal);
@@ -85,7 +85,7 @@ main {
     resize: vertical;
 }
 
-/* ========== Encabezado ========== */
+
 .encabezado {
     display: flex;
     justify-content: space-between;
@@ -147,7 +147,6 @@ main {
     transform: scale(1.05);
 }
 
-/* ========== Catálogo: contenedor y menú lateral ========== */
 .cont-principal {
     display: flex;
     min-height: 100vh;
@@ -189,7 +188,6 @@ main {
     }
 }
 
-/* ========== Buscador ========== */
 .busqueda {
     display: flex;
     gap: 15px;
@@ -229,7 +227,6 @@ input:focus {
     background: var(--bg-hover);
 }
 
-/* ========== Grilla de películas ========== */
 .grilla-pelis {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -310,7 +307,7 @@ input:focus {
     transform: scale(1.2);
 }
 
-/* Se muestran solo al pasar el mouse por la tarjeta */
+
 .tarjeta-peli .btn-hover-vista,
 .tarjeta-peli .icono-favorito {
     opacity: 0;
@@ -340,7 +337,7 @@ input:focus {
     margin: 0;
 }
 
-/* ========== Ventana emergente: agregar película ========== */
+
 .modal {
     border: none;
     background: transparent;
@@ -414,7 +411,7 @@ input:focus {
     grid-column: 1 / -1;
 }
 
-/* Checkbox "Vista en el cine": se apoya en la especificidad del ID */
+
 #form-pelicula .campo-checkbox {
     flex-direction: row;
     justify-content: flex-start;
@@ -438,7 +435,7 @@ input:focus {
     cursor: pointer;
 }
 
-/* ========== Ventana emergente: detalle ========== */
+
 .modal-grande .modal-contenido-detalle {
     background: var(--bg-secundario);
     border: 1px solid var(--border-color);
@@ -547,7 +544,7 @@ input:focus {
     transform: scale(1.2);
 }
 
-/* ========== Perfil ========== */
+
 #contenido-perfil {
     flex: 1;
     max-width: 1200px;
@@ -606,7 +603,7 @@ input:focus {
     padding-bottom: 10px;
 }
 
-/* Favoritas */
+
 .indicador-limite {
     color: var(--a-color);
     font-size: 13px;
@@ -647,7 +644,7 @@ input:focus {
     margin: 0;
 }
 
-/* Pendientes */
+
 .subtitulo-seccion {
     color: var(--text-secundario);
     font-size: 13px;
@@ -665,7 +662,7 @@ input:focus {
     border-color: var(--a-color);
 }
 
-/* Stats */
+
 .seccion-stats table {
     width: 100%;
     border-collapse: collapse;
@@ -703,7 +700,7 @@ input:focus {
     border-bottom: none;
 }
 
-/* Pie de página */
+
 #pie-pagina {
     background: var(--bg-secundario);
     border-top: 1px solid var(--border-color);
@@ -719,7 +716,7 @@ input:focus {
 }
 
 
-/* ========== ESTILOS DEL LOGIN (index.html) ========== */
+
 
 .body-login {
     display: flex;
@@ -832,9 +829,7 @@ input:focus {
     }
 }
 
-/* ========== Mobile (extra) ========== */
 
-/* En pantallas táctiles, mostrar siempre los botones de la tarjeta */
 @media (hover: none) {
     .tarjeta-peli .btn-hover-vista,
     .tarjeta-peli .icono-favorito {
@@ -881,7 +876,7 @@ input:focus {
         border-color: var(--a-color);
     }
 
-    /* Modal de agregar: una sola columna */
+   
     .modal-contenido {
         padding: 25px 20px;
     }
@@ -890,7 +885,7 @@ input:focus {
         gap: 20px;
     }
 
-    /* Modal de detalle: imagen arriba, texto abajo */
+    
     .modal-grande .modal-contenido-detalle {
         flex-direction: column;
         max-height: 90vh;
@@ -914,7 +909,7 @@ input:focus {
     }
 }
 
-/* Perfil: evita desborde en pantallas muy chicas */
+
 .contenedor-perfil-grid {
     grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
 }

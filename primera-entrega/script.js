@@ -1,6 +1,5 @@
-// INICIO DE SESIÓN
+
 const validar = () => {
-    // Tomamos los valores ingresados
     const usuario = document.getElementById('usuario').value.trim().toLowerCase();
     const clave = document.getElementById('clave').value.trim();
     const mensajeError = document.getElementById('mensaje-error');
@@ -21,16 +20,16 @@ const validar = () => {
     }
 };
 
-// Declaración de variables y selección del DOM
+
 const contenedorPelis = document.querySelector('.grilla-pelis');
 const selectAnio = document.getElementById('input-anio');
 
-// Cargar años en el select
+
 for (let i = 2026; i >= 1820; i--) {
     selectAnio.innerHTML += `<option value="${i}">${i}</option>`;
 }
 
-// Inicialización del arreglo de películas desde localStorage
+
 let peliculas = [];
 const peliculasGuardadas = localStorage.getItem('cineteca_pelis');
 if (peliculasGuardadas) {
@@ -50,7 +49,6 @@ const renderizarPeliculas = (listaPeliculas) => {
         const textoBoton = peli.estado === 'Vista' ? 'Vista ✓' : '+ Marcar';
         const iconoFavoritoHTML = `<div class="icono-favorito" onclick="event.stopPropagation(); alternarFavorito(${indexReal})">${peli.favorita ? '♥' : '♡'}</div>`;
         
-        // Tarjeta
         const htmlPeli = `
             <article class="tarjeta-peli" style="cursor: pointer;" onclick="abrirDetalle(${indexReal})">
                 <div class="cont-portada">
@@ -103,7 +101,6 @@ const aplicarFiltros = () => {
         return coincideEstado && coincideGenero && coincideBusqueda;
     });
 
-    // Ordenar las películas filtradas según la variable de estado
     pelisFiltradas.sort((a, b) => {
         return ordenAnioDescendente ? b.anio - a.anio : a.anio - b.anio;
     });
@@ -111,7 +108,6 @@ const aplicarFiltros = () => {
     renderizarPeliculas(pelisFiltradas);
 };
 
-// Eventos Laterales y Buscador
 botonesEstado.forEach((boton) => {
     boton.onclick = () => {
         botonesEstado.forEach(b => b.classList.remove('activa'));
@@ -132,7 +128,6 @@ botonesGenero.forEach((boton) => {
 
 inputBusqueda.oninput = () => aplicarFiltros();
 
-// Evento para el boton de ordenar por año
 btnOrdenarAnio.onclick = () => {
     ordenAnioDescendente = !ordenAnioDescendente; 
     btnOrdenarAnio.innerText = ordenAnioDescendente ? 'Año ▼' : 'Año ▲';
@@ -145,14 +140,13 @@ const formPelicula = document.getElementById('form-pelicula');
 const btnCerrarModal = document.getElementById('btn-cerrar-modal');
 const MAX_FAVORITAS = 3;
 
-// Modal agregar peli
+
 btnAgregar.onclick = () => modalAgregar.showModal(); 
 btnCerrarModal.onclick = () => modalAgregar.close(); 
 
 formPelicula.onsubmit = (evento) => {
     evento.preventDefault(); 
     
-    //input de la portada
     const portadaIngresada = document.getElementById('input-portada').value;
     const portadaGenerica = "https://via.placeholder.com/300x450/141417/888888?text=Sin+Portada";
 
@@ -187,7 +181,6 @@ const alternarEstado = (index) => {
     const peli = peliculas[index];
     peli.estado = peli.estado === 'Vista' ? 'Pendiente' : 'Vista';
 
-    // Una película pendiente no puede ser favorita
     if (peli.estado === 'Pendiente') {
         peli.favorita = false;
     }
@@ -205,7 +198,6 @@ const alternarFavorito = (index) => {
     const peli = peliculas[index];
 
     if (!peli.favorita) {
-        // Solo se pueden marcar como favoritas las películas vistas
         if (peli.estado !== 'Vista') {
             alert('Error: Solo puedes marcar como favoritas las películas que ya viste.');
             return;
@@ -224,7 +216,6 @@ const alternarFavorito = (index) => {
 };
 
 
-// MODAL DE DETALLE 
 const modalDetalle = document.getElementById('modal-detalle');
 const btnCerrarDetalle = document.getElementById('btn-cerrar-detalle');
 let indicePeliActual = null;
@@ -319,6 +310,4 @@ document.getElementById('btn-detalle-eliminar').onclick = () => {
     }
 };
 
-
-// Ejecución inicial 
 renderizarPeliculas(peliculas);
