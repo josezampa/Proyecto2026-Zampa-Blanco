@@ -1,0 +1,37 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background: $bg-principal;
+  color: $text-terciario;
+  font-family: "Poppins", sans-serif;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  color: $text-primario;
+}
+
+p {
+  margin: 0;
+}
+
+main {
+  flex: 1;
+  padding: $espacio-l;
+
+  @include movil {
+    padding: $espacio-m 15px;
+  }
+}

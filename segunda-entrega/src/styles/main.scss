@@ -1,4 +1,8 @@
 @use "abstracts/variables";
+@use "abstracts/mixins";
+@use "base/reset";
+@use "layout/header";
+@use "layout/footer";
 
 body {
   margin: 0;
