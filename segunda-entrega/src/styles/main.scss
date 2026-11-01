@@ -1,0 +1,7 @@
+@use "abstracts/variables";
+
+body {
+  margin: 0;
+  background: variables.$bg-principal;
+  color: variables.$text-terciario;
+}
