@@ -2,6 +2,12 @@ const CLAVE_STORAGE = 'cineteca_pelis';
 const MAX_FAVORITAS = 3;
 const ANIO_MIN = 1888;
 const ANIO_MAX = new Date().getFullYear();
+/**
+ * Funciones de filtrado del catálogo según el estado de la película.
+ * @method FILTROS_ESTADO
+ * @param {Object} peli - Película a evaluar
+ * @return {boolean} true si la película cumple el filtro
+ */
 const FILTROS_ESTADO = {
     Todas: () => true,
     Vistas: (peli) => peli.estado === 'Vista',
@@ -18,7 +24,7 @@ const obtenerPeliculas = () => {
     try {
         const guardadas = JSON.parse(localStorage.getItem(CLAVE_STORAGE));
         return Array.isArray(guardadas) ? guardadas : [];
-    } catch (error) {
+    } catch {
         return [];
     }
 };
@@ -37,7 +43,7 @@ let indicePeliActual = null;
 const guardarPeliculas = () => {
     try {
         localStorage.setItem(CLAVE_STORAGE, JSON.stringify(peliculas));
-    } catch (error) {
+    } catch {
         alert('Error: No se pudieron guardar los cambios en el navegador.');
     }
 };
@@ -166,7 +172,7 @@ const alternarOrdenAnio = (boton) => {
 };
 
 /**
- * Alterna una película entre Vista y Pendiente. Si pasa a Pendiente deja de ser favorita y se borra con quién y dónde la vio.
+ * Alterna una película entre Vista y Pendiente. Si pasa a Pendiente deja de ser favorita y se borran su puntuación y con quién y dónde la vio.
  * @method alternarEstado
  * @param {number} index - Posición de la película en el arreglo principal
  * @return {void}
@@ -177,6 +183,7 @@ const alternarEstado = (index) => {
 
     if (peli.estado === 'Pendiente') {
         peli.favorita = false;
+        peli.puntuacion = 0;
         peli.compania = '';
         peli.enCine = false;
     }
@@ -224,13 +231,19 @@ const marcarPuntos = (puntaje) => {
 };
 
 /**
- * Guarda el puntaje elegido en el detalle. Si se toca el puntaje actual, baja un punto.
+ * Guarda el puntaje elegido en el detalle (solo si la película está vista). Si se toca el puntaje actual, baja un punto.
  * @method actualizarPuntuacion
  * @param {number} valorTocado - Número del cuadrado en el que se hizo clic
  * @return {void}
  */
 const actualizarPuntuacion = (valorTocado) => {
     const peli = peliculas[indicePeliActual];
+
+    if (peli.estado !== 'Vista') {
+        alert('Error: Solo podés puntuar las películas que ya viste.');
+        return;
+    }
+
     const puntajeActual = Number(peli.puntuacion) || 0;
     const nuevoPuntaje = valorTocado === puntajeActual ? valorTocado - 1 : valorTocado;
 
