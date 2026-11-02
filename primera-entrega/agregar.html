@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Blanco Julieta, Zampa María Josefina">
+    <meta name="description" content="Formulario de Cineteca para agregar una nueva película a tu archivo personal de cine.">
+    <meta name="keywords" content="cine, películas, agregar película, formulario, reseñas">
+    <title>Cineteca - Agregar película</title>
+    <link rel="icon" type="image/png" href="imagenes/logo_cineteca.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body onload="actualizarCamposVista()">
+    <header class="encabezado">
+        <div class="cont-logo">
+            <img src="imagenes/logo_cineteca.png" alt="Logo de Cineteca, rollo de película">
+            <div>
+                <h1>Cineteca</h1>
+                <p>Tu archivo personal de cine</p>
+            </div>
+        </div>
+        <nav class="menu-superior">
+            <a href="index.html" class="btn-nav">Catálogo</a>
+            <a href="agregar.html" class="btn-nav activa" aria-current="page">Agregar</a>
+            <a href="perfil.html" class="btn-nav">Perfil</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="contenedor-form">
+            <h2>Agregar nueva película</h2>
+
+            <form id="form-pelicula" novalidate onsubmit="guardarPelicula(event)">
+                <div class="campo-form campo-largo">
+                    <label for="input-titulo">Título:</label>
+                    <input type="text" id="input-titulo" placeholder="Ej: Taken" size="40" maxlength="60">
+                </div>
+
+                <div class="campo-form">
+                    <label for="input-director">Director:</label>
+                    <input type="text" id="input-director" placeholder="Nombre del director" size="30" maxlength="50">
+                </div>
+
+                <div class="campo-form">
+                    <label for="input-anio">Año:</label>
+                    <input type="text" id="input-anio" placeholder="Ej: 2008" size="4" maxlength="4" inputmode="numeric">
+                </div>
+
+                <div class="campo-form">
+                    <label for="input-genero">Género:</label>
+                    <select id="input-genero">
+                        <option value="" selected>Seleccioná un género</option>
+                        <option value="Drama">Drama</option>
+                        <option value="Terror">Terror</option>
+                        <option value="Comedia">Comedia</option>
+                        <option value="Acción">Acción</option>
+                        <option value="Romance">Romance</option>
+                        <option value="Ciencia ficción">Ciencia ficción</option>
+                        <option value="Thriller">Thriller</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                </div>
+
+                <div class="campo-form">
+                    <label for="input-estado">Estado:</label>
+                    <select id="input-estado" onchange="actualizarCamposVista()">
+                        <option value="Pendiente" selected>Pendiente</option>
+                        <option value="Vista">Vista</option>
+                    </select>
+                </div>
+
+                <div class="campo-form">
+                    <label for="input-puntuacion">Puntuación:</label>
+                    <input type="text" id="input-puntuacion" placeholder="Del 1 al 10" size="2" maxlength="2" inputmode="numeric">
+                </div>
+
+                <div class="campo-form">
+                    <label for="input-compania">¿Con quién la viste?</label>
+                    <select id="input-compania" disabled>
+                        <option value="" selected>No especificar</option>
+                        <option value="Solo/a">Solo/a</option>
+                        <option value="Con amigos">Con amigos</option>
+                        <option value="Con familia">Con familia</option>
+                        <option value="En pareja">En pareja</option>
+                    </select>
+                </div>
+
+                <div class="campo-form campo-checkbox campo-largo">
+                    <input type="checkbox" id="input-cine" disabled>
+                    <label for="input-cine">Vista en el cine</label>
+                </div>
+
+                <div class="campo-form campo-largo">
+                    <label for="input-sinopsis">Sinopsis:</label>
+                    <textarea id="input-sinopsis" placeholder="Breve descripción de la película" rows="4" maxlength="500"></textarea>
+                </div>
+
+                <div class="campo-form campo-largo">
+                    <label for="input-resena">Reseña personal:</label>
+                    <textarea id="input-resena" placeholder="Escribí tu opinión de la película..." rows="4" maxlength="500"></textarea>
+                </div>
+
+                <div class="acciones-form campo-largo">
+                    <button type="submit" class="btn-principal">Guardar</button>
+                    <a href="index.html" class="btn-filtro">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer id="pie-pagina">
+        <p>Cineteca - Hecho por BLANCO JULIETA y ZAMPA MARIA JOSEFINA. Materia: Taller de Desarrollo Web</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

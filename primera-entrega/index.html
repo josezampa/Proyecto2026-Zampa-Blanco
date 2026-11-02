@@ -1,35 +1,108 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cineteca - Iniciar Sesión</title>
-    <link rel="stylesheet" href="style.css"> 
+    <meta name="author" content="Blanco Julieta, Zampa María Josefina">
+    <meta name="description" content="Catálogo de Cineteca: tu archivo personal de cine con películas vistas, pendientes y favoritas.">
+    <meta name="keywords" content="cine, películas, catálogo, favoritas, pendientes, reseñas">
+    <title>Cineteca - Catálogo</title>
+    <link rel="icon" type="image/png" href="imagenes/logo_cineteca.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="body-login">
-    
-    <div class="contenedor-login">
-        <img src="imagenes/logo_cineteca.png" alt="Logo de Cineteca" class="logo-login">
-        <h1>Bienvenidas a Cineteca</h1>
-        <p>Ingresá tus datos para continuar</p>
-        
-        <form id="form-login">
-            <div class="campo-form">
-                <label for="usuario">Usuario:</label>
-                <input type="text" id="usuario" placeholder="Ingrese su nombre" required>
+
+<body onload="aplicarFiltros()">
+    <header class="encabezado">
+        <div class="cont-logo">
+            <img src="imagenes/logo_cineteca.png" alt="Logo de Cineteca, rollo de película">
+            <div>
+                <h1>Cineteca</h1>
+                <p>Tu archivo personal de cine</p>
             </div>
-            
-            <div class="campo-form">
-                <label for="clave">Clave:</label>
-                <input type="password" id="clave" placeholder="Ingrese su clave" required>
+        </div>
+        <nav class="menu-superior">
+            <a href="index.html" class="btn-nav activa" aria-current="page">Catálogo</a>
+            <a href="agregar.html" class="btn-nav">Agregar</a>
+            <a href="perfil.html" class="btn-nav">Perfil</a>
+        </nav>
+    </header>
+
+    <div class="cont-principal">
+        <aside class="menu-lateral">
+            <section class="cat-menu">
+                <h2>Estado</h2>
+                <ul>
+                    <li><button type="button" class="activa" onclick="cambiarFiltro('estado', this)">Todas</button></li>
+                    <li><button type="button" onclick="cambiarFiltro('estado', this)">Vistas</button></li>
+                    <li><button type="button" onclick="cambiarFiltro('estado', this)">Pendientes</button></li>
+                    <li><button type="button" onclick="cambiarFiltro('estado', this)">Favoritas</button></li>
+                </ul>
+            </section>
+
+            <section class="cat-menu">
+                <h2>Género</h2>
+                <ul>
+                    <li><button type="button" class="activa" onclick="cambiarFiltro('genero', this)">Todos</button></li>
+                    <li><button type="button" onclick="cambiarFiltro('genero', this)">Drama</button></li>
+                    <li><button type="button" onclick="cambiarFiltro('genero', this)">Terror</button></li>
+                    <li><button type="button" onclick="cambiarFiltro('genero', this)">Comedia</button></li>
+                    <li><button type="button" onclick="cambiarFiltro('genero', this)">Acción</button></li>
+                    <li><button type="button" onclick="cambiarFiltro('genero', this)">Romance</button></li>
+                    <li><button type="button" onclick="cambiarFiltro('genero', this)">Ciencia ficción</button></li>
+                    <li><button type="button" onclick="cambiarFiltro('genero', this)">Thriller</button></li>
+                    <li><button type="button" onclick="cambiarFiltro('genero', this)">Otro</button></li>
+                </ul>
+            </section>
+        </aside>
+
+        <main>
+            <div class="busqueda">
+                <label for="buscar-peli">Buscar película:</label>
+                <input type="search" id="buscar-peli" placeholder="Título o director..." size="30" maxlength="50" oninput="aplicarFiltros()">
+                <button type="button" class="btn-filtro" onclick="alternarOrdenAnio(this)">Año ▼</button>
             </div>
-            
-            <p id="mensaje-error" class="mensaje-error"></p>
-            
-            <button type="button" class="btn-principal btn-login" onclick="validar()">Entrar</button>
-        </form>
+
+            <div id="grilla-pelis" class="grilla-pelis"></div>
+        </main>
     </div>
+
+    <dialog id="modal-detalle" class="modal">
+        <div class="modal-contenido">
+            <button type="button" class="btn-cerrar-x" aria-label="Cerrar detalle" onclick="cerrarDetalle()">✕</button>
+
+            <p class="detalle-gen-year"><span id="detalle-genero"></span> · <span id="detalle-anio"></span></p>
+            <h2 id="detalle-titulo"></h2>
+            <p class="detalle-director" id="detalle-director"></p>
+            <p class="detalle-contexto" id="detalle-contexto"></p>
+
+            <div class="detalle-puntuacion">
+                <span id="cont-puntos"></span>
+                <span id="detalle-puntuacion-num"></span>
+            </div>
+
+            <p class="detalle-sinopsis" id="detalle-sinopsis"></p>
+
+            <div class="seccion-resena">
+                <label for="detalle-resena">Reseña</label>
+                <textarea id="detalle-resena" placeholder="Escribí tu reseña personal..." maxlength="500" rows="4"></textarea>
+                <button type="button" class="btn-principal" onclick="guardarResena()">Guardar</button>
+            </div>
+
+            <div class="acciones-detalle">
+                <button type="button" id="btn-detalle-vista" class="btn-filtro" onclick="alternarEstado(indicePeliActual)">✓ Vista</button>
+                <button type="button" id="btn-detalle-favorita" class="btn-filtro" onclick="alternarFavorito(indicePeliActual)">♥ Favorita</button>
+                <button type="button" class="btn-eliminar" onclick="eliminarPelicula()">Eliminar</button>
+            </div>
+        </div>
+    </dialog>
+
+    <footer id="pie-pagina">
+        <p>Cineteca - Hecho por BLANCO JULIETA y ZAMPA MARIA JOSEFINA. Materia: Taller de Desarrollo Web</p>
+    </footer>
 
     <script src="script.js"></script>
 </body>
+
 </html>
