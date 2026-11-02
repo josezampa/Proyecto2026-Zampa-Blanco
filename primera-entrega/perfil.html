@@ -4,49 +4,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Blanco Julieta, Zampa María Josefina">
     <meta name="description" content="Perfil de usuario en Cineteca con selección de películas favoritas, pendientes y estadísticas de visualización.">
+    <meta name="keywords" content="cine, perfil, favoritas, pendientes, estadísticas, películas">
+    <title>Cineteca - Perfil de usuario</title>
+    <link rel="icon" type="image/png" href="imagenes/logo_cineteca.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <title>Cineteca - Perfil de Usuario</title>
-    <link rel="icon" type="image" href="imagenes/logo_cineteca.png">
 </head>
 
-<body>
+<body onload="cargarPerfil()">
     <header class="encabezado">
         <div class="cont-logo">
-            <img src="imagenes/logo_cineteca.png" alt="Logo de Cineteca, rollo de película" class="logo">
+            <img src="imagenes/logo_cineteca.png" alt="Logo de Cineteca, rollo de película">
             <div>
                 <h1>Cineteca</h1>
                 <p>Tu archivo personal de cine</p>
             </div>
         </div>
         <nav class="menu-superior">
-            <a href="catalogo.html" class="btn-nav">Catálogo</a>
-            <a href="perfil.html" class="btn-nav activa">Perfil</a>
+            <a href="index.html" class="btn-nav">Catálogo</a>
+            <a href="agregar.html" class="btn-nav">Agregar</a>
+            <a href="perfil.html" class="btn-nav activa" aria-current="page">Perfil</a>
         </nav>
     </header>
 
-    <main id="contenido-perfil">
+    <main id="contenido-perfil" class="contenido-centrado">
         <section class="seccion-usuario">
             <img src="imagenes/perfil_usuario.jpeg" alt="Fotografía de perfil del usuario" id="foto-perfil">
             <div class="datos-usuario">
                 <h2>JULI Y JOSE :D</h2>
-                <p>Nos gusta ver pelis y hacer páginas web (maso)</p>
+                <p>Nos gusta ver peliculas !</p>
             </div>
         </section>
 
         <div class="contenedor-perfil-grid">
             <section class="seccion-favoritas">
-                <h2>Películas Favoritas</h2>
+                <h2>Películas favoritas</h2>
                 <p id="contador-favoritos" class="indicador-limite">Favoritas seleccionadas: 0 / 3</p>
-                <div id="contenedor-favoritas-lista" class="lista-favoritas">
-                </div>
+                <div id="contenedor-favoritas-lista" class="lista-favoritas"></div>
             </section>
 
             <section class="seccion-pendientes">
                 <h2>Pendientes</h2>
-                <p class="subtitulo-seccion">Las películas cargadas que aún no has marcado como vistas:</p>
-                <ul class="lista-pendientes">
-                </ul>
+                <p class="subtitulo-seccion">Las películas cargadas que aún no marcaste como vistas:</p>
+                <ul id="lista-pendientes"></ul>
             </section>
 
             <section class="seccion-stats">
@@ -61,19 +63,19 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Películas vistas</td>
+                            <th scope="row">Películas vistas</th>
                             <td id="stat-vistas">0</td>
                         </tr>
                         <tr>
-                            <td>Pendientes</td>
+                            <th scope="row">Pendientes</th>
                             <td id="stat-pendientes">0</td>
                         </tr>
                         <tr>
-                            <td>Nota media</td>
-                            <td id="stat-nota-media">0 / 10</td>
+                            <th scope="row">Nota media</th>
+                            <td id="stat-nota-media">- / 10</td>
                         </tr>
                         <tr>
-                            <td>Género más visto</td>
+                            <th scope="row">Género más visto</th>
                             <td id="stat-genero-top">N/A</td>
                         </tr>
                     </tbody>
@@ -86,6 +88,7 @@
         <p>Cineteca - Hecho por BLANCO JULIETA y ZAMPA MARIA JOSEFINA. Materia: Taller de Desarrollo Web</p>
     </footer>
 
-    <script src="funciones_perfil.js"></script>
+    <script src="script.js"></script>
 </body>
+
 </html>
