@@ -1,0 +1,32 @@
+@use "../abstracts/variables" as *;
+
+.campo {
+  width: 100%;
+  padding: $espacio-s 12px;
+  background: $bg-principal;
+  border: 1px solid $border-color;
+  border-radius: $radio-chico;
+  color: $text-terciario;
+  font: inherit;
+  transition: border-color $transicion;
+
+  &:focus {
+    border-color: $a-color;
+    outline: none;
+  }
+}
+
+.btn-filtro {
+  padding: $espacio-s $espacio-m;
+  background: $bg-secundario;
+  border: 1px solid $border-color;
+  border-radius: $radio-chico;
+  color: $text-terciario;
+  font: inherit;
+  cursor: pointer;
+  transition: background $transicion;
+
+  &:hover {
+    background: $bg-hover;
+  }
+}

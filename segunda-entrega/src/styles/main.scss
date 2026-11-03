@@ -1,11 +1,6 @@
-@use "abstracts/variables";
-@use "abstracts/mixins";
 @use "base/reset";
 @use "layout/header";
 @use "layout/footer";
-
-body {
-  margin: 0;
-  background: variables.$bg-principal;
-  color: variables.$text-terciario;
-}
+@use "components/controles";
+@use "components/tarjeta-peli";
+@use "pages/catalogo";
