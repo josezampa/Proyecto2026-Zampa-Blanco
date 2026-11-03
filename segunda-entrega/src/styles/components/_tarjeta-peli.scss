@@ -2,6 +2,7 @@
 
 .tarjeta-peli {
   overflow: hidden;
+  position: relative;
   background: $bg-secundario;
   border: 1px solid $border-color;
   border-radius: $radio;
@@ -61,13 +62,39 @@
     font-size: 14px;
   }
 
-    .icono-favorito,
+  .btn-titulo {
+    padding: 0;
+    background: none;
+    border: none;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+    }
+
+    &:focus-visible {
+      outline: none;
+    }
+
+    &:focus-visible::after {
+      outline: 2px solid $a-color;
+      outline-offset: -2px;
+    }
+  }
+  
+  .icono-favorito,
   .btn-hover-vista {
     position: absolute;
     bottom: $espacio-s;
     cursor: pointer;
     opacity: 0;
     transition: opacity $transicion, transform 0.2s ease;
+    z-index: 1;
   }
 
   .icono-favorito {

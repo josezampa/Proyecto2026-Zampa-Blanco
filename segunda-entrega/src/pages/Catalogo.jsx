@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
-import { obtenerPeliculas, actualizarPelicula } from "@api/peliculas";
+import {
+  obtenerPeliculas,
+  actualizarPelicula,
+  eliminarPelicula,
+} from "@api/peliculas";
 import PeliculaCard from "@components/PeliculaCard";
 import FiltroGrupo from "@components/FiltroGrupo";
+import DetallePelicula from "@components/DetallePelicula";
 
 const MAX_FAVORITAS = 3;
 
@@ -33,6 +38,7 @@ const Catalogo = () => {
   const [filtroEstado, setFiltroEstado] = useState("Todas");
   const [filtroGenero, setFiltroGenero] = useState("Todos");
   const [aviso, setAviso] = useState("");
+  const [peliculaAbiertaId, setPeliculaAbiertaId] = useState(null);
 
   useEffect(() => {
     const cargarPeliculas = async () => {
@@ -55,8 +61,10 @@ const Catalogo = () => {
         actuales.map((peli) => (peli.id === id ? actualizada : peli))
       );
       setAviso("");
+      return true;
     } catch {
       setAviso("No se pudieron guardar los cambios. Probá de nuevo.");
+      return false;
     }
   };
 
@@ -84,6 +92,29 @@ const Catalogo = () => {
     guardarCambios(peli.id, { favorita: !peli.favorita });
   };
 
+  const puntuar = (peli, valor) => {
+    const puntuacion = valor === peli.puntuacion ? valor - 1 : valor;
+    guardarCambios(peli.id, { puntuacion });
+  };
+
+  const guardarResena = (peli, resena) => guardarCambios(peli.id, { resena });
+
+  const eliminar = async (id) => {
+    try {
+      await eliminarPelicula(id);
+      setPeliculas((actuales) => actuales.filter((peli) => peli.id !== id));
+      setPeliculaAbiertaId(null);
+      setAviso("");
+    } catch {
+      setAviso("No se pudo eliminar la película. Probá de nuevo.");
+    }
+  };
+
+  const cerrarDetalle = () => {
+    setPeliculaAbiertaId(null);
+    setAviso("");
+  };
+
   if (cargando) return <p>Cargando películas...</p>;
   if (error) return <p role="alert">{error}</p>;
 
@@ -98,6 +129,8 @@ const Catalogo = () => {
         peli.director.toLowerCase().includes(texto)
     )
     .sort((a, b) => (ordenDescendente ? b.anio - a.anio : a.anio - b.anio));
+
+  const peliculaAbierta = peliculas.find((peli) => peli.id === peliculaAbiertaId);
 
   return (
     <div className="cont-catalogo">
@@ -137,7 +170,7 @@ const Catalogo = () => {
           </button>
         </div>
 
-        {aviso && (
+        {aviso && !peliculaAbierta && (
           <p className="aviso" role="alert">
             {aviso}
           </p>
@@ -155,6 +188,7 @@ const Catalogo = () => {
               <PeliculaCard
                 key={peli.id}
                 pelicula={peli}
+                onAbrir={setPeliculaAbiertaId}
                 onAlternarEstado={alternarEstado}
                 onAlternarFavorito={alternarFavorito}
               />
@@ -162,6 +196,19 @@ const Catalogo = () => {
           </div>
         )}
       </div>
+
+      {peliculaAbierta && (
+        <DetallePelicula
+          pelicula={peliculaAbierta}
+          aviso={aviso}
+          onCerrar={cerrarDetalle}
+          onAlternarEstado={alternarEstado}
+          onAlternarFavorito={alternarFavorito}
+          onPuntuar={puntuar}
+          onGuardarResena={guardarResena}
+          onEliminar={eliminar}
+        />
+      )}
     </div>
   );
 };

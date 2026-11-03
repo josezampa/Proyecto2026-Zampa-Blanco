@@ -1,4 +1,9 @@
-const PeliculaCard = ({ pelicula, onAlternarEstado, onAlternarFavorito }) => {
+const PeliculaCard = ({
+  pelicula,
+  onAbrir,
+  onAlternarEstado,
+  onAlternarFavorito,
+}) => {
   const puntuacion = pelicula.puntuacion || "-";
 
   return (
@@ -27,7 +32,15 @@ const PeliculaCard = ({ pelicula, onAlternarEstado, onAlternarFavorito }) => {
         <p className="gen-year">
           {pelicula.genero} - {pelicula.anio}
         </p>
-        <h3>{pelicula.titulo}</h3>
+        <h3>
+          <button
+            type="button"
+            className="btn-titulo"
+            onClick={() => onAbrir(pelicula.id)}
+          >
+            {pelicula.titulo}
+          </button>
+        </h3>
         <p className="director">{pelicula.director}</p>
       </div>
     </article>

@@ -23,3 +23,11 @@ export const actualizarPelicula = async (id, cambios) => {
 
   return await respuesta.json();
 };
+
+export const eliminarPelicula = async (id) => {
+  const respuesta = await fetch(`${URL_API}/${id}`, { method: "DELETE" });
+
+  if (!respuesta.ok) {
+    throw new Error("No se pudo eliminar la película.");
+  }
+};
