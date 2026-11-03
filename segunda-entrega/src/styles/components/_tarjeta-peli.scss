@@ -60,4 +60,52 @@
     color: $text-secundario;
     font-size: 14px;
   }
+
+    .icono-favorito,
+  .btn-hover-vista {
+    position: absolute;
+    bottom: $espacio-s;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity $transicion, transform 0.2s ease;
+  }
+
+  .icono-favorito {
+    left: $espacio-s;
+    padding: 0;
+    background: none;
+    border: none;
+    color: $a-color;
+    font-size: 20px;
+
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+
+  .btn-hover-vista {
+    right: $espacio-s;
+    padding: 8px 12px;
+    background: $a-color;
+    border: 1px solid $a-color;
+    border-radius: $radio-chico;
+    color: $text-sobre-acento;
+    font: inherit;
+    font-weight: bold;
+  }
+
+  &:hover,
+  &:focus-within {
+    .icono-favorito,
+    .btn-hover-vista {
+      opacity: 1;
+    }
+  }
+
+  @media (hover: none) {
+    .icono-favorito,
+    .btn-hover-vista {
+      opacity: 1;
+    }
+  }
 }

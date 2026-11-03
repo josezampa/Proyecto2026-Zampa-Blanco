@@ -1,4 +1,4 @@
-const PeliculaCard = ({ pelicula }) => {
+const PeliculaCard = ({ pelicula, onAlternarEstado, onAlternarFavorito }) => {
   const puntuacion = pelicula.puntuacion || "-";
 
   return (
@@ -6,6 +6,22 @@ const PeliculaCard = ({ pelicula }) => {
       <div className="cont-portada">
         <span className="puntuacion">{puntuacion}/10</span>
         <span className="genero-portada">{pelicula.genero}</span>
+        <button
+          type="button"
+          className="icono-favorito"
+          aria-label="Favorita"
+          aria-pressed={pelicula.favorita}
+          onClick={() => onAlternarFavorito(pelicula)}
+        >
+          {pelicula.favorita ? "♥" : "♡"}
+        </button>
+        <button
+          type="button"
+          className="btn-hover-vista"
+          onClick={() => onAlternarEstado(pelicula)}
+        >
+          {pelicula.estado === "Vista" ? "Vista ✓" : "+ Marcar"}
+        </button>
       </div>
       <div className="info-tarjeta">
         <p className="gen-year">

@@ -1,21 +1,21 @@
 {
   "peliculas": [
     {
-      "id": 1,
+      "id": "1",
       "titulo": "Taken",
       "director": "Pierre Morel",
       "anio": 2008,
       "genero": "Acción",
       "estado": "Vista",
       "puntuacion": 8,
-      "compania": "Con amigos",
-      "enCine": true,
+      "compania": "",
+      "enCine": false,
       "sinopsis": "Un ex agente busca a su hija secuestrada.",
       "resena": "",
-      "favorita": false
+      "favorita": true
     },
     {
-      "id": 2,
+      "id": "2",
       "titulo": "Parasite",
       "director": "Bong Joon-ho",
       "anio": 2019,
@@ -28,5 +28,6 @@
       "resena": "",
       "favorita": false
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

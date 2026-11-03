@@ -1,0 +1,55 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.filtro-grupo {
+  margin-bottom: $espacio-l;
+
+  h2 {
+    margin-bottom: $espacio-s;
+    color: $text-secundario;
+    font-size: 12px;
+  }
+
+  button {
+    display: block;
+    width: 100%;
+    padding: $espacio-s 15px;
+    background: none;
+    border: none;
+    border-left: 3px solid transparent;
+    color: $text-terciario;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color $transicion;
+
+    &:hover:not(.activa) {
+      background: $bg-hover;
+    }
+
+    &.activa {
+      background: $border-color;
+      border-left-color: $a-color;
+    }
+  }
+
+  @include movil {
+    margin-bottom: $espacio-m;
+
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    button {
+      width: auto;
+      border: 1px solid $border-color;
+      border-radius: $espacio-m;
+
+      &.activa {
+        border-color: $a-color;
+      }
+    }
+  }
+}
