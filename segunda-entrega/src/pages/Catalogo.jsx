@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { GENEROS } from "@api/peliculas";
 import usePeliculas from "@hooks/usePeliculas";
+import useLocalStorage from "@hooks/useLocalStorage";
+import Boton from "@components/Boton";
 import PeliculaCard from "@components/PeliculaCard";
 import FiltroGrupo from "@components/FiltroGrupo";
 import DetallePelicula from "@components/DetallePelicula";
@@ -28,9 +30,18 @@ const Catalogo = () => {
     eliminar,
   } = usePeliculas();
   const [busqueda, setBusqueda] = useState("");
-  const [ordenDescendente, setOrdenDescendente] = useState(true);
-  const [filtroEstado, setFiltroEstado] = useState("Todas");
-  const [filtroGenero, setFiltroGenero] = useState("Todos");
+  const [ordenDescendente, setOrdenDescendente] = useLocalStorage(
+    "cineteca-orden-descendente",
+    true
+  );
+  const [filtroEstado, setFiltroEstado] = useLocalStorage(
+    "cineteca-filtro-estado",
+    "Todas"
+  );
+  const [filtroGenero, setFiltroGenero] = useLocalStorage(
+    "cineteca-filtro-genero",
+    "Todos"
+  );
   const [peliculaAbiertaId, setPeliculaAbiertaId] = useState(null);
 
   const cerrarDetalle = () => {
@@ -88,13 +99,9 @@ const Catalogo = () => {
             value={busqueda}
             onChange={(e) => setBusqueda(e.target.value)}
           />
-          <button
-            type="button"
-            className="btn-filtro"
-            onClick={() => setOrdenDescendente((actual) => !actual)}
-          >
+          <Boton onClick={() => setOrdenDescendente((actual) => !actual)}>
             Año {ordenDescendente ? "▼" : "▲"}
-          </button>
+          </Boton>
         </div>
 
         {aviso && !peliculaAbierta && (

@@ -1,4 +1,5 @@
 import usePeliculas, { MAX_FAVORITAS } from "@hooks/usePeliculas";
+import Boton from "@components/Boton";
 
 const calcularGeneroTop = (vistas) => {
   const cantidades = {};
@@ -91,13 +92,7 @@ const Perfil = () => {
               {pendientes.map((peli) => (
                 <li key={peli.id} className="item-perfil">
                   <span>{peli.titulo}</span>
-                  <button
-                    type="button"
-                    className="btn-filtro"
-                    onClick={() => alternarEstado(peli)}
-                  >
-                    ✓ Vista
-                  </button>
+                  <Boton onClick={() => alternarEstado(peli)}>✓ Vista</Boton>
                 </li>
               ))}
             </ul>

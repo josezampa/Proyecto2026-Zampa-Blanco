@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { agregarPelicula, GENEROS, COMPANIAS } from "@api/peliculas";
 import Campo from "@components/Campo";
+import Boton from "@components/Boton";
 
 const ANIO_MIN = 1888;
 const ANIO_MAX = new Date().getFullYear();
@@ -250,9 +251,9 @@ const Agregar = () => {
         )}
 
         <div className="acciones-form campo-largo">
-          <button type="submit" className="btn-principal" disabled={guardando}>
+          <Boton type="submit" variante="principal" disabled={guardando}>
             {guardando ? "Guardando..." : "Guardar"}
-          </button>
+          </Boton>
           <Link to="/" className="btn-filtro">
             Cancelar
           </Link>
