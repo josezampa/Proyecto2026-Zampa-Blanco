@@ -27,6 +27,20 @@
       "sinopsis": "Una familia pobre se infiltra en una casa rica.",
       "resena": "",
       "favorita": false
+    },
+    {
+      "titulo": "hola probando 123",
+      "director": "tarantino",
+      "anio": 2009,
+      "genero": "Terror",
+      "estado": "Vista",
+      "puntuacion": 3,
+      "compania": "Solo/a",
+      "enCine": true,
+      "sinopsis": "",
+      "resena": "",
+      "favorita": false,
+      "id": "MKsiphWE6Zg"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

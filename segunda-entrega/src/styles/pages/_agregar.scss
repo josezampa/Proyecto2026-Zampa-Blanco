@@ -1,0 +1,41 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.contenedor-form {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: $espacio-l;
+  background: $bg-secundario;
+  border: 1px solid $border-color;
+  border-radius: $radio;
+
+  h2 {
+    margin-bottom: $espacio-m;
+  }
+
+  @include movil {
+    padding: 25px $espacio-m;
+  }
+}
+
+.form-pelicula {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px 40px;
+  align-items: start;
+
+  @include movil {
+    grid-template-columns: 1fr;
+    gap: $espacio-m;
+  }
+}
+
+.campo-largo {
+  grid-column: 1 / -1;
+}
+
+.acciones-form {
+  display: flex;
+  justify-content: flex-end;
+  gap: $espacio-s;
+}
