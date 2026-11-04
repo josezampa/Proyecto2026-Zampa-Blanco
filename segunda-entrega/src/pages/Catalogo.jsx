@@ -1,14 +1,9 @@
-import { useEffect, useState } from "react";
-import {
-  obtenerPeliculas,
-  actualizarPelicula,
-  eliminarPelicula,
-} from "@api/peliculas";
+import { useState } from "react";
+import { GENEROS } from "@api/peliculas";
+import usePeliculas from "@hooks/usePeliculas";
 import PeliculaCard from "@components/PeliculaCard";
 import FiltroGrupo from "@components/FiltroGrupo";
 import DetallePelicula from "@components/DetallePelicula";
-
-const MAX_FAVORITAS = 3;
 
 const FILTROS_ESTADO = {
   Todas: () => true,
@@ -17,102 +12,34 @@ const FILTROS_ESTADO = {
   Favoritas: (peli) => peli.favorita,
 };
 
-const GENEROS = [
-  "Todos",
-  "Drama",
-  "Terror",
-  "Comedia",
-  "Acción",
-  "Romance",
-  "Ciencia ficción",
-  "Thriller",
-  "Otro",
-];
+const OPCIONES_GENERO = ["Todos", ...GENEROS];
 
 const Catalogo = () => {
-  const [peliculas, setPeliculas] = useState([]);
-  const [cargando, setCargando] = useState(true);
-  const [error, setError] = useState("");
+  const {
+    peliculas,
+    cargando,
+    error,
+    aviso,
+    limpiarAviso,
+    alternarEstado,
+    alternarFavorito,
+    puntuar,
+    guardarResena,
+    eliminar,
+  } = usePeliculas();
   const [busqueda, setBusqueda] = useState("");
   const [ordenDescendente, setOrdenDescendente] = useState(true);
   const [filtroEstado, setFiltroEstado] = useState("Todas");
   const [filtroGenero, setFiltroGenero] = useState("Todos");
-  const [aviso, setAviso] = useState("");
   const [peliculaAbiertaId, setPeliculaAbiertaId] = useState(null);
-
-  useEffect(() => {
-    const cargarPeliculas = async () => {
-      try {
-        setPeliculas(await obtenerPeliculas());
-      } catch {
-        setError("No se pudo conectar con el servidor. Probá de nuevo más tarde.");
-      } finally {
-        setCargando(false);
-      }
-    };
-
-    cargarPeliculas();
-  }, []);
-
-  const guardarCambios = async (id, cambios) => {
-    try {
-      const actualizada = await actualizarPelicula(id, cambios);
-      setPeliculas((actuales) =>
-        actuales.map((peli) => (peli.id === id ? actualizada : peli))
-      );
-      setAviso("");
-      return true;
-    } catch {
-      setAviso("No se pudieron guardar los cambios. Probá de nuevo.");
-      return false;
-    }
-  };
-
-  const alternarEstado = (peli) => {
-    const cambios =
-      peli.estado === "Vista"
-        ? { estado: "Pendiente", favorita: false, compania: "", enCine: false }
-        : { estado: "Vista" };
-
-    guardarCambios(peli.id, cambios);
-  };
-
-  const alternarFavorito = (peli) => {
-    if (!peli.favorita) {
-      if (peli.estado !== "Vista") {
-        setAviso("Solo podés marcar como favoritas las películas que ya viste.");
-        return;
-      }
-      if (peliculas.filter((p) => p.favorita).length >= MAX_FAVORITAS) {
-        setAviso(`Solo podés tener ${MAX_FAVORITAS} películas favoritas como máximo.`);
-        return;
-      }
-    }
-
-    guardarCambios(peli.id, { favorita: !peli.favorita });
-  };
-
-  const puntuar = (peli, valor) => {
-    const puntuacion = valor === peli.puntuacion ? valor - 1 : valor;
-    guardarCambios(peli.id, { puntuacion });
-  };
-
-  const guardarResena = (peli, resena) => guardarCambios(peli.id, { resena });
-
-  const eliminar = async (id) => {
-    try {
-      await eliminarPelicula(id);
-      setPeliculas((actuales) => actuales.filter((peli) => peli.id !== id));
-      setPeliculaAbiertaId(null);
-      setAviso("");
-    } catch {
-      setAviso("No se pudo eliminar la película. Probá de nuevo.");
-    }
-  };
 
   const cerrarDetalle = () => {
     setPeliculaAbiertaId(null);
-    setAviso("");
+    limpiarAviso();
+  };
+
+  const eliminarAbierta = async (id) => {
+    if (await eliminar(id)) setPeliculaAbiertaId(null);
   };
 
   if (cargando) return <p>Cargando películas...</p>;
@@ -143,7 +70,7 @@ const Catalogo = () => {
         />
         <FiltroGrupo
           titulo="Género"
-          opciones={GENEROS}
+          opciones={OPCIONES_GENERO}
           activa={filtroGenero}
           onSeleccionar={setFiltroGenero}
         />
@@ -206,7 +133,7 @@ const Catalogo = () => {
           onAlternarFavorito={alternarFavorito}
           onPuntuar={puntuar}
           onGuardarResena={guardarResena}
-          onEliminar={eliminar}
+          onEliminar={eliminarAbierta}
         />
       )}
     </div>

@@ -1,0 +1,164 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.contenedor-perfil {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.seccion-usuario {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  margin-bottom: 30px;
+  padding: 25px 30px;
+  background: $bg-secundario;
+  border: 1px solid $border-color;
+  border-radius: $radio;
+
+  @include movil {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.foto-perfil {
+  width: 90px;
+  height: 90px;
+  border: 2px solid $a-color;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.datos-usuario {
+  h2 {
+    margin-bottom: 8px;
+    font-size: 22px;
+  }
+
+  p {
+    color: $text-secundario;
+    font-size: 14px;
+  }
+}
+
+.perfil-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+  gap: 25px;
+
+  @include movil {
+    grid-template-columns: 1fr;
+  }
+}
+
+.seccion-perfil {
+  padding: 25px;
+  background: $bg-secundario;
+  border: 1px solid $border-color;
+  border-radius: $radio;
+
+  h2 {
+    margin-bottom: 15px;
+    padding-bottom: $espacio-s;
+    border-bottom: 1px solid $border-color;
+    font-size: 18px;
+  }
+}
+
+.indicador-limite {
+  margin-bottom: 15px;
+  color: $a-color;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.subtitulo-seccion {
+  margin-bottom: 15px;
+  color: $text-secundario;
+  font-size: 13px;
+}
+
+.lista-perfil {
+  display: grid;
+  gap: $espacio-s;
+}
+
+.item-perfil {
+  display: flex;
+  align-items: center;
+  gap: $espacio-s;
+  padding: 12px 15px;
+  background: $bg-principal;
+  border: 1px solid $border-color;
+  border-radius: $radio-chico;
+  color: $text-terciario;
+  font-size: 14px;
+  transition: border-color $transicion;
+
+  input[type="checkbox"] {
+    flex: none;
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    accent-color: $a-color;
+    cursor: pointer;
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+
+  label {
+    color: inherit;
+    cursor: pointer;
+  }
+}
+
+.lista-pendientes .item-perfil {
+  justify-content: space-between;
+
+  &:hover {
+    border-color: $a-color;
+  }
+}
+
+.tabla-stats {
+  width: 100%;
+  border-collapse: collapse;
+
+  caption {
+    caption-side: top;
+    margin-bottom: 12px;
+    color: $text-secundario;
+    font-size: 12px;
+    text-align: left;
+  }
+
+  th,
+  td {
+    padding: 12px $espacio-s;
+    border-bottom: 1px solid $border-color;
+    font-size: 14px;
+    text-align: left;
+  }
+
+  th {
+    color: $text-secundario;
+    font-weight: normal;
+  }
+
+  td {
+    color: $text-primario;
+    font-weight: bold;
+    text-align: right;
+  }
+
+  tr:last-child {
+    th,
+    td {
+      border-bottom: none;
+    }
+  }
+}
