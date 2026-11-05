@@ -2,11 +2,13 @@
 > Un registro personal de películas para organizar, puntuar, y guardar las pelis que mas te gusten :)
 
 ## 📌 Índice
+## 📌 Índice
 1. [Descripción del Proyecto](#-descripción-del-proyecto)
 2. [Contenido de la Página](#-contenido-de-la-página)
 3. [Tecnologías Utilizadas](#-tecnologías-utilizadas)
-4. [Demostración y Despliegue](#-demostración-y-despliegue)
-5. [Autoras](#-autoras)
+4. [Cómo ejecutar el proyecto](#-cómo-ejecutar-el-proyecto)
+5. [Demostración y Despliegue](#-demostración-y-despliegue)
+6. [Autoras](#-autoras)
 
 ---
 
@@ -35,14 +37,78 @@ A continuación se detallan las herramientas y lenguajes empleados para el desar
 
 | Tecnología | Categoría | Uso que le dimos |
 | :--- | :--- | :--- |
-| **HTML** | Estructura Web | Maquetado semántico de la página y formularios de registro. |
-| **CSS** | Estilos | Diseño responsivo, paleta de colores y estilos con Flexbox/Grid. |
-| **JavaScript** | Lógica | Interacción, dinamismo, formularios. |
-| **GitHub** | Hosting | Despliegue del sitio web dinámico/estático en línea. |
-| **Canva** | Diseño | Hacer el wireframe |
+| **React** | Librería de interfaz | Componentes reutilizables y estado con hooks (`useState`, `useEffect`, `useRef`, `useNavigate`). |
+| **Vite** | Herramienta de desarrollo | Servidor de desarrollo, empaquetado y alias de importación. |
+| **React Router** | Enrutamiento | Navegación entre Catálogo, Agregar y Perfil con un layout común (`Outlet`). |
+| **Sass (SCSS)** | Estilos | Variables, mixins, anidamiento y estilos organizados por módulos. |
+| **json-server** | Base de datos simulada | API REST local sobre `data/db.json`: consultar, agregar, modificar y eliminar películas. |
+| **JavaScript** | Lógica | `fetch` con `async/await`, hooks propios y validaciones en tiempo real. |
+| **localStorage** | Almacenamiento del navegador | Recordar el orden y los filtros del catálogo. |
+| **Git y GitHub** | Control de versiones | Repositorio y trabajo en equipo. |
+| **Canva** | Diseño | Hacer el wireframe. |
 
 ### 🔧 Recursos Adicionales
 * **Google GEMINI:** Organizar ideas, consultas de sintaxis, correcciones.
+
+---
+
+## ▶️ Cómo ejecutar el proyecto
+
+### Requisitos previos
+* **Node.js** (versión LTS) y **npm**.
+* **Git**.
+
+### Pasos
+1. Clonar el repositorio y entrar a la carpeta de la segunda entrega:
+
+```bash
+git clone https://github.com/josezampa/Proyecto2026-Zampa-Blanco.git
+cd Proyecto2026-Zampa-Blanco/segunda-entrega
+```
+
+2. Instalar las dependencias:
+
+```bash
+npm install
+```
+
+3. En una primera terminal, levantar la base de datos simulada y dejarla abierta:
+
+```bash
+npm run mock
+```
+
+La API queda disponible en http://localhost:3001/peliculas.
+
+4. En una segunda terminal, dentro de la misma carpeta, levantar la aplicación:
+
+```bash
+npm run dev
+```
+
+5. Abrir http://localhost:5173 en el navegador.
+
+> **Importante:** las dos terminales tienen que estar abiertas al mismo tiempo. Si el mock está apagado, la aplicación muestra un mensaje de error de conexión.
+
+### Scripts disponibles
+| Script | Qué hace |
+| :--- | :--- |
+| `npm run dev` | Servidor de desarrollo de Vite (puerto 5173). |
+| `npm run mock` | json-server sobre `data/db.json` (puerto 3001). |
+
+### Estructura de carpetas
+```
+segunda-entrega/
+├── data/db.json     base de datos simulada
+├── public/          imágenes servidas tal cual
+└── src/
+    ├── api/         acceso al mock con fetch
+    ├── assets/      imágenes importadas
+    ├── components/  componentes reutilizables
+    ├── hooks/       hooks propios
+    ├── pages/       páginas (una por ruta)
+    └── styles/      archivos SCSS
+```
 
 ---
 
