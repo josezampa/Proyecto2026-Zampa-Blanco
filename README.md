@@ -2,7 +2,6 @@
 > Un registro personal de películas para organizar, puntuar, y guardar las pelis que mas te gusten :)
 
 ## 📌 Índice
-## 📌 Índice
 1. [Descripción del Proyecto](#-descripción-del-proyecto)
 2. [Contenido de la Página](#-contenido-de-la-página)
 3. [Tecnologías Utilizadas](#-tecnologías-utilizadas)
