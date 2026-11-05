@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Layout from "@components/Layout";
 import Catalogo from "@pages/Catalogo";
 import Agregar from "@pages/Agregar";
@@ -11,6 +11,7 @@ const App = () => {
         <Route index element={<Catalogo />} />
         <Route path="agregar" element={<Agregar />} />
         <Route path="perfil" element={<Perfil />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
     </Routes>
   );

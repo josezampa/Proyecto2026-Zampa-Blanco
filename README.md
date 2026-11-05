@@ -52,7 +52,7 @@ A continuación se detallan las herramientas y lenguajes empleados para el desar
 
 ---
 
-## ▶️ Cómo ejecutar el proyecto
+## ▶️ Cómo ejecutar el proyecto (SEGUNDA ENTREGA)
 
 ### Requisitos previos
 * **Node.js** (versión LTS) y **npm**.
@@ -112,7 +112,7 @@ segunda-entrega/
 
 ---
 
-## 🚀 Demostración y Despliegue
+## 🚀 Demostración y Despliegue (PRIMERA ENTREGA)
 
 El proyecto se encuentra desplegado y se puede navegar en línea a través del siguiente enlace:
 👉 **[C L I C K](https://josezampa.github.io/Proyecto2026-Zampa-Blanco/primera-entrega/index.html)**
