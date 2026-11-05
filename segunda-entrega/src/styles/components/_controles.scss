@@ -1,0 +1,113 @@
+@use "../abstracts/variables" as *;
+
+.campo {
+  width: 100%;
+  padding: $espacio-s 12px;
+  background: $bg-principal;
+  border: 1px solid $border-color;
+  border-radius: $radio-chico;
+  color: $text-terciario;
+  font: inherit;
+  transition: border-color $transicion;
+
+  &:focus {
+    border-color: $a-color;
+    outline: none;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &[aria-invalid="true"] {
+    border-color: $color-peligro;
+  }
+}
+
+textarea.campo {
+  resize: vertical;
+}
+
+.campo-form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  label {
+    color: $text-secundario;
+    font-size: 14px;
+  }
+
+  &:has(:disabled) label {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.campo-checkbox {
+  flex-direction: row;
+  align-items: center;
+  gap: $espacio-s;
+
+  input[type="checkbox"] {
+    flex: none;
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    accent-color: $a-color;
+    cursor: pointer;
+  }
+
+  label {
+    cursor: pointer;
+  }
+}
+
+.error-campo {
+  color: $color-peligro;
+  font-size: 13px;
+}
+
+.btn-filtro {
+  display: inline-block;
+  padding: $espacio-s $espacio-m;
+  background: $bg-secundario;
+  border: 1px solid $border-color;
+  border-radius: $radio-chico;
+  color: $text-terciario;
+  font: inherit;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background $transicion;
+
+  &:hover {
+    background: $bg-hover;
+  }
+}
+
+.btn-principal {
+  display: inline-block;
+  padding: $espacio-s $espacio-m;
+  background: $a-color;
+  border: 1px solid $a-color;
+  border-radius: $radio-chico;
+  color: $text-sobre-acento;
+  font: inherit;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+}

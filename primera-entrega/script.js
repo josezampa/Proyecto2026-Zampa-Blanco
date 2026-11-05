@@ -24,7 +24,7 @@ const obtenerPeliculas = () => {
     try {
         const guardadas = JSON.parse(localStorage.getItem(CLAVE_STORAGE));
         return Array.isArray(guardadas) ? guardadas : [];
-    } catch {
+    } catch (error) {
         return [];
     }
 };
@@ -43,7 +43,7 @@ let indicePeliActual = null;
 const guardarPeliculas = () => {
     try {
         localStorage.setItem(CLAVE_STORAGE, JSON.stringify(peliculas));
-    } catch {
+    } catch (error) {
         alert('Error: No se pudieron guardar los cambios en el navegador.');
     }
 };
@@ -183,7 +183,6 @@ const alternarEstado = (index) => {
 
     if (peli.estado === 'Pendiente') {
         peli.favorita = false;
-        peli.puntuacion = 0;
         peli.compania = '';
         peli.enCine = false;
     }

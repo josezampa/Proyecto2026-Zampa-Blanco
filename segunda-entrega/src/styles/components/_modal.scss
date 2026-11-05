@@ -1,0 +1,170 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.modal {
+  padding: 0;
+  background: transparent;
+  border: none;
+
+  &::backdrop {
+    background: rgba(0, 0, 0, 0.8);
+  }
+}
+
+.modal-contenido {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 90vw;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: $espacio-l;
+  background: $bg-secundario;
+  border: 1px solid $border-color;
+  border-radius: $radio;
+  color: $text-terciario;
+
+  h2 {
+    font-size: 32px;
+  }
+
+  @include movil {
+    padding: 25px $espacio-m;
+
+    h2 {
+      font-size: 24px;
+    }
+  }
+}
+
+.btn-cerrar-x {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  padding: 8px 12px;
+  background: $fondo-translucido;
+  border: none;
+  border-radius: $radio-chico;
+  color: $text-primario;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.detalle-gen-year,
+.detalle-director {
+  color: $text-secundario;
+  font-size: 14px;
+}
+
+.detalle-contexto {
+  display: flex;
+  align-items: center;
+  color: $text-secundario;
+  font-size: 14px;
+
+  &::before {
+    content: "●";
+    margin-right: $espacio-s;
+    color: $a-color;
+    font-size: 12px;
+  }
+}
+
+.detalle-puntuacion {
+  color: $a-color;
+  font-weight: bold;
+}
+
+.detalle-sinopsis {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.acciones-detalle {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $espacio-s;
+  margin-top: $espacio-s;
+  padding-top: $espacio-m;
+  border-top: 1px solid $border-color;
+}
+
+.zona-eliminar {
+  display: flex;
+  align-items: center;
+  gap: $espacio-s;
+  margin-left: auto;
+}
+
+.btn-eliminar {
+  padding: $espacio-s $espacio-m;
+  background: transparent;
+  border: 1px solid $color-peligro;
+  border-radius: $radio-chico;
+  color: $color-peligro;
+  font: inherit;
+  cursor: pointer;
+  transition: background $transicion;
+
+  &:hover {
+    background: $color-peligro;
+    color: $text-primario;
+  }
+}
+
+.puntos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.btn-punto {
+  padding: 0 2px;
+  background: none;
+  border: none;
+  color: $a-color;
+  font-size: 20px;
+  cursor: pointer;
+  transition: transform 0.1s ease;
+
+  &:hover:not(:disabled) {
+    transform: scale(1.2);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+  }
+}
+
+.ayuda {
+  margin-top: 6px;
+  color: $text-secundario;
+  font-size: 13px;
+}
+
+.seccion-resena {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  label {
+    color: $text-secundario;
+    font-size: 14px;
+  }
+
+  textarea {
+    height: 90px;
+    resize: none;
+  }
+}
+
+.acciones-resena {
+  display: flex;
+  align-items: center;
+  gap: $espacio-m;
+  color: $text-secundario;
+  font-size: 14px;
+}

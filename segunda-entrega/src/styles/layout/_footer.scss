@@ -1,0 +1,13 @@
+@use "../abstracts/variables" as *;
+
+#pie-pagina {
+  padding: $espacio-m $espacio-l;
+  background: $bg-secundario;
+  border-top: 1px solid $border-color;
+  text-align: center;
+
+  p {
+    color: $text-secundario;
+    font-size: 13px;
+  }
+}
