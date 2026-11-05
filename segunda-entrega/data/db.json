@@ -64,8 +64,8 @@
       "genero": "Terror",
       "estado": "Vista",
       "puntuacion": 7,
-      "compania": "En pareja",
-      "enCine": true,
+      "compania": "",
+      "enCine": false,
       "sinopsis": "Una pareja de investigadores paranormales ayuda a una familia acosada por una presencia en su casa.",
       "resena": "",
       "favorita": false
