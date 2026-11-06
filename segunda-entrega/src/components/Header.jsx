@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import logo from "@assets/logo_cineteca.png";
 
-const Header = () => {
+const Header = ({ isLogged }) => {
   return (
     <header className="encabezado">
       <div className="cont-logo">
@@ -14,7 +14,11 @@ const Header = () => {
       <nav className="menu-superior">
         <NavLink to="/" end className="btn-nav">Catálogo</NavLink>
         <NavLink to="/agregar" className="btn-nav">Agregar</NavLink>
-        <NavLink to="/perfil" className="btn-nav">Perfil</NavLink>
+        {isLogged ? (
+          <NavLink to="/perfil" className="btn-nav">Perfil</NavLink>
+        ) : (
+          <NavLink to="/login" className="btn-nav">Login</NavLink>
+        )}
       </nav>
     </header>
   );

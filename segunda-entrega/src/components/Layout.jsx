@@ -21,9 +21,9 @@ const Layout = () => {
 
   return (
     <>
-      <Header />
+      <Header isLogged={isLogged} />
       <main>
-        <Outlet />
+        <Outlet context={{ isLogged, setIsLogged }} />
       </main>
       <Footer />
     </>
