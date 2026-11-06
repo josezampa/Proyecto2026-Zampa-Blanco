@@ -1,3 +1,4 @@
+import { Navigate, useOutletContext } from "react-router-dom";
 import usePeliculas, { MAX_FAVORITAS } from "@hooks/usePeliculas";
 import Boton from "@components/Boton";
 
@@ -14,9 +15,11 @@ const calcularGeneroTop = (vistas) => {
 };
 
 const Perfil = () => {
+  const { isLogged } = useOutletContext();
   const { peliculas, cargando, error, aviso, alternarEstado, alternarFavorito } =
     usePeliculas();
-
+  
+  if (!isLogged) return <Navigate to="/login" replace />;
   if (cargando) return <p>Cargando perfil...</p>;
   if (error) return <p role="alert">{error}</p>;
 
