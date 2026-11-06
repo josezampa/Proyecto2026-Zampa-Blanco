@@ -15,7 +15,7 @@ const calcularGeneroTop = (vistas) => {
 };
 
 const Perfil = () => {
-  const { isLogged } = useOutletContext();
+  const { isLogged, setIsLogged } = useOutletContext();
   const { peliculas, cargando, error, aviso, alternarEstado, alternarFavorito } =
     usePeliculas();
   
@@ -46,6 +46,7 @@ const Perfil = () => {
         <div className="datos-usuario">
           <h2>JULI Y JOSE :D</h2>
           <p>Nos gusta ver peliculas !</p>
+          <Boton onClick={() => setIsLogged(false)}>Cerrar sesión</Boton>
         </div>
       </section>
 
