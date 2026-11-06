@@ -8,6 +8,7 @@ const TITULOS = {
   "/": "Cineteca - Catálogo",
   "/agregar": "Cineteca - Agregar",
   "/perfil": "Cineteca - Perfil",
+  "/login": "Cineteca - Login",
 };
 
 const Layout = () => {
