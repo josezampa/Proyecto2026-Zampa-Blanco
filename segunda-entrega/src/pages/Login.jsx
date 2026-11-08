@@ -75,10 +75,10 @@ const Login = () => {
   if (isLogged) return <Navigate to="/" replace />;
 
   return (
-    <div className="contenedor-form">
+    <div className="contenedor-form contenedor-login">
       <h2>Iniciar sesión</h2>
 
-      <form className="form-pelicula" noValidate onSubmit={ingresar}>
+      <form className="form-pelicula form-login" noValidate onSubmit={ingresar}>
         <Campo
           id="input-usuario"
           name="usuario"

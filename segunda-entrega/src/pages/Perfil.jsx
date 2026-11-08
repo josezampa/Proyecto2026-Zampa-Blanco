@@ -51,7 +51,9 @@ const Perfil = () => {
         <div className="datos-usuario">
           <h2>JULI Y JOSE :D</h2>
           <p>Nos gusta ver peliculas !</p>
-          <Boton onClick={() => setIsLogged(false)}>Cerrar sesión</Boton>
+          <Boton className="btn-cerrar-sesion" onClick={() => setIsLogged(false)}>
+            Cerrar sesión
+          </Boton>
         </div>
       </section>
 
