@@ -59,7 +59,7 @@ Credenciales de prueba:
 
 Comportamiento:
 
-- **Sin sesión:** se puede ver el catálogo y el detalle de cada película en modo lectura. En Agregar se puede completar el formulario, pero el botón "Guardar" está deshabilitado. La navbar muestra "Login" en lugar de "Perfil", y entrar a `/perfil` redirige a `/login`.
+- - **Sin sesión:** se puede ver el catálogo y el detalle de cada película en modo lectura. El catálogo se muestra sin datos personales (todas las películas figuran como pendientes, sin favoritas, puntuaciones ni reseñas) y los botones de edición están deshabilitados. En Agregar se puede completar el formulario, pero el botón "Guardar" está deshabilitado. La navbar muestra "Login" en lugar de "Perfil", y entrar a `/perfil` redirige a `/login`.
 - **Con sesión:** la aplicación funciona completa. En Perfil aparece el botón "Cerrar sesión", que devuelve al login.
 
 ## Estructura de `src`

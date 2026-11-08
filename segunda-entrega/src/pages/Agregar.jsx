@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import { agregarPelicula, GENEROS, COMPANIAS } from "@api/peliculas";
 import Campo from "@components/Campo";
 import Boton from "@components/Boton";
-import { Link, useNavigate, useOutletContext } from "react-router-dom";
+
 
 const ANIO_MIN = 1888;
 const ANIO_MAX = new Date().getFullYear();
