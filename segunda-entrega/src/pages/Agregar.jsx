@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { agregarPelicula, GENEROS, COMPANIAS } from "@api/peliculas";
 import Campo from "@components/Campo";
 import Boton from "@components/Boton";
+import { Link, useNavigate, useOutletContext } from "react-router-dom";
 
 const ANIO_MIN = 1888;
 const ANIO_MAX = new Date().getFullYear();
@@ -51,6 +52,7 @@ const validar = (valores) => {
 
 const Agregar = () => {
   const navigate = useNavigate();
+  const { isLogged } = useOutletContext();
   const [valores, setValores] = useState(VALORES_INICIALES);
   const [tocados, setTocados] = useState({});
   const [intentoEnvio, setIntentoEnvio] = useState(false);
@@ -258,8 +260,15 @@ const Agregar = () => {
           </p>
         )}
 
+        {!isLogged && (
+          <p className="ayuda campo-largo">
+            Iniciá sesión para poder guardar la película.{" "}
+            <Link to="/login">Ir al login</Link>
+          </p>
+        )}
+
         <div className="acciones-form campo-largo">
-          <Boton type="submit" variante="principal" disabled={guardando}>
+          <Boton type="submit" variante="principal" disabled={guardando || !isLogged}>
             {guardando ? "Guardando..." : "Guardar"}
           </Boton>
           <Link to="/" className="btn-filtro">
