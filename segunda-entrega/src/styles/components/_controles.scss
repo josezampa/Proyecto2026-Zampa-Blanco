@@ -82,8 +82,13 @@ textarea.campo {
   cursor: pointer;
   transition: background $transicion;
 
-  &:hover {
+  &:hover:not(:disabled) {
     background: $bg-hover;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 }
 
