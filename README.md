@@ -26,7 +26,8 @@ La plataforma incluye las siguientes **secciones y funcionalidades principales**
 
 * **Catálogo Principal:** Listado de películas con buscador por título y filtro por género. Acá aparecen todas las películas registradas por el usuario.
 * **Registro y Valoración:** Formulario para agregar una película al catálogo, ingresando información principal de la peli y una valoración personal en el caso que se haya visto.
-* **Perfil:** Sección dedicada a guardar la info más importante del usuario: películas pendientes, pelis favoritas, y estadísticas personales.
+* **Perfil:** Sección dedicada a guardar la info más importante del usuario: películas pendientes, pelis favoritas, estadísticas personales y el botón para cerrar sesión.
+* **Inicio de sesión:** Pantalla de login simulada. Sin sesión, la aplicación funciona en modo lectura; con sesión se habilitan las acciones de edición.
 
 ---
 
@@ -45,6 +46,9 @@ A continuación se detallan las herramientas y lenguajes empleados para el desar
 | **localStorage** | Almacenamiento del navegador | Recordar el orden y los filtros del catálogo. |
 | **Git y GitHub** | Control de versiones | Repositorio y trabajo en equipo. |
 | **Canva** | Diseño | Hacer el wireframe. |
+| **React Router** | Enrutamiento | Navegación entre Catálogo, Agregar, Perfil y Login con un layout común (`Outlet`), y redirección a `/login` si no hay sesión. |
+| **json-server** | Base de datos simulada | API REST local sobre `src/data/db.json`: consultar, agregar, modificar y eliminar películas. |
+| **localStorage** | Almacenamiento del navegador | Recordar el orden y los filtros del catálogo y el estado de sesión. |
 
 ### 🔧 Recursos Adicionales
 * **Google GEMINI:** Organizar ideas, consultas de sintaxis, correcciones.
@@ -89,11 +93,20 @@ npm run dev
 
 > **Importante:** las dos terminales tienen que estar abiertas al mismo tiempo. Si el mock está apagado, la aplicación muestra un mensaje de error de conexión.
 
+### Inicio de sesión
+El login es simulado y el estado se guarda en `localStorage`. Credenciales de prueba:
+* Usuario: `jose` o `juli`
+* Contraseña: `1234`
+
 ### Scripts disponibles
 | Script | Qué hace |
 | :--- | :--- |
 | `npm run dev` | Servidor de desarrollo de Vite (puerto 5173). |
 | `npm run mock` | json-server sobre `data/db.json` (puerto 3001). |
+| `npm run dev` | Servidor de desarrollo de Vite (puerto 5173). |
+| `npm run mock` | json-server sobre `src/data/db.json` (puerto 3001). |
+| `npm run build` | Genera la versión de producción. |
+| `npm run preview` | Sirve localmente la versión de producción. |
 
 ### Estructura de carpetas
 ```
