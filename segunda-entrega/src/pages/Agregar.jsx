@@ -21,6 +21,14 @@ const VALORES_INICIALES = {
   resena: "",
 };
 
+/**
+ * Valida los campos del formulario de alta de película.
+ * @param {Object} valores - Valores actuales del formulario.
+ * @param {string} valores.titulo - Título ingresado.
+ * @param {string} valores.anio - Año ingresado, como texto.
+ * @param {string} valores.puntuacion - Puntuación ingresada, como texto.
+ * @returns {Object<string, string>} Mensaje de error por nombre de campo; vacío si no hay errores.
+ */
 const validar = (valores) => {
   const errores = {};
   const anio = Number(valores.anio);
