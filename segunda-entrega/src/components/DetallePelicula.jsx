@@ -160,10 +160,9 @@ const DetallePelicula = ({
                 <button
                   type="button"
                   className="btn-eliminar"
-                  disabled={!puedeEditar}
-                  onClick={() => setConfirmando(true)}
+                  onClick={() => onEliminar(pelicula.id)}
                 >
-                  Eliminar
+                  Sí, eliminar
                 </button>
                 <button
                   type="button"
@@ -177,6 +176,7 @@ const DetallePelicula = ({
               <button
                 type="button"
                 className="btn-eliminar"
+                disabled={!puedeEditar}
                 onClick={() => setConfirmando(true)}
               >
                 Eliminar
