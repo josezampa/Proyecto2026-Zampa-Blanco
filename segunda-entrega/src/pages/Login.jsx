@@ -11,6 +11,11 @@ const VALORES_INICIALES = {
   clave: "",
 };
 
+/**
+ * Valida los campos del formulario de login.
+ * @param {{usuario: string, clave: string}} valores - Valores actuales del formulario.
+ * @returns {{usuario?: string, clave?: string}} Mensaje de error por campo; vacío si no hay errores.
+ */
 const validar = (valores) => {
   const errores = {};
 
