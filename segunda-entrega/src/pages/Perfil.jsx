@@ -2,6 +2,11 @@ import { Navigate, useOutletContext } from "react-router-dom";
 import usePeliculas, { MAX_FAVORITAS } from "@hooks/usePeliculas";
 import Boton from "@components/Boton";
 
+/**
+ * Calcula el género con más películas vistas.
+ * @param {Array<{genero: string}>} vistas - Películas marcadas como vistas.
+ * @returns {string} El género más repetido, o "N/A" si no hay películas vistas.
+ */
 const calcularGeneroTop = (vistas) => {
   const cantidades = {};
 
