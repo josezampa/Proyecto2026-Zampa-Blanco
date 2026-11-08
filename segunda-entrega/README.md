@@ -20,7 +20,7 @@ npm install
 npm run mock
 ```
 
-La API queda disponible en http://localhost:3001/peliculas.
+Queda disponible en http://localhost:3001/peliculas.
 
 3. En una segunda terminal, levantar la aplicación:
 
@@ -31,3 +31,11 @@ npm run dev
 4. Abrir http://localhost:5173 en el navegador.
 
 Las dos terminales tienen que estar abiertas al mismo tiempo.
+
+## Scripts
+| Script | Qué hace |
+| :--- | :--- |
+| `npm run dev` | Servidor de desarrollo de Vite. |
+| `npm run mock` | json-server sobre `src/data/db.json`. |
+| `npm run build` | Genera la versión de producción en `dist`. |
+| `npm run preview` | Sirve localmente la versión generada. |

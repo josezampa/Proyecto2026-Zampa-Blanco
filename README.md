@@ -98,13 +98,14 @@ npm run dev
 ### Estructura de carpetas
 ```
 segunda-entrega/
-├── data/db.json     base de datos simulada
 ├── public/          imágenes servidas tal cual
 └── src/
     ├── api/         acceso al mock con fetch
     ├── assets/      imágenes importadas
     ├── components/  componentes reutilizables
+    ├── data/        db.json: base de datos simulada
     ├── hooks/       hooks propios
+    ├── layout/      estructura común de las páginas
     ├── pages/       páginas (una por ruta)
     └── styles/      archivos SCSS
 ```
