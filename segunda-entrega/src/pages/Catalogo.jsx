@@ -16,12 +16,29 @@ const FILTROS_ESTADO = {
   Favoritas: (peli) => peli.favorita,
 };
 
+/**
+ * Devuelve una copia de la película sin los datos personales del usuario
+ * (estado, favorita, puntuación, compañía, cine y reseña), para mostrar
+ * el catálogo "en cero" cuando no hay sesión iniciada.
+ * @param {Object} peli - Película tal como está guardada.
+ * @returns {Object} Película con los datos personales reiniciados.
+ */
+const ocultarDatosPersonales = (peli) => ({
+  ...peli,
+  estado: "Pendiente",
+  favorita: false,
+  puntuacion: 0,
+  compania: "",
+  enCine: false,
+  resena: "",
+});
+
 const OPCIONES_GENERO = ["Todos", ...GENEROS];
 
 const Catalogo = () => {
   const { isLogged } = useOutletContext();
   const {
-    peliculas,
+    peliculas: peliculasGuardadas,
     cargando,
     error,
     aviso,
@@ -58,6 +75,10 @@ const Catalogo = () => {
 
   if (cargando) return <p>Cargando películas...</p>;
   if (error) return <p role="alert">{error}</p>;
+
+  const peliculas = isLogged
+    ? peliculasGuardadas
+    : peliculasGuardadas.map(ocultarDatosPersonales);
 
   const texto = busqueda.trim().toLowerCase();
 
