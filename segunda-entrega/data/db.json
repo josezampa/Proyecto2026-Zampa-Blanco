@@ -20,13 +20,13 @@
       "director": "Bong Joon-ho",
       "anio": 2019,
       "genero": "Thriller",
-      "estado": "Pendiente",
+      "estado": "Vista",
       "puntuacion": 0,
       "compania": "",
       "enCine": false,
       "sinopsis": "Una familia pobre se infiltra en una casa rica.",
       "resena": "",
-      "favorita": false
+      "favorita": true
     },
     {
       "id": "3",
@@ -132,7 +132,7 @@
       "director": "Lee Unkrich",
       "anio": 2017,
       "genero": "Otro",
-      "estado": "Pendiente",
+      "estado": "Vista",
       "puntuacion": 0,
       "compania": "",
       "enCine": false,
