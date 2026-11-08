@@ -102,8 +102,6 @@ El login es simulado y el estado se guarda en `localStorage`. Credenciales de pr
 | Script | Qué hace |
 | :--- | :--- |
 | `npm run dev` | Servidor de desarrollo de Vite (puerto 5173). |
-| `npm run mock` | json-server sobre `data/db.json` (puerto 3001). |
-| `npm run dev` | Servidor de desarrollo de Vite (puerto 5173). |
 | `npm run mock` | json-server sobre `src/data/db.json` (puerto 3001). |
 | `npm run build` | Genera la versión de producción. |
 | `npm run preview` | Sirve localmente la versión de producción. |
