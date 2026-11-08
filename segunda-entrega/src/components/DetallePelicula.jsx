@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 
 const PUNTOS = Array.from({ length: 10 }, (_, indice) => indice + 1);
 
 const DetallePelicula = ({
   pelicula,
+  puedeEditar,
   aviso,
   onCerrar,
   onAlternarEstado,
@@ -78,14 +80,14 @@ const DetallePelicula = ({
                 className="btn-punto"
                 aria-label={`Puntuar con ${valor}`}
                 aria-pressed={valor <= pelicula.puntuacion}
-                disabled={!esVista}
+                disabled={!esVista || !puedeEditar}
                 onClick={() => onPuntuar(pelicula, valor)}
               >
                 {valor <= pelicula.puntuacion ? "■" : "□"}
               </button>
             ))}
           </div>
-          {!esVista && (
+          {!esVista && puedeEditar && (
             <p className="ayuda">Marcá la película como vista para puntuarla.</p>
           )}
         </div>
@@ -103,10 +105,16 @@ const DetallePelicula = ({
             maxLength={500}
             placeholder="Escribí tu reseña personal..."
             value={resena}
+            disabled={!puedeEditar}
             onChange={cambiarResena}
           />
           <div className="acciones-resena">
-            <button type="button" className="btn-principal" onClick={guardarResena}>
+            <button
+              type="button"
+              className="btn-principal"
+              disabled={!puedeEditar}
+              onClick={guardarResena}
+            >
               Guardar reseña
             </button>
             {resenaGuardada && <span role="status">Reseña guardada.</span>}
@@ -119,10 +127,18 @@ const DetallePelicula = ({
           </p>
         )}
 
+        {!puedeEditar && (
+          <p className="ayuda">
+            Iniciá sesión para puntuar, reseñar o modificar esta película.{" "}
+            <Link to="/login">Ir al login</Link>
+          </p>
+        )}
+
         <div className="acciones-detalle">
           <button
             type="button"
             className="btn-filtro"
+            disabled={!puedeEditar}
             onClick={() => onAlternarEstado(pelicula)}
           >
             {esVista ? "Marcar como pendiente" : "✓ Marcar como vista"}
@@ -131,6 +147,7 @@ const DetallePelicula = ({
             type="button"
             className="btn-filtro"
             aria-pressed={pelicula.favorita}
+            disabled={!puedeEditar}
             onClick={() => onAlternarFavorito(pelicula)}
           >
             {pelicula.favorita ? "♥ Favorita" : "♡ Favorita"}
@@ -143,9 +160,10 @@ const DetallePelicula = ({
                 <button
                   type="button"
                   className="btn-eliminar"
-                  onClick={() => onEliminar(pelicula.id)}
+                  disabled={!puedeEditar}
+                  onClick={() => setConfirmando(true)}
                 >
-                  Sí, eliminar
+                  Eliminar
                 </button>
                 <button
                   type="button"

@@ -166,6 +166,7 @@ const Catalogo = () => {
       {peliculaAbierta && (
         <DetallePelicula
           pelicula={peliculaAbierta}
+          puedeEditar={isLogged}
           aviso={aviso}
           onCerrar={cerrarDetalle}
           onAlternarEstado={alternarEstado}
