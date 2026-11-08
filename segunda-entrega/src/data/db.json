@@ -137,8 +137,20 @@
       "compania": "",
       "enCine": false,
       "sinopsis": "Un niño viaja al mundo de los muertos para conocer la historia de su familia.",
-      "resena": "hola",
+      "resena": "",
       "favorita": true
+    }
+  ],
+  "accounts": [
+    {
+      "id": "1",
+      "usuario": "jose",
+      "clave": "1234"
+    },
+    {
+      "id": "2",
+      "usuario": "juli",
+      "clave": "1234"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

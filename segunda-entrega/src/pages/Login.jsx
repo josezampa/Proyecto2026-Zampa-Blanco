@@ -1,10 +1,14 @@
 import { useState } from "react";
-import { Navigate, useNavigate, useOutletContext } from "react-router-dom";
+import {
+  Link,
+  Navigate,
+  useLocation,
+  useNavigate,
+  useOutletContext,
+} from "react-router-dom";
+import { obtenerCuentas } from "@api/accounts";
 import Campo from "@components/Campo";
 import Boton from "@components/Boton";
-
-const USUARIOS_VALIDOS = ["jose", "juli"];
-const CLAVE_VALIDA = "1234";
 
 const VALORES_INICIALES = {
   usuario: "",
@@ -32,10 +36,12 @@ const validar = (valores) => {
 
 const Login = () => {
   const navigate = useNavigate();
+  const { state } = useLocation();
   const { isLogged, setIsLogged } = useOutletContext();
   const [valores, setValores] = useState(VALORES_INICIALES);
   const [tocados, setTocados] = useState({});
   const [intentoEnvio, setIntentoEnvio] = useState(false);
+  const [verificando, setVerificando] = useState(false);
   const [errorEnvio, setErrorEnvio] = useState("");
 
   const errores = validar(valores);
@@ -51,7 +57,7 @@ const Login = () => {
     setErrorEnvio("");
   };
 
-  const ingresar = (e) => {
+  const ingresar = async (e) => {
     e.preventDefault();
     setIntentoEnvio(true);
 
@@ -61,15 +67,28 @@ const Login = () => {
       return;
     }
 
-    const usuario = valores.usuario.trim().toLowerCase();
+    setVerificando(true);
+    setErrorEnvio("");
 
-    if (!USUARIOS_VALIDOS.includes(usuario) || valores.clave !== CLAVE_VALIDA) {
-      setErrorEnvio("Usuario o contraseña incorrectos.");
-      return;
+    try {
+      const cuentas = await obtenerCuentas();
+      const usuario = valores.usuario.trim().toLowerCase();
+      const cuenta = cuentas.find(
+        (c) => c.usuario.toLowerCase() === usuario && c.clave === valores.clave
+      );
+
+      if (!cuenta) {
+        setErrorEnvio("Usuario o contraseña incorrectos.");
+        setVerificando(false);
+        return;
+      }
+
+      setIsLogged(true);
+      navigate("/");
+    } catch {
+      setErrorEnvio("No se pudo conectar con el servidor. Probá de nuevo más tarde.");
+      setVerificando(false);
     }
-
-    setIsLogged(true);
-    navigate("/");
   };
 
   if (isLogged) return <Navigate to="/" replace />;
@@ -77,6 +96,12 @@ const Login = () => {
   return (
     <div className="contenedor-form contenedor-login">
       <h2>Iniciar sesión</h2>
+
+      {state?.cuentaCreada && (
+        <p className="ayuda" role="status">
+          Cuenta creada. Ya podés iniciar sesión.
+        </p>
+      )}
 
       <form className="form-pelicula form-login" noValidate onSubmit={ingresar}>
         <Campo
@@ -113,11 +138,15 @@ const Login = () => {
         )}
 
         <div className="acciones-form campo-largo">
-          <Boton type="submit" variante="principal">
-            Ingresar
+          <Boton type="submit" variante="principal" disabled={verificando}>
+            {verificando ? "Verificando..." : "Ingresar"}
           </Boton>
         </div>
       </form>
+
+      <p className="ayuda">
+        ¿No tenés cuenta? <Link to="/registro">Creá una</Link>
+      </p>
     </div>
   );
 };

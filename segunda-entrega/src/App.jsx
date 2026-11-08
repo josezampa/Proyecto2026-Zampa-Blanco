@@ -4,6 +4,7 @@ import Catalogo from "@pages/Catalogo";
 import Agregar from "@pages/Agregar";
 import Perfil from "@pages/Perfil";
 import Login from "@pages/Login";
+import Registro from "@pages/Registro";
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
         <Route path="agregar" element={<Agregar />} />
         <Route path="perfil" element={<Perfil />} />
         <Route path="login" element={<Login />} />
+        <Route path="registro" element={<Registro />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
     </Routes>

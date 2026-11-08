@@ -8,7 +8,7 @@ Migración de Cineteca a React con Vite, SCSS y una base de datos simulada con j
 - Vite
 - React Router DOM (rutas anidadas con `Outlet`)
 - Sass (SCSS)
-- json-server (API simulada, datos en `src/data/db.json`)
+- json-server (API simulada, datos en `src/data/db.json`: colecciones `peliculas` y `accounts`)
 - localStorage (filtros del catálogo y estado de sesión)
 
 ## Cómo ejecutarlo
@@ -48,24 +48,30 @@ Las dos terminales tienen que estar abiertas al mismo tiempo. Si el catálogo mu
 | `npm run build` | Genera la versión de producción. |
 | `npm run preview` | Sirve localmente la versión de producción. |
 
-## Inicio de sesión
+## Servicios del mock
 
-El inicio de sesión es **simulado**: se valida en el navegador y el estado se guarda en `localStorage` (clave `cineteca-isLogged`). No es seguridad real.
+| Recurso | Acciones | Dónde se usa |
+|---|---|---|
+| `/peliculas` | GET, POST, PATCH y DELETE | Catálogo, detalle, Agregar y Perfil |
+| `/accounts` | GET y POST | Login y Crear cuenta |
+
+Las funciones que consumen el mock están en `src/api` y usan `fetch` con `async/await`.
+
+## Inicio de sesión y creación de cuentas
+
+El inicio de sesión es **simulado**: las cuentas se guardan en la colección `accounts` de `src/data/db.json` y el estado de sesión se guarda en `localStorage` (clave `cineteca-isLogged`). No es seguridad real: las contraseñas se guardan sin cifrar.
 
 Credenciales de prueba:
 
 - Usuario: `jose` o `juli`
 - Contraseña: `1234`
 
-Comportamiento:
+Cómo funciona:
 
-- - **Sin sesión:** se puede ver el catálogo y el detalle de cada película en modo lectura. El catálogo se muestra sin datos personales (todas las películas figuran como pendientes, sin favoritas, puntuaciones ni reseñas) y los botones de edición están deshabilitados. En Agregar se puede completar el formulario, pero el botón "Guardar" está deshabilitado. La navbar muestra "Login" en lugar de "Perfil", y entrar a `/perfil` redirige a `/login`.
+- **Iniciar sesión:** el formulario consulta las cuentas con un `GET` a `/accounts` y, si el usuario existe y la contraseña coincide, guarda la sesión.
+- **Crear cuenta:** la página `/registro` valida los datos mientras se escribe, comprueba que el usuario no exista y guarda la cuenta nueva con un `POST` a `/accounts`. Después lleva al login.
+
+Comportamiento según la sesión:
+
+- **Sin sesión:** se puede ver el catálogo y el detalle de cada película en modo lectura. El catálogo se muestra sin datos personales (todas las películas figuran como pendientes, sin favoritas, puntuaciones ni reseñas) y los botones de edición están deshabilitados. En Agregar se puede completar el formulario, pero el botón "Guardar" está deshabilitado. La navbar muestra "Login" en lugar de "Perfil", y entrar a `/perfil` redirige a `/login`.
 - **Con sesión:** la aplicación funciona completa. En Perfil aparece el botón "Cerrar sesión", que devuelve al login.
-
-## Estructura de `src`
-
-`api`, `assets`, `components`, `data`, `hooks`, `layout`, `pages` y `styles`.
-
-## Dependencias
-
-`npm audit` no reporta vulnerabilidades (0 al 8 de noviembre de 2026). `json-server` se usa en su versión `1.0.0-beta`.
