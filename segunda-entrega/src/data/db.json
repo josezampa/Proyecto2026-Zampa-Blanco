@@ -12,7 +12,7 @@
       "enCine": true,
       "sinopsis": "Un ex agente busca a su hija secuestrada.",
       "resena": "",
-      "favorita": true
+      "favorita": false
     },
     {
       "id": "2",
@@ -20,13 +20,13 @@
       "director": "Bong Joon-ho",
       "anio": 2019,
       "genero": "Thriller",
-      "estado": "Vista",
+      "estado": "Pendiente",
       "puntuacion": 0,
       "compania": "",
       "enCine": false,
       "sinopsis": "Una familia pobre se infiltra en una casa rica.",
       "resena": "",
-      "favorita": true
+      "favorita": false
     },
     {
       "id": "3",
@@ -40,7 +40,7 @@
       "enCine": true,
       "sinopsis": "Un ex empleado judicial intenta cerrar un viejo caso de homicidio que lo marcó para siempre.",
       "resena": "",
-      "favorita": true
+      "favorita": false
     },
     {
       "id": "4",
@@ -118,13 +118,13 @@
       "director": "George Miller",
       "anio": 2015,
       "genero": "Acción",
-      "estado": "Pendiente",
+      "estado": "Vista",
       "puntuacion": 0,
       "compania": "",
       "enCine": false,
       "sinopsis": "En un desierto postapocalíptico, una guerrera y un fugitivo escapan de un tirano.",
       "resena": "",
-      "favorita": false
+      "favorita": true
     },
     {
       "id": "10",
@@ -138,7 +138,7 @@
       "enCine": false,
       "sinopsis": "Un niño viaja al mundo de los muertos para conocer la historia de su familia.",
       "resena": "",
-      "favorita": false
+      "favorita": true
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

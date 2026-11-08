@@ -1,5 +1,6 @@
 const PeliculaCard = ({
   pelicula,
+  puedeEditar,
   onAbrir,
   onAlternarEstado,
   onAlternarFavorito,
@@ -16,6 +17,7 @@ const PeliculaCard = ({
           className="icono-favorito"
           aria-label="Favorita"
           aria-pressed={pelicula.favorita}
+          disabled={!puedeEditar}
           onClick={() => onAlternarFavorito(pelicula)}
         >
           {pelicula.favorita ? "♥" : "♡"}
@@ -23,6 +25,7 @@ const PeliculaCard = ({
         <button
           type="button"
           className="btn-hover-vista"
+          disabled={!puedeEditar}
           onClick={() => onAlternarEstado(pelicula)}
         >
           {pelicula.estado === "Vista" ? "Vista ✓" : "+ Marcar"}

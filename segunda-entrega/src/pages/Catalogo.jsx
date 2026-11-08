@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link, useOutletContext } from "react-router-dom";
 import { GENEROS } from "@api/peliculas";
 import usePeliculas from "@hooks/usePeliculas";
 import useLocalStorage from "@hooks/useLocalStorage";
@@ -6,6 +7,7 @@ import Boton from "@components/Boton";
 import PeliculaCard from "@components/PeliculaCard";
 import FiltroGrupo from "@components/FiltroGrupo";
 import DetallePelicula from "@components/DetallePelicula";
+
 
 const FILTROS_ESTADO = {
   Todas: () => true,
@@ -17,6 +19,7 @@ const FILTROS_ESTADO = {
 const OPCIONES_GENERO = ["Todos", ...GENEROS];
 
 const Catalogo = () => {
+  const { isLogged } = useOutletContext();
   const {
     peliculas,
     cargando,
@@ -110,6 +113,13 @@ const Catalogo = () => {
           </p>
         )}
 
+        {!isLogged && (
+          <p className="ayuda">
+            Iniciá sesión para marcar películas como vistas o favoritas.{" "}
+            <Link to="/login">Ir al login</Link>
+          </p>
+        )}
+
         {peliculasVisibles.length === 0 ? (
           <p className="mensaje-vacio">
             {peliculas.length === 0
@@ -122,6 +132,7 @@ const Catalogo = () => {
               <PeliculaCard
                 key={peli.id}
                 pelicula={peli}
+                puedeEditar={isLogged}
                 onAbrir={setPeliculaAbiertaId}
                 onAlternarEstado={alternarEstado}
                 onAlternarFavorito={alternarFavorito}

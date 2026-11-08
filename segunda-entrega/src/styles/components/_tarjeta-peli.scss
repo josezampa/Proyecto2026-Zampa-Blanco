@@ -136,3 +136,9 @@
     }
   }
 }
+
+.icono-favorito:disabled,.btn-hover-vista:disabled {
+  cursor: not-allowed;
+  filter: grayscale(1);
+  transform: none;
+}
