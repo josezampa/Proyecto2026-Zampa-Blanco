@@ -115,7 +115,6 @@ const Login = () => {
           value={valores.usuario}
           onChange={cambiar}
           error={mostrarError("usuario")}
-          size={30}
         />
 
         <Campo
@@ -130,7 +129,6 @@ const Login = () => {
           value={valores.clave}
           onChange={cambiar}
           error={mostrarError("clave")}
-          size={30}
         />
 
         {errorEnvio && (
