@@ -101,7 +101,6 @@ const DetallePelicula = ({
           <textarea
             id="detalle-resena"
             className="campo"
-            rows={4}
             maxLength={500}
             placeholder="Escribí tu reseña personal..."
             value={resena}
