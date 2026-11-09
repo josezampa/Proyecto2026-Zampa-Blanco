@@ -68,7 +68,7 @@ const DetallePelicula = ({
         <p className="detalle-director">{pelicula.director}</p>
         <p className="detalle-contexto">{contexto}</p>
 
-        <div className="seccion-puntuacion">
+        <div>
           <p id="etiqueta-puntuacion" className="detalle-puntuacion">
             Puntuación: {pelicula.puntuacion || "-"}/10
           </p>

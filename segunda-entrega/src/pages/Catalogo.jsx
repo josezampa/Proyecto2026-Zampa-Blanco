@@ -111,7 +111,7 @@ const Catalogo = () => {
         />
       </aside>
 
-      <div className="resultados">
+      <div>
         <div className="busqueda">
           <label htmlFor="buscar-peli">Buscar película:</label>
           <input

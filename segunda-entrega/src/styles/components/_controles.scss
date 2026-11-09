@@ -69,6 +69,11 @@ textarea.campo {
   font-size: 13px;
 }
 
+.aviso {
+  color: $color-peligro;
+  font-size: 14px;
+}
+
 .btn-filtro {
   display: inline-block;
   padding: $espacio-s $espacio-m;
