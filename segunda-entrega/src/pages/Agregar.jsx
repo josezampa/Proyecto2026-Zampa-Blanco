@@ -134,6 +134,7 @@ const Agregar = () => {
           value={valores.titulo}
           onChange={cambiar}
           error={mostrarError("titulo")}
+          size={30}
         />
 
         <Campo
@@ -144,6 +145,7 @@ const Agregar = () => {
           maxLength={50}
           value={valores.director}
           onChange={cambiar}
+          size={30}
         />
 
         <Campo
@@ -156,6 +158,7 @@ const Agregar = () => {
           value={valores.anio}
           onChange={cambiar}
           error={mostrarError("anio")}
+          size={30}
         />
 
         <Campo
@@ -197,6 +200,7 @@ const Agregar = () => {
           value={valores.puntuacion}
           onChange={cambiar}
           error={mostrarError("puntuacion")}
+          size={30}
         />
 
         <Campo
