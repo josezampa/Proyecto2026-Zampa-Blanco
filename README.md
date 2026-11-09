@@ -28,6 +28,7 @@ La plataforma incluye las siguientes **secciones y funcionalidades principales**
 * **Registro y Valoración:** Formulario para agregar una película al catálogo, ingresando información principal de la peli y una valoración personal en el caso que se haya visto.
 * **Perfil:** Sección dedicada a guardar la info más importante del usuario: películas pendientes, pelis favoritas, estadísticas personales y el botón para cerrar sesión.
 * **Inicio de sesión:** Pantalla de login simulada. Sin sesión, la aplicación funciona en modo lectura; con sesión se habilitan las acciones de edición.
+* **Crear cuenta** Pantalla de crear cuenta simulada. Permite crear pares de usuario-clave para ingresar a la página.
 
 ---
 
@@ -39,11 +40,8 @@ A continuación se detallan las herramientas y lenguajes empleados para el desar
 | :--- | :--- | :--- |
 | **React** | Librería de interfaz | Componentes reutilizables y estado con hooks (`useState`, `useEffect`, `useRef`, `useNavigate`). |
 | **Vite** | Herramienta de desarrollo | Servidor de desarrollo, empaquetado y alias de importación. |
-| **React Router** | Enrutamiento | Navegación entre Catálogo, Agregar y Perfil con un layout común (`Outlet`). |
 | **Sass (SCSS)** | Estilos | Variables, mixins, anidamiento y estilos organizados por módulos. |
-| **json-server** | Base de datos simulada | API REST local sobre `data/db.json`: consultar, agregar, modificar y eliminar películas. |
 | **JavaScript** | Lógica | `fetch` con `async/await`, hooks propios y validaciones en tiempo real. |
-| **localStorage** | Almacenamiento del navegador | Recordar el orden y los filtros del catálogo. |
 | **Git y GitHub** | Control de versiones | Repositorio y trabajo en equipo. |
 | **Canva** | Diseño | Hacer el wireframe. |
 | **React Router** | Enrutamiento | Navegación entre Catálogo, Agregar, Perfil y Login con un layout común (`Outlet`), y redirección a `/login` si no hay sesión. |
